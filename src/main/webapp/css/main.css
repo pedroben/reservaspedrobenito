@@ -1,0 +1,35 @@
+/* ==========================================================================
+   APP custom styles. Rafael Aznar.
+   ========================================================================== */
+
+body {
+    background-color: #F8F8F8;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    background-repeat: repeat;
+}
+.btn-toolbar {
+    margin-top: 0px;
+    margin-bottom: 0x;
+}
+.btn-toolbar {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.table-condensed th, .table-condensed td {
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.table th, .table td {
+    vertical-align:middle;
+}
+#loginForm{
+    margin:0 auto;
+    width: 50%;
+}
+
+
+
+
+
+
