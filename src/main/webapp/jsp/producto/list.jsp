@@ -29,12 +29,10 @@
         <td><%=oProductoBEAN.getDescripcion()%></td>
         <td><%=oProductoBEAN.getPrecio()%>&euro;</td>
         <td>
-            <%=oProductoBEAN.getTipoProducto().getDescripcion()%>
-            <div class="btn-toolbar">
-                <div class="btn-group">
-                    <a class="btn btn-mini" href="Controller?class=tipoproducto&method=selectone&id=<%=oProductoBEAN.getId()%>&selectonetable=producto&selectonefield=id_tipoproducto"><i class="icon-search"></i></a>                                        
-                </div>
+            <div class="btn-group">
+                <a class="btn btn-mini" href="Controller?class=tipoproducto&method=selectone&id=<%=oProductoBEAN.getId()%>&selectonetable=producto&selectonefield=id_tipoproducto"><i class="icon-search"></i></a>                                        
             </div>
+            <%=oProductoBEAN.getTipoProducto().getDescripcion()%>
         </td>
         <td>
             <div class="btn-toolbar">

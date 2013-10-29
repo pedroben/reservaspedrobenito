@@ -31,7 +31,7 @@
                     <a class="btn btn-mini" href="Controller?class=tipoproducto&method=update&id=<%=oTipoproductoBean.getId()%>"><i class="icon-pencil"></i></a>           
                     <a class="btn btn-mini" href="Controller?class=tipoproducto&method=remove&id=<%=oTipoproductoBean.getId()%>"><i class="icon-trash"></i></a>            
                     <% } else { %>
-                    <a class="btn btn-mini" href="Controller?class=producto&method=updatetipoproducto&id=<%=oContexto.getId()%>&selectonetable=<%=oContexto.getSelectOneTable()%>&selectonefield=<%=oContexto.getSelectOneField()%>"><i class="icon-ok"></i></a>                    
+                    <a class="btn btn-mini" href="Controller?class=producto&method=updatetipoproducto&id=<%=oContexto.getId()%>&id_tipoproducto=<%=oTipoproductoBean.getId()%>&selectonetable=<%=oContexto.getSelectOneTable()%>&selectonefield=<%=oContexto.getSelectOneField()%>"><i class="icon-ok"></i></a>                    
                     <% } %>
                 </div>
             </div>

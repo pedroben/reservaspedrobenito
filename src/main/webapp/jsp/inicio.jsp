@@ -1,11 +1,11 @@
 <div class="hero-unit">
-    <h1>Bienvenidos a Comprusiàs March v02</h1>
+    <h1>Bienvenidos a Comprausiàs March v02</h1>
 </div>
 <div class="row-fluid">
     <div class="span8">
         <div class="row-fluid">
             <div class="span6">
-                <h3>¿Qué es Comprusiàs March?</h3>
+                <h3>¿Qué es Comprausiàs March?</h3>
                 <p>Es una aplicación didáctica para aprender a organizar y desarrollar aplicaciones Java de servidor. La utilizamos como base para construir un proyecto durante la primera evaluación del módulo DES del ciclo formativo DAW.</p>
             </div>
             <div class="span6">
