@@ -143,8 +143,7 @@ public class Mysql implements GenericData {
         try {
             oStatement = (Statement) oConexionMySQL.createStatement();
             String strSQL = "SELECT " + strCampo + " FROM " + strTabla + " WHERE id=" + Integer.toString(id);
-            oResultSet = oStatement.executeQuery(strSQL);
-            oResultSet.first();            
+            oResultSet = oStatement.executeQuery(strSQL);           
             if (oResultSet.next()) 
             {
                 return oResultSet.getString(strCampo);
