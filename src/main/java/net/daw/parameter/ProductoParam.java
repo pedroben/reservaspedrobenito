@@ -44,7 +44,7 @@ public class ProductoParam {
     }
 
     public ProductoBean loadTipoProducto(ProductoBean oProducto) {
-        if ((request.getParameter("id_tipoproducto") != null)) {
+        if ((request.getParameter("id_tipoproducto" ) != null)) {
             TipoproductoBean oTipoproducto = new TipoproductoBean(Integer.parseInt(request.getParameter("id_tipoproducto")));
             oProducto.setTipoProducto(oTipoproducto);
         }

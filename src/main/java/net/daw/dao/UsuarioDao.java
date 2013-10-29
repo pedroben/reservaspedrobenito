@@ -14,7 +14,7 @@ public class UsuarioDao {
         enumTipoConexion = tipoConexion;
     }
 
-    public UsuarioBean getUsuario(UsuarioBean oUsuario) throws Exception {
+    public UsuarioBean get(UsuarioBean oUsuario) throws Exception {
         try {
             oMysql.conexion(enumTipoConexion);
             oUsuario.setId(Integer.parseInt(oMysql.getId("usuario", "login", oUsuario.getLogin())));

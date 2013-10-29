@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.UsuarioBean;
 import net.daw.dao.UsuarioDao;
 import net.daw.helper.Contexto;
+import net.daw.parameter.UsuarioParam;
 
 public class UsuarioLogin2 extends Operation {
 
@@ -15,10 +16,10 @@ public class UsuarioLogin2 extends Operation {
         oContexto.setVista("jsp/mensaje.jsp"); 
         String result;
         UsuarioBean oUsuario = new UsuarioBean();
-        oUsuario.setLogin(request.getParameter("login"));
-        oUsuario.setPassword(request.getParameter("password"));
+        UsuarioParam oUsuarioParam=new UsuarioParam(request);       
+        oUsuario=oUsuarioParam.load(oUsuario);       
         UsuarioDao oUsuarioDao = new UsuarioDao(oContexto.getEnumTipoConexion());
-        oUsuario = oUsuarioDao.getUsuario(oUsuario);
+        oUsuario = oUsuarioDao.get(oUsuario);
         if (oUsuario.getId() != 0) {
             result = "Bienvenido/a " + oUsuario.getNombre() + " Has entrado en la aplicación. Ahora puedes operar con los menús.";
             request.getSession().setAttribute("usuario", oUsuario);

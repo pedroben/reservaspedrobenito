@@ -23,7 +23,7 @@ public class ProductoUpdatetipoproducto1 extends Operation {
         oProductoBean=oProductoDao.get(oProductoBean);
         oProductoBean.setTipoProducto(oProductoParam.loadTipoProducto(oProductoBean).getTipoProducto());
                            
-        oProductoBean = oProductoParam.load(oProductoBean);
+        oProductoBean = oProductoParam.loadTipoProducto(oProductoBean);
         try {
             oProductoDao.set(oProductoBean);
         } catch (Exception e) {
