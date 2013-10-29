@@ -31,10 +31,10 @@
         <td><%=oClienteBEAN.getEmail()%></td>
         <td>
             <div class="btn-toolbar">
-                <div class="btn-group">
+                <div class="btn-group">                    
                     <a class="btn btn-mini" href="Controller?class=cliente&method=view&id=<%=oClienteBEAN.getId()%>"><i class="icon-eye-open"></i></a>                    
                     <a class="btn btn-mini" href="Controller?class=cliente&method=update&id=<%=oClienteBEAN.getId()%>"><i class="icon-pencil"></i></a>           
-                    <a class="btn btn-mini" href="Controller?class=cliente&method=remove&id=<%=oClienteBEAN.getId()%>"><i class="icon-trash"></i></a>            
+                    <a class="btn btn-mini" href="Controller?class=cliente&method=remove&id=<%=oClienteBEAN.getId()%>"><i class="icon-trash"></i></a>                         
                 </div>
             </div>
         </td>

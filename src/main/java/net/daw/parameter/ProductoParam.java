@@ -7,6 +7,7 @@ package net.daw.parameter;
 
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.ProductoBean;
+import net.daw.bean.TipoproductoBean;
 
 /**
  *
@@ -39,9 +40,14 @@ public class ProductoParam {
         if ((request.getParameter("precio") != null)) {
             oProducto.setPrecio(Float.parseFloat(request.getParameter("precio")));
         }
+        return oProducto;
+    }
+
+    public ProductoBean loadTipoProducto(ProductoBean oProducto) {
         if ((request.getParameter("id_tipoproducto") != null)) {
-            oProducto.setId_tipoproducto(Integer.parseInt(request.getParameter("id_tipoproducto")));
-        }        
+            TipoproductoBean oTipoproducto = new TipoproductoBean(Integer.parseInt(request.getParameter("id_tipoproducto")));
+            oProducto.setTipoProducto(oTipoproducto);
+        }
         return oProducto;
     }
 }

@@ -6,8 +6,8 @@ public class ProductoBean {
     private String codigo;
     private String descripcion;
     private Float precio;
-    private Integer id_tipoproducto;
-
+    private TipoproductoBean tipoProducto;
+          
     public ProductoBean() {
 
     }
@@ -48,11 +48,13 @@ public class ProductoBean {
         this.precio = precio;
     }
 
-    public Integer getId_tipoproducto() {
-        return id_tipoproducto;
+    public TipoproductoBean getTipoProducto() {
+        return tipoProducto;
     }
 
-    public void setId_tipoproducto(Integer id_tipoproducto) {
-        this.id_tipoproducto = id_tipoproducto;
+    public void setTipoProducto(TipoproductoBean tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
+
+
 }

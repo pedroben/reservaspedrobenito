@@ -14,6 +14,10 @@ public class TipoproductoBean {
     private int id;
     private String descripcion;
 
+    public TipoproductoBean() {
+
+    }
+
     public TipoproductoBean(Integer id) {
         this.id = id;
     }

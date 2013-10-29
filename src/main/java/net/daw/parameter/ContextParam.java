@@ -30,6 +30,7 @@ public class ContextParam {
             String parameterName = (String) enumeration.nextElement();
             parameterNames.put(parameterName, request.getParameter(parameterName));
         }
+        oContexto.setParameters(parameterNames);
 
         if (request.getParameter("id") == null) {
             oContexto.setId(0);
@@ -47,12 +48,6 @@ public class ContextParam {
             oContexto.setMetodo("ocioso");
         } else {
             oContexto.setMetodo(request.getParameter("method"));
-        }
-
-        if (request.getParameter("submit") == null) {
-            oContexto.setBuscando("");
-        } else {
-            oContexto.setBuscando(request.getParameter("submit"));
         }
 
         if (request.getParameter("phase") == null) {
@@ -97,6 +92,18 @@ public class ContextParam {
                 oContexto.setOrder(request.getParameter("order"));
                 oContexto.setOrderValue(request.getParameter("filtervalue"));
             }
+        }
+
+        if (request.getParameter("selectonetable") == null) {
+            oContexto.setSelectOneTable("");
+        } else {
+            oContexto.setSelectOneTable(request.getParameter("selectonetable"));
+        }
+
+        if (request.getParameter("selectonefield") == null) {
+            oContexto.setSelectOneField("");
+        } else {
+            oContexto.setSelectOneField(request.getParameter("selectonefield"));
         }
 
         return oContexto;

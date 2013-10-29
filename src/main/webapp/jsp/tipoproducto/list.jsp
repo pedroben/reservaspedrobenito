@@ -26,9 +26,13 @@
         <td>
             <div class="btn-toolbar">
                 <div class="btn-group">
-                    <a class="btn btn-mini" href="Controller?class=producto&method=view&id=<%=oTipoproductoBean.getId()%>"><i class="icon-eye-open"></i></a>                    
-                    <a class="btn btn-mini" href="Controller?class=producto&method=update&id=<%=oTipoproductoBean.getId()%>"><i class="icon-pencil"></i></a>           
-                    <a class="btn btn-mini" href="Controller?class=producto&method=remove&id=<%=oTipoproductoBean.getId()%>"><i class="icon-trash"></i></a>            
+                    <% if (!oContexto.getMetodo().equalsIgnoreCase("selectone")) { %>
+                    <a class="btn btn-mini" href="Controller?class=tipoproducto&method=view&id=<%=oTipoproductoBean.getId()%>"><i class="icon-eye-open"></i></a>                    
+                    <a class="btn btn-mini" href="Controller?class=tipoproducto&method=update&id=<%=oTipoproductoBean.getId()%>"><i class="icon-pencil"></i></a>           
+                    <a class="btn btn-mini" href="Controller?class=tipoproducto&method=remove&id=<%=oTipoproductoBean.getId()%>"><i class="icon-trash"></i></a>            
+                    <% } else { %>
+                    <a class="btn btn-mini" href="Controller?class=producto&method=updatetipoproducto&id=<%=oTipoproductoBean.getId()%>&selectonetable=<%=oContexto.getSelectOneTable()%>&selectonefield=<%=oContexto.getSelectOneField()%>"><i class="icon-ok"></i></a>                    
+                    <% } %>
                 </div>
             </div>
         </td>

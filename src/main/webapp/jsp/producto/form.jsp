@@ -55,16 +55,7 @@
                    name="precio" type="text" size="30" maxlength="50"
                    value="<%=precio%>" /> 
             <br />
-        </div>
-        <div>
-            <label for="id_tipoproducto">Tipo de producto: </label> 
-            <input <%=strControlEnabled%>  id="id_tipoproducto"
-                   name="id_tipoproducto" type="text" size="30" maxlength="50"
-                   value="<%=id_tipoproducto%>" /> 
-            <input type="submit" name="id_tipoproducto" value="id_tipoproducto" />
-            
-            <br />
-        </div>            
+        </div>           
         <div>
             <input type="submit" name="enviar" value="<%=strValueBoton%>" />
         </div>

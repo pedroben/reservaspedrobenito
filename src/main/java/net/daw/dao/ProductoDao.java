@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import net.daw.bean.ProductoBean;
+import net.daw.bean.TipoproductoBean;
 import net.daw.data.Mysql;
+import net.daw.helper.Contexto;
 import net.daw.helper.Enum;
 
 public class ProductoDao {
@@ -64,7 +66,12 @@ public class ProductoDao {
             oProductoBean.setCodigo(oMysql.getOne("producto", "codigo", oProductoBean.getId()));
             oProductoBean.setDescripcion(oMysql.getOne("producto", "descripcion", oProductoBean.getId()));
             oProductoBean.setPrecio(Float.parseFloat(oMysql.getOne("producto", "precio", oProductoBean.getId())));
-            oProductoBean.setId_tipoproducto(Integer.parseInt(oMysql.getOne("producto", "id_tipoproducto", oProductoBean.getId())));
+
+            TipoproductoBean oTipoproducto = new TipoproductoBean(Integer.parseInt(oMysql.getOne("producto", "id_tipoproducto", oProductoBean.getId())));
+            TipoproductoDao oTipoproductoDao = new TipoproductoDao(enumTipoConexion);
+            oTipoproducto = oTipoproductoDao.get(oTipoproducto);
+
+            oProductoBean.setTipoProducto(oTipoproducto);
             oMysql.desconexion();
         } catch (Exception e) {
             throw new Exception("ProductoDao.get: Error: " + e.getMessage());
@@ -84,7 +91,8 @@ public class ProductoDao {
             oMysql.updateOne(oProductoBean.getId(), "producto", "codigo", oProductoBean.getCodigo());
             oMysql.updateOne(oProductoBean.getId(), "producto", "descripcion", oProductoBean.getDescripcion());
             oMysql.updateOne(oProductoBean.getId(), "producto", "precio", oProductoBean.getPrecio().toString());
-            oMysql.updateOne(oProductoBean.getId(), "producto", "id_tipoproducto", oProductoBean.getId_tipoproducto().toString());
+            Integer id_Tipoproducto=oProductoBean.getTipoProducto().getId();
+            oMysql.updateOne(oProductoBean.getId(), "producto", "id_tipoproducto",id_Tipoproducto.toString() );
             oMysql.commitTrans();
         } catch (Exception e) {
             oMysql.rollbackTrans();

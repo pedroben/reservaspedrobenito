@@ -1,17 +1,22 @@
 package net.daw.helper;
+
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Contexto {
 
+    private HashMap<String, String> parameters;
+
     private Integer id;
-    
+
     private String clase;
     private String metodo;
     private String fase;
-    
-    private String buscando;
-    private HashMap<String,String> parameters;
+
+    private String selectOneTable;
+    private String selectOneField;
 
     private Integer page;
     private Integer nrpp;
@@ -179,14 +184,6 @@ public class Contexto {
         return strOperation;
     }
 
-    public String getBuscando() {
-        return buscando;
-    }
-
-    public void setBuscando(String buscando) {
-        this.buscando = buscando;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -195,6 +192,39 @@ public class Contexto {
         this.id = id;
     }
 
+    public HashMap<String, String> getParameters() {
+        return parameters;
+    }
 
+    public void setParameters(HashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
+    public String getSerializedParams() {
+        String resultado = "";
+        Iterator oIterator = this.parameters.entrySet().iterator();
+        while (oIterator.hasNext()) {
+            Map.Entry oEntrada = (Map.Entry) oIterator.next();
+            resultado += oEntrada.getKey() + "=" + oEntrada.getValue() + "&";
+            oIterator.remove();
+        }
+        return resultado.substring(0, resultado.length() - 2);
+    }
+
+    public String getSelectOneTable() {
+        return selectOneTable;
+    }
+
+    public void setSelectOneTable(String selectOneTable) {
+        this.selectOneTable = selectOneTable;
+    }
+
+    public String getSelectOneField() {
+        return selectOneField;
+    }
+
+    public void setSelectOneField(String selectOneField) {
+        this.selectOneField = selectOneField;
+    }
 
 }

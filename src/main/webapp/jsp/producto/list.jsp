@@ -1,8 +1,8 @@
 
+<%@ page import="net.daw.helper.Contexto"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Iterator"%>
 <%@ page import="net.daw.bean.ProductoBean"%>
-<%@ page import="net.daw.helper.Contexto"%>
 <%
     Contexto oContexto = (Contexto) request.getAttribute("contexto");
     ArrayList<Object> alObjetoParametro = (ArrayList<Object>) oContexto.getParametro();
@@ -16,6 +16,7 @@
         <th>código</th>
         <th>descripción</th>
         <th>precio</th>
+        <th>tipo</th>
         <th colspan="2">Operaciones</th>
     </tr>
     <%
@@ -26,7 +27,15 @@
         <td><%=oProductoBEAN.getId()%></td>
         <td><%=oProductoBEAN.getCodigo()%></td>
         <td><%=oProductoBEAN.getDescripcion()%></td>
-        <td><%=oProductoBEAN.getPrecio()%>&euro;</td>	
+        <td><%=oProductoBEAN.getPrecio()%>&euro;</td>
+        <td>
+            <%=oProductoBEAN.getTipoProducto().getDescripcion()%>
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <a class="btn btn-mini" href="Controller?class=tipoproducto&method=selectone&id=<%=oProductoBEAN.getId()%>&selectonetable=producto&selectonefield=id_tipoproducto"><i class="icon-search"></i></a>                                        
+                </div>
+            </div>
+        </td>
         <td>
             <div class="btn-toolbar">
                 <div class="btn-group">
