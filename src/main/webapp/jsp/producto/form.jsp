@@ -7,14 +7,14 @@
     String codigo = "";
     String descripcion = "";
     String precio = "";
-    String id_tipoproducto = "";
+    String strTipoproducto = "";
     if ("update".equals(oContexto.getMetodo()) || oContexto.getMetodo().equals("view")) {
         ProductoBean oProductoBean = (ProductoBean) oContexto.getParametro();
         id = oProductoBean.getId();
         codigo = oProductoBean.getCodigo();
         descripcion = oProductoBean.getDescripcion();
         precio = Float.toString(oProductoBean.getPrecio());
-        //id_tipoproducto = Integer.toString(oProductoBean.getId_tipoproducto());
+        strTipoproducto = "(" + Integer.toString(oProductoBean.getTipoProducto().getId()) + ") " + oProductoBean.getTipoProducto().getDescripcion();
     }
     if (oContexto.getMetodo().equals("view")) {
         strControlEnabled = "disabled=\"true\"";
@@ -56,6 +56,13 @@
                    value="<%=precio%>" /> 
             <br />
         </div>           
+        <div>
+            <label for="tipoproducto">Tipo de producto: </label> 
+            <input disabled="true"  id="tipoproducto"
+                   name="tipoproducto" type="text" size="30" maxlength="50"
+                   value="<%=strTipoproducto%>" /> 
+            <br />
+        </div>             
         <div>
             <input type="submit" name="enviar" value="<%=strValueBoton%>" />
         </div>
