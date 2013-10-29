@@ -9,7 +9,11 @@
     ArrayList<TipoproductoBean> alPagina = (ArrayList<TipoproductoBean>) alObjetoParametro.get(0);
     Iterator<TipoproductoBean> oIterador = alPagina.listIterator();
 %>
+<% if (!oContexto.getMetodo().equalsIgnoreCase("selectone")) { %>
 <h1>Listado de tipos de productos</h1>
+<% } else { %>
+<h1>Selección de tipos de productos</h1>
+<% } %>
 <table class="table table-hover table-condensed">
     <tr>
         <th>id</th>
