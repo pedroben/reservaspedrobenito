@@ -1,5 +1,6 @@
 package net.daw.operation;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,11 +14,15 @@ public class UsuarioLogin2 extends Operation {
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Contexto oContexto = (Contexto) request.getAttribute("contexto");
-        oContexto.setVista("jsp/mensaje.jsp"); 
+        oContexto.setVista("jsp/mensaje.jsp");
         String result;
         UsuarioBean oUsuario = new UsuarioBean();
-        UsuarioParam oUsuarioParam=new UsuarioParam(request);       
-        oUsuario=oUsuarioParam.load(oUsuario);       
+        UsuarioParam oUsuarioParam = new UsuarioParam(request);
+        try {
+            oUsuario = oUsuarioParam.load(oUsuario);
+        } catch (NumberFormatException e) {
+            return "Tipo de dato incorrecto en uno de los campos del formulario";
+        }
         UsuarioDao oUsuarioDao = new UsuarioDao(oContexto.getEnumTipoConexion());
         oUsuario = oUsuarioDao.get(oUsuario);
         if (oUsuario.getId() != 0) {
