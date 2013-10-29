@@ -14,7 +14,7 @@
         codigo = oProductoBean.getCodigo();
         descripcion = oProductoBean.getDescripcion();
         precio = Float.toString(oProductoBean.getPrecio());
-        id_tipoproducto = Integer.toString(oProductoBean.getId_tipoproducto());
+        //id_tipoproducto = Integer.toString(oProductoBean.getId_tipoproducto());
     }
     if (oContexto.getMetodo().equals("view")) {
         strControlEnabled = "disabled=\"true\"";
