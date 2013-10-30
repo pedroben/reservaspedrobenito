@@ -16,18 +16,20 @@ public class UsuarioLogin2 extends Operation {
         Contexto oContexto = (Contexto) request.getAttribute("contexto");
         oContexto.setVista("jsp/mensaje.jsp");
         String result;
-        UsuarioBean oUsuario = new UsuarioBean();
+        UsuarioBean oUsuario1 = new UsuarioBean();
         UsuarioParam oUsuarioParam = new UsuarioParam(request);
         try {
-            oUsuario = oUsuarioParam.load(oUsuario);
+            oUsuario1 = oUsuarioParam.load(oUsuario1);
         } catch (NumberFormatException e) {
             return "Tipo de dato incorrecto en uno de los campos del formulario";
         }
+        UsuarioBean oUsuario2 = new UsuarioBean();
         UsuarioDao oUsuarioDao = new UsuarioDao(oContexto.getEnumTipoConexion());
-        oUsuario = oUsuarioDao.get(oUsuario);
-        if (oUsuario.getId() != 0) {
-            result = "Bienvenido/a " + oUsuario.getNombre() + " Has entrado en la aplicación. Ahora puedes operar con los menús.";
-            request.getSession().setAttribute("usuarioBean", oUsuario);
+        oUsuario2.setLogin(oUsuario1.getLogin());
+        oUsuario2 = oUsuarioDao.getFromLogin(oUsuario2);
+        if (oUsuario2.getId() != 0 && oUsuario2.getPassword().equals(oUsuario1.getPassword())) {            
+            result = "Bienvenido/a " + oUsuario2.getNombre() + " Has entrado en la aplicación. Ahora puedes operar con los menús.";
+            request.getSession().setAttribute("usuarioBean", oUsuario2);
         } else {
             result = "Login o password incorrectos. No has entrado en la aplicación.";
         }

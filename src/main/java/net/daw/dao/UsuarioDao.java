@@ -14,7 +14,7 @@ public class UsuarioDao {
         enumTipoConexion = tipoConexion;
     }
 
-    public UsuarioBean get(UsuarioBean oUsuario) throws Exception {
+    public UsuarioBean getFromLogin(UsuarioBean oUsuario) throws Exception {
         try {
             oMysql.conexion(enumTipoConexion);
             String strId = oMysql.getId("usuario", "login", oUsuario.getLogin());
@@ -22,16 +22,9 @@ public class UsuarioDao {
                 oUsuario.setId(0);
             } else {
                 oUsuario.setId(Integer.parseInt(strId));
-            }
-            String strPass = oMysql.getOne("usuario", "password", oUsuario.getId());
-            if (strPass != null) {
-                if (strPass.equals(oUsuario.getPassword())) {
-                    oUsuario.setNombre(oMysql.getOne("usuario", "nombre", oUsuario.getId()));
-                    oUsuario.setEmail(oMysql.getOne("usuario", "email", oUsuario.getId()));
-                }
-            } else {
-                oUsuario.setNombre("");
-                oUsuario.setEmail("");
+                oUsuario.setPassword(oMysql.getOne("usuario", "password", oUsuario.getId()));
+                oUsuario.setNombre(oMysql.getOne("usuario", "nombre", oUsuario.getId()));
+                oUsuario.setEmail(oMysql.getOne("usuario", "email", oUsuario.getId()));
             }
             oMysql.desconexion();
             return oUsuario;
