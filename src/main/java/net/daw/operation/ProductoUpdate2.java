@@ -19,14 +19,12 @@ public class ProductoUpdate2 extends Operation {
         ProductoDao oProductoDao = new ProductoDao(oContexto.getEnumTipoConexion());
         ProductoParam oProductoParam = new ProductoParam(request);
         oProductoBean = oProductoParam.loadId(oProductoBean);
+        oProductoBean = oProductoDao.get(oProductoBean);
         try {
             oProductoBean = oProductoParam.load(oProductoBean);
         } catch (NumberFormatException e) {
             return "Tipo de dato incorrecto en uno de los campos del formulario";
         }
-        TipoproductoBean oTipoproductoBean = new TipoproductoBean();
-        oTipoproductoBean.setId(0);
-        oProductoBean.setTipoProducto(oTipoproductoBean);
         try {
             oProductoDao.set(oProductoBean);
         } catch (Exception e) {
