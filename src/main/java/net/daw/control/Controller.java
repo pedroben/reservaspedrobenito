@@ -39,7 +39,9 @@ public class Controller extends HttpServlet {
         } catch (IllegalAccessException e) {
             throw new ServletException("Controller: Error: IllegalAccessException " + e.getMessage());
         } catch (ClassNotFoundException e) {
-            throw new ServletException("Controller: Error: ClassNotFoundException " + e.getMessage());
+            oContexto.setVista("jsp/mensaje.jsp");
+            oContexto.setParametro("Lo sentimos pero la operación no está disponible en estos momentos");
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 
