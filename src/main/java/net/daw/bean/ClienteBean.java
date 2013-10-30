@@ -1,15 +1,11 @@
 package net.daw.bean;
 
 public class ClienteBean {
-	private int id;
-	private String nombre;
-	private String ape1;
-	private String ape2;
-	private String email;
-	
-	public ClienteBean (){
-
-	}
+	private int id=0;
+	private String nombre="";
+	private String ape1="";
+	private String ape2="";
+	private String email="";
 	
 	public ClienteBean (int id){
 		this.id=id;

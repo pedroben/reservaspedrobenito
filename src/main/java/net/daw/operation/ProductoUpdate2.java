@@ -4,6 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.ProductoBean;
+import net.daw.bean.TipoproductoBean;
 import net.daw.dao.ProductoDao;
 import net.daw.helper.Contexto;
 import net.daw.parameter.ProductoParam;
@@ -23,6 +24,9 @@ public class ProductoUpdate2 extends Operation {
         } catch (NumberFormatException e) {
             return "Tipo de dato incorrecto en uno de los campos del formulario";
         }
+        TipoproductoBean oTipoproductoBean = new TipoproductoBean();
+        oTipoproductoBean.setId(0);
+        oProductoBean.setTipoProducto(oTipoproductoBean);
         try {
             oProductoDao.set(oProductoBean);
         } catch (Exception e) {

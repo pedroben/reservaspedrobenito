@@ -45,7 +45,7 @@ public class ProductoParam {
                 oProducto.setDescripcion(request.getParameter("descripcion"));
             }
             if ((request.getParameter("precio") != null)) {
-                oProducto.setPrecio(Float.parseFloat(request.getParameter("precio")));
+                oProducto.setPrecio(Double.parseDouble(request.getParameter("precio")));
             }
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Controller: Error: load: Formato de datos en parámetros incorrecto " + e.getMessage());

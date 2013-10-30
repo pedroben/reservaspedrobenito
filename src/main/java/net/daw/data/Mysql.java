@@ -106,6 +106,18 @@ public class Mysql implements GenericData {
     }
 
     @Override
+    public void setNull(int intId, String strTabla, String strCampo) throws Exception {
+        Statement oStatement;
+        try {
+            oStatement = (Statement) oConexionMySQL.createStatement();
+            String strSQL = "UPDATE " + strTabla + " SET " + strCampo + " = null WHERE id = " + Integer.toString(intId);
+            oStatement.executeUpdate(strSQL);
+        } catch (SQLException e) {
+            throw new Exception("mysql.setNull: Error al modificar el registro: " + e.getMessage());
+        }
+    }    
+    
+    @Override
     public void updateOne(int intId, String strTabla, String strCampo, String strValor) throws Exception {
         Statement oStatement;
         try {
@@ -113,7 +125,7 @@ public class Mysql implements GenericData {
             String strSQL = "UPDATE " + strTabla + " SET " + strCampo + " = '" + strValor + "' WHERE id = " + Integer.toString(intId);
             oStatement.executeUpdate(strSQL);
         } catch (SQLException e) {
-            throw new Exception("mysql.removeOne: Error al modificar el registro: " + e.getMessage());
+            throw new Exception("mysql.updateOne: Error al modificar el registro: " + e.getMessage());
         }
     }
 

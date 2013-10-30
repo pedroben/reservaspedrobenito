@@ -1,11 +1,11 @@
 package net.daw.bean;
 
 public class UsuarioBean {
-	private int id;
-	private String nombre;
-	private String email;
-	private String login;
-	private String password;
+	private int id=0;
+	private String nombre="";
+	private String email="";
+	private String login="";
+	private String password="";
 
 	public int getId() {
 		return id;

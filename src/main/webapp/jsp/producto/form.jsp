@@ -1,6 +1,7 @@
 <%@page import="net.daw.helper.Contexto"%>
 <%@page import="net.daw.bean.ProductoBean"%>
 <% Contexto oContexto = (Contexto) request.getAttribute("contexto");
+    String strTitulo="";
     String strControlEnabled = "";
     String strValueBoton = "Enviar";
     Integer id = 0;
@@ -13,21 +14,24 @@
         id = oProductoBean.getId();
         codigo = oProductoBean.getCodigo();
         descripcion = oProductoBean.getDescripcion();
-        precio = Float.toString(oProductoBean.getPrecio());
+        precio = Double.toString(oProductoBean.getPrecio());
         strTipoproducto = "(" + Integer.toString(oProductoBean.getTipoProducto().getId()) + ") " + oProductoBean.getTipoProducto().getDescripcion();
     }
     if (oContexto.getMetodo().equals("view")) {
+        strTitulo="Vista";
         strControlEnabled = "disabled=\"true\"";
         strValueBoton = "Cerrar";
     }
     if (oContexto.getMetodo().equals("update")) {
+        strTitulo="Edición";
         strValueBoton = "Modificar";
     }
     if (oContexto.getMetodo().equals("new")) {
+        strTitulo="Alta";
         strValueBoton = "Crear";
     }
 %>
-<h1>Edición de producto</h1>
+<h1><%=strTitulo%> de producto</h1>
 <form class="semantic" action="Controller" method="post" id="clienteForm">
     <fieldset>
         <legend>Formulario de producto</legend>
