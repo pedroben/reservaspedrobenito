@@ -27,7 +27,7 @@ public class UsuarioLogin2 extends Operation {
         oUsuario = oUsuarioDao.get(oUsuario);
         if (oUsuario.getId() != 0) {
             result = "Bienvenido/a " + oUsuario.getNombre() + " Has entrado en la aplicación. Ahora puedes operar con los menús.";
-            request.getSession().setAttribute("usuario", oUsuario);
+            request.getSession().setAttribute("usuarioBean", oUsuario);
         } else {
             result = "Login o password incorrectos. No has entrado en la aplicación.";
         }
