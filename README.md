@@ -1,4 +1,4 @@
 comprausias-march
 =================
 
-A didactic Java program to learn to structure server only maintenences
+A didactic Java program to learn how to structure simple server-only maintenances.
