@@ -34,7 +34,7 @@
                         <span class="icon-bar"></span> 
                         <span class="icon-bar"></span>
                     </a> 
-                    <a class="brand" href="Controller">Comprausiàs March</a>
+                    <a class="brand" href="Controller">ComprAusiàs March</a>
                     <div class="nav-collapse collapse">
                         <%
                             if (user != null) {
