@@ -7,6 +7,7 @@ package net.daw.parameter;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.helper.Contexto;
@@ -70,28 +71,26 @@ public class ContextParam {
             }
 
             if (request.getParameter("filter") == null) {
-                oContexto.setFilter("nofilter");
-                oContexto.setFilterValue("nofilter");
+                oContexto.setHmFilter(null);
             } else {
                 if (request.getParameter("filtervalue") == null) {
-                    oContexto.setFilter("nofilter");
-                    oContexto.setFilterValue("nofilter");
+                    oContexto.setHmFilter(null);
                 } else {
-                    oContexto.setFilter(request.getParameter("order"));
-                    oContexto.setFilterValue(request.getParameter("filtervalue"));
+                    HashMap<String, String> hmFilter = new HashMap<>();
+                    hmFilter.put(request.getParameter("filter"), request.getParameter("filtervalue"));
+                    oContexto.setHmFilter(hmFilter);
                 }
             }
 
-            if (request.getParameter("order") == null) {
-                oContexto.setOrder("noorder");
-                oContexto.setOrderValue("noorder");
+            if (request.getParameter("order") == null) {  
+                oContexto.setHmOrder(null);
             } else {
-                if (request.getParameter("filtervalue") == null) {
-                    oContexto.setOrder("noorder");
-                    oContexto.setOrderValue("noorder");
+                if (request.getParameter("ordervalue") == null) { 
+                    oContexto.setHmOrder(null);
                 } else {
-                    oContexto.setOrder(request.getParameter("order"));
-                    oContexto.setOrderValue(request.getParameter("filtervalue"));
+                    HashMap<String, String> hmOrder = new HashMap<>();
+                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
+                    oContexto.setHmOrder(hmOrder);
                 }
             }
 

@@ -1,5 +1,5 @@
 <ul class="nav">
-    <li class="active">
+    <li>
         <a href="Controller">Inicio</a>
     </li>
     <li class="dropdown">

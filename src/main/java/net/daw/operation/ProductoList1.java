@@ -16,12 +16,16 @@ public class ProductoList1 extends Operation {
         oContexto.setVista("jsp/producto/list.jsp");
         try {
             ProductoDao oProductoDAO = new ProductoDao(oContexto.getEnumTipoConexion());
-            Integer intPages = oProductoDAO.getPages(oContexto.getNrpp());
+            Integer intPages = oProductoDAO.getPages(oContexto.getNrpp(), oContexto.getHmFilter(), oContexto.getHmOrder());
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
-            ArrayList<ProductoBean> listado = (ArrayList<ProductoBean>) oProductoDAO.getPage(oContexto.getNrpp(), oContexto.getPage());
-            ArrayList<String> vecindad = (ArrayList<String>) oProductoDAO.getNeighborhood("<a href=\"Controller?class=producto&method=list&rpp=" + oContexto.getNrpp() + "&page=", oContexto.getPage(), intPages, 2);
+            if (oContexto.getPage() < 1) {
+                oContexto.setPage(1);
+            }
+            ArrayList<ProductoBean> listado = (ArrayList<ProductoBean>) oProductoDAO.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getHmFilter(), oContexto.getHmOrder());
+            String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";
+            ArrayList<String> vecindad = (ArrayList<String>) oProductoDAO.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
             a.add(vecindad);

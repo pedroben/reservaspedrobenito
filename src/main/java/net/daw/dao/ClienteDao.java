@@ -1,6 +1,7 @@
 package net.daw.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import net.daw.bean.ClienteBean;
@@ -8,33 +9,33 @@ import net.daw.data.Mysql;
 import net.daw.helper.Enum;
 
 public class ClienteDao {
+
     private Mysql oMysql;
     private Enum.Connection enumTipoConexion;
+
     public ClienteDao(Enum.Connection tipoConexion) throws Exception {
         oMysql = new Mysql();
-        enumTipoConexion=tipoConexion;
+        enumTipoConexion = tipoConexion;
     }
 
-    public int getPages(int intRegsPerPag) throws Exception {
+    public int getPages(int intRegsPerPag,HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
-            pages = oMysql.getPages("cliente", intRegsPerPag);
+            pages = oMysql.getPages("cliente", intRegsPerPag, hmFilter, hmOrder);
             oMysql.desconexion();
             return pages;
         } catch (Exception e) {
             throw new Exception("ClienteDao.getPages: Error: " + e.getMessage());
-        } finally {
-            oMysql.desconexion();
         }
     }
 
-    public ArrayList<ClienteBean> getPage(int intRegsPerPag, int intPage) throws Exception {
+    public ArrayList<ClienteBean> getPage(int intRegsPerPag, int intPage,HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<ClienteBean> arrCliente = new ArrayList<>();
         try {
-            oMysql.conexion(enumTipoConexion);
-            arrId = oMysql.getPage("cliente", intRegsPerPag, intPage,"");
+            oMysql.conexion(enumTipoConexion);           
+            arrId = oMysql.getPage("cliente", intRegsPerPag, intPage, hmFilter, hmOrder);
             Iterator<Integer> iterador = arrId.listIterator();
             while (iterador.hasNext()) {
                 ClienteBean oClienteBean = new ClienteBean(iterador.next());
@@ -44,13 +45,11 @@ public class ClienteDao {
             return arrCliente;
         } catch (Exception e) {
             throw new Exception("ClienteDao.getPage: Error: " + e.getMessage());
-        } finally {
-            oMysql.desconexion();
         }
     }
 
     public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception {
-        oMysql.conexion(enumTipoConexion);        
+        oMysql.conexion(enumTipoConexion);
         ArrayList<String> n = oMysql.getNeighborhood(strLink, intPageNumber, intTotalPages, intNeighborhood);
         oMysql.desconexion();
         return n;
@@ -72,8 +71,6 @@ public class ClienteDao {
         return oClienteBean;
     }
 
-
-    
     public void set(ClienteBean oClienteBean) throws Exception {
         try {
             oMysql.conexion(enumTipoConexion);

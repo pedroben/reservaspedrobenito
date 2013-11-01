@@ -26,11 +26,11 @@ public class TipoproductoSelectone1  extends Operation {
         oContexto.setVista("jsp/tipoproducto/list.jsp");
         try {
             TipoproductoDao oTipoproductoDao = new TipoproductoDao(oContexto.getEnumTipoConexion());
-            Integer intPages = oTipoproductoDao.getPages(oContexto.getNrpp());
+            Integer intPages = oTipoproductoDao.getPages(oContexto.getNrpp(),null,null);
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
-            ArrayList<TipoproductoBean> listado = (ArrayList<TipoproductoBean>) oTipoproductoDao.getPage(oContexto.getNrpp(), oContexto.getPage());
+            ArrayList<TipoproductoBean> listado = (ArrayList<TipoproductoBean>) oTipoproductoDao.getPage(oContexto.getNrpp(), oContexto.getPage(),null,null);
             ArrayList<String> vecindad = (ArrayList<String>) oTipoproductoDao.getNeighborhood("<a href=\"Controller?class=tipoproducto&method=list&rpp=" + oContexto.getNrpp() + "&page=", oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);

@@ -9,22 +9,58 @@
     ArrayList<ClienteBean> alPagina = (ArrayList<ClienteBean>) alObjetoParametro.get(0);
     Iterator<ClienteBean> oIterador = alPagina.listIterator();
 %>
-<h1>Listado de clientes</h1>
-<%
-    if (!oIterador.hasNext()) {
-        out.print("<h4>Listado vacío</h4>");
-    } else {
-%>
+<div class="row-fluid">
+    <div class="span8">
+        <h1>Listado de clientes</h1>
+        <%
+            if (!oIterador.hasNext()) {
+                out.print("<h4>Listado vacío</h4>");
+            } else {
+        %>
+        <%
+            ArrayList<String> paginacion = (ArrayList<String>) alObjetoParametro.get(1);
+            Iterator<String> iterador2 = paginacion.listIterator();
+            while (iterador2.hasNext()) {
+                String o = iterador2.next();
+                out.print(o);
+            }
+        %>
+    </div>
+    <div class="span4">
+        <div class="text-right">
+            <%
+                if (oContexto.getHmOrder() != null) {
+                    out.print("<h4>Listado ordenado por " + oContexto.getHmOrder().keySet().toArray()[0].toString() + "</h4>");
+                    out.print("<a href=\"Controller?class=cliente&method=list\">Quitar orden</a>");
+                }
+            %>
+        </div>
+    </div>
+</div>
 <table class="table table-hover table-condensed">
     <tr>
-        <th>id</th>
-        <th>nombre</th>
-        <th>ape1</th>
-        <th>ape2</th>
-        <th>email</th>
+        <th>id
+            <a href="Controller?class=cliente&method=list&order=id&ordervalue=asc"><i class="icon-arrow-up"></i></a>
+            <a href="Controller?class=cliente&method=list&order=id&ordervalue=desc"><i class="icon-arrow-down"></i></a>
+        </th>
+        <th>nombre
+            <a href="Controller?class=cliente&method=list&order=nombre&ordervalue=asc"><i class="icon-arrow-up"></i></a>
+            <a href="Controller?class=cliente&method=list&order=nombre&ordervalue=desc"><i class="icon-arrow-down"></i></a>
+        </th>
+        <th>primer apellido
+            <a href="Controller?class=cliente&method=list&order=ape1&ordervalue=asc"><i class="icon-arrow-up"></i></a>
+            <a href="Controller?class=cliente&method=list&order=ape1&ordervalue=desc"><i class="icon-arrow-down"></i></a>
+        </th>
+        <th>segundo apellido
+            <a href="Controller?class=cliente&method=list&order=ape2&ordervalue=asc"><i class="icon-arrow-up"></i></a>
+            <a href="Controller?class=cliente&method=list&order=ape2&ordervalue=desc"><i class="icon-arrow-down"></i></a>        
+        </th>
+        <th>email
+            <a href="Controller?class=cliente&method=list&order=email&ordervalue=asc"><i class="icon-arrow-up"></i></a>
+            <a href="Controller?class=cliente&method=list&order=email&ordervalue=desc"><i class="icon-arrow-down"></i></a>         
+        </th>
         <th>Operaciones</th>
     </tr>
-
     <%
         while (oIterador.hasNext()) {
             ClienteBean oClienteBEAN = oIterador.next();
@@ -48,14 +84,7 @@
     <%
         }
     %>
-    <%
-        ArrayList<String> paginacion = (ArrayList<String>) alObjetoParametro.get(1);
-        Iterator<String> iterador2 = paginacion.listIterator();
-        while (iterador2.hasNext()) {
-            String o = iterador2.next();
-            out.print(o);
-        }
-    %>
+
 </table>
 <%
     }

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import net.daw.bean.TipoproductoBean;
 import net.daw.data.Mysql;
@@ -16,21 +16,21 @@ import net.daw.data.Mysql;
  * @author rafa
  */
 public class TipoproductoDao {
-    
+
     private final Mysql oMysql;
     private final net.daw.helper.Enum.Connection enumTipoConexion;
-    private final String strTabla="tipoproducto";
+    private final String strTabla = "tipoproducto";
 
     public TipoproductoDao(net.daw.helper.Enum.Connection tipoConexion) throws Exception {
         oMysql = new Mysql();
         enumTipoConexion = tipoConexion;
     }
 
-    public int getPages(int intRegsPerPag) throws Exception {
+    public int getPages(int intRegsPerPag, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
-            pages = oMysql.getPages(strTabla, intRegsPerPag);
+            pages = oMysql.getPages(strTabla, intRegsPerPag, hmFilter, hmOrder);
             oMysql.desconexion();
             return pages;
         } catch (Exception e) {
@@ -40,12 +40,12 @@ public class TipoproductoDao {
         }
     }
 
-    public ArrayList<TipoproductoBean> getPage(int intRegsPerPag, int intPage) throws Exception {
+    public ArrayList<TipoproductoBean> getPage(int intRegsPerPag, int intPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> alId;
         ArrayList<TipoproductoBean> alBeans = new ArrayList<>();
         try {
             oMysql.conexion(enumTipoConexion);
-            alId = oMysql.getPage(strTabla, intRegsPerPag, intPage, "");
+            alId = oMysql.getPage(strTabla, intRegsPerPag, intPage, hmFilter, hmOrder);
             Iterator<Integer> iterador = alId.listIterator();
             while (iterador.hasNext()) {
                 TipoproductoBean oTipoproductoBean = new TipoproductoBean(iterador.next());
@@ -60,6 +60,7 @@ public class TipoproductoDao {
         }
     }
 //buttonpad
+
     public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception {
         oMysql.conexion(enumTipoConexion);
         ArrayList<String> n = oMysql.getNeighborhood(strLink, intPageNumber, intTotalPages, intNeighborhood);
@@ -70,7 +71,7 @@ public class TipoproductoDao {
     public TipoproductoBean get(TipoproductoBean oTipoproductoBean) throws Exception {
         try {
             oMysql.conexion(enumTipoConexion);
-            oTipoproductoBean.setDescripcion(oMysql.getOne(strTabla, "descripcion", oTipoproductoBean.getId()));            
+            oTipoproductoBean.setDescripcion(oMysql.getOne(strTabla, "descripcion", oTipoproductoBean.getId()));
             oMysql.desconexion();
         } catch (Exception e) {
             throw new Exception("TiporoductoDao.get: Error: " + e.getMessage());
@@ -87,7 +88,7 @@ public class TipoproductoDao {
             if (oTipoproductoBean.getId() == 0) {
                 oTipoproductoBean.setId(oMysql.insertOne(strTabla));
             }
-            oMysql.updateOne(oTipoproductoBean.getId(), strTabla, "descripcion", oTipoproductoBean.getDescripcion());            
+            oMysql.updateOne(oTipoproductoBean.getId(), strTabla, "descripcion", oTipoproductoBean.getDescripcion());
             oMysql.commitTrans();
         } catch (Exception e) {
             oMysql.rollbackTrans();

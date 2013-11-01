@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import net.daw.connection.DataSourceConnection;
 import net.daw.connection.DriverManagerConnection;
 import net.daw.connection.GenericConnection;
@@ -115,8 +118,8 @@ public class Mysql implements GenericData {
         } catch (SQLException e) {
             throw new Exception("mysql.setNull: Error al modificar el registro: " + e.getMessage());
         }
-    }    
-    
+    }
+
     @Override
     public void updateOne(int intId, String strTabla, String strCampo, String strValor) throws Exception {
         Statement oStatement;
@@ -184,12 +187,24 @@ public class Mysql implements GenericData {
     }
 
     @Override
-    public int getPages(String strTabla, int intRegsPerPage) throws Exception {
+    public int getPages(String strTabla, int intRegsPerPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         int intResult = 0;
         Statement oStatement;
         try {
             oStatement = (Statement) oConexionMySQL.createStatement();
             String strSQL = "SELECT count(*) FROM " + strTabla + " WHERE 1=1";
+            if (hmFilter != null) {
+                for (Map.Entry oPar : hmFilter.entrySet()) {
+                    strSQL += " AND " + oPar.getKey() + " = " + oPar.getValue();
+                }
+            }
+            if (hmOrder != null) {
+                strSQL += " ORDER BY";
+                for (Map.Entry oPar : hmOrder.entrySet()) {
+                    strSQL += " " + oPar.getKey() + " " + oPar.getValue() + ",";
+                }
+                strSQL = strSQL.substring(0, strSQL.length() - 1);
+            }
             ResultSet oResultSet = oStatement.executeQuery(strSQL);
             while (oResultSet.next()) {
                 intResult = oResultSet.getInt("COUNT(*)") / intRegsPerPage;
@@ -204,7 +219,7 @@ public class Mysql implements GenericData {
     }
 
     @Override
-    public ArrayList<Integer> getPage(String strTabla, int intRegsPerPage, int intPagina, String strOrden) throws Exception {
+    public ArrayList<Integer> getPage(String strTabla, int intRegsPerPage, int intPagina, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         try {
             ArrayList<Integer> vector = new ArrayList<>();
             int intOffset;
@@ -212,8 +227,17 @@ public class Mysql implements GenericData {
             oStatement = (Statement) oConexionMySQL.createStatement();
             intOffset = Math.max(((intPagina - 1) * intRegsPerPage), 0);
             String strSQL = "SELECT id FROM " + strTabla + " WHERE 1=1 ";
-            if (!strOrden.equals("")) {
-                strSQL += " ORDER BY " + strOrden;
+            if (hmFilter != null) {
+                for (Map.Entry oPar : hmFilter.entrySet()) {
+                    strSQL += " AND " + oPar.getKey() + " LIKE '%" + oPar.getValue() + "%'";
+                }
+            }
+            if (hmOrder != null) {
+                strSQL += " ORDER BY";
+                for (Map.Entry oPar : hmOrder.entrySet()) {
+                    strSQL += " " + oPar.getKey() + " " + oPar.getValue() + ",";
+                }
+                strSQL = strSQL.substring(0, strSQL.length() - 1);
             }
             strSQL += " LIMIT " + intOffset + " , " + intRegsPerPage;
             ResultSet oResultSet = oStatement.executeQuery(strSQL);

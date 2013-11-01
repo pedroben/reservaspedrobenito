@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package net.daw.operation;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import net.daw.helper.Contexto;
  *
  * @author rafa
  */
-public class TipoproductoList1  extends Operation {
+public class TipoproductoList1 extends Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -26,12 +25,16 @@ public class TipoproductoList1  extends Operation {
         oContexto.setVista("jsp/tipoproducto/list.jsp");
         try {
             TipoproductoDao oTipoproductoDao = new TipoproductoDao(oContexto.getEnumTipoConexion());
-            Integer intPages = oTipoproductoDao.getPages(oContexto.getNrpp());
+            Integer intPages = oTipoproductoDao.getPages(oContexto.getNrpp(), oContexto.getHmFilter(), oContexto.getHmOrder());
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
-            ArrayList<TipoproductoBean> listado = (ArrayList<TipoproductoBean>) oTipoproductoDao.getPage(oContexto.getNrpp(), oContexto.getPage());
-            ArrayList<String> vecindad = (ArrayList<String>) oTipoproductoDao.getNeighborhood("<a href=\"Controller?class=tipoproducto&method=list&rpp=" + oContexto.getNrpp() + "&page=", oContexto.getPage(), intPages, 2);
+            if (oContexto.getPage() < 1) {
+                oContexto.setPage(1);
+            }
+            ArrayList<TipoproductoBean> listado = (ArrayList<TipoproductoBean>) oTipoproductoDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getHmFilter(), oContexto.getHmOrder());
+            String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";
+            ArrayList<String> vecindad = (ArrayList<String>) oTipoproductoDao.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
             a.add(vecindad);
@@ -40,5 +43,5 @@ public class TipoproductoList1  extends Operation {
             throw new ServletException("TipoproductoList1: View Error: " + e.getMessage());
         }
     }
-    
+
 }

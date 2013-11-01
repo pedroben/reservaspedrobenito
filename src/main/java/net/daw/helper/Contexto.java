@@ -21,11 +21,8 @@ public class Contexto {
     private Integer page;
     private Integer nrpp;
 
-    private String filter;
-    private String filterValue;
-
-    private String order;
-    private String orderValue;
+    private HashMap<String, String> hmFilter;
+    private HashMap<String, String> hmOrder;
 
     private String vista;
 
@@ -78,38 +75,6 @@ public class Contexto {
 
     public void setNrpp(Integer nrpp) {
         this.nrpp = nrpp;
-    }
-
-    public String getFilter() {
-        return filter;
-    }
-
-    public void setFilter(String filter) {
-        this.filter = filter;
-    }
-
-    public String getFilterValue() {
-        return filterValue;
-    }
-
-    public void setFilterValue(String filterValue) {
-        this.filterValue = filterValue;
-    }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = order;
-    }
-
-    public String getOrderValue() {
-        return orderValue;
-    }
-
-    public void setOrderValue(String orderValue) {
-        this.orderValue = orderValue;
     }
 
     public String getVista() {
@@ -208,7 +173,20 @@ public class Contexto {
             resultado += oEntrada.getKey() + "=" + oEntrada.getValue() + "&";
             oIterator.remove();
         }
-        return resultado.substring(0, resultado.length() - 2);
+        return resultado.substring(0, resultado.length() - 1);
+    }
+
+    public String getSerializedParamsExceptPage() {
+        String resultado = "";
+        Iterator oIterator = this.parameters.entrySet().iterator();
+        while (oIterator.hasNext()) {
+            Map.Entry oEntrada = (Map.Entry) oIterator.next();
+            if (!oEntrada.getKey().equals("page")) {
+                resultado += oEntrada.getKey() + "=" + oEntrada.getValue() + "&";                
+            }
+            oIterator.remove();
+        }
+        return resultado.substring(0, resultado.length() - 1);
     }
 
     public String getSelectOneTable() {
@@ -225,6 +203,22 @@ public class Contexto {
 
     public void setSelectOneField(String selectOneField) {
         this.selectOneField = selectOneField;
+    }
+
+    public HashMap<String, String> getHmFilter() {
+        return hmFilter;
+    }
+
+    public void setHmFilter(HashMap<String, String> hmFilter) {
+        this.hmFilter = hmFilter;
+    }
+
+    public HashMap<String, String> getHmOrder() {
+        return hmOrder;
+    }
+
+    public void setHmOrder(HashMap<String, String> hmOrder) {
+        this.hmOrder = hmOrder;
     }
 
 }
