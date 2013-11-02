@@ -12,7 +12,7 @@ import net.daw.bean.ProductoBean;
 import net.daw.dao.ProductoDao;
 import net.daw.helper.Contexto;
 
-public class ProductoRellena1 extends Operation {
+public class ProductoRellena1 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

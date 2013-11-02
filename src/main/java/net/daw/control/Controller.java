@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.daw.helper.Contexto;
-import net.daw.helper.Session;
 import net.daw.operation.Operation;
 import net.daw.parameter.ContextParam;
 
@@ -20,8 +18,8 @@ public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         Contexto oContexto = new Contexto();
-        oContexto = Session.loadSession(request, oContexto);
         ContextParam oContextParam = new ContextParam(request);
+        oContexto=oContextParam.loadSession(oContexto);
         oContexto = oContextParam.load(oContexto); 
         oContexto.setEnumTipoConexion(net.daw.helper.Enum.Connection.DataSource);
         request.setAttribute("contexto", oContexto);

@@ -9,7 +9,7 @@ import net.daw.dao.ProductoDao;
 import net.daw.helper.Contexto;
 import net.daw.parameter.ProductoParam;
 
-public class ProductoNew2 extends Operation {
+public class ProductoNew2 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

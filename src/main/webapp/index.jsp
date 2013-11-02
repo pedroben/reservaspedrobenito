@@ -2,8 +2,8 @@
 <%@page import="net.daw.helper.Contexto"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
-    UsuarioBean user = (UsuarioBean) request.getSession().getAttribute("usuarioBean");
     Contexto oContexto = (Contexto) request.getAttribute("contexto");
+    UsuarioBean oUserBean = (UsuarioBean) oContexto.getUserBeanSession();
 %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -37,7 +37,7 @@
                     <a class="brand" href="Controller">ComprAusiàs March</a>
                     <div class="nav-collapse collapse">
                         <%
-                            if (user != null) {
+                            if (oUserBean != null) {
                         %>
                         <jsp:include page="jsp/menuSuperior.jsp" />
                         <%
@@ -45,9 +45,9 @@
                         %>
                         <p class="navbar-text pull-right">
                             <%
-                                if (user != null) {
+                                if (oUserBean != null) {
                             %>
-                            Estás logueado como <%=user.getNombre()%>&nbsp;&nbsp;&nbsp;&nbsp;
+                            Estás logueado como <%=oUserBean.getNombre()%>&nbsp;&nbsp;&nbsp;&nbsp;
                             <a class="navbar-link" href="Controller?class=usuario&method=logout">(Salir del sistema)</a>
                             <%
                             } else {
@@ -64,7 +64,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <%
-                    if (user != null) {
+                    if (oUserBean != null) {
                         out.print("<div class=\"span2\">");
                 %>
                 <jsp:include page="jsp/menuLateral.jsp" />
@@ -73,7 +73,7 @@
                     }
                 %>
                 <%
-                    if (user != null) {
+                    if (oUserBean != null) {
                         out.print("<div class=\"span10\">");
                     } else {
                         out.print("<div class=\"span12\">");
@@ -82,8 +82,10 @@
                 <jsp:include page='<%=(String) oContexto.getVista()%>' />
                 <%
                     out.print("</div>");
-                %>            
-                <div class="span12"><hr><footer><p>&copy; Rafael Aznar (2013)</p></footer></div>            
+                %>    
+                <div class="row-fluid">
+                <div class="span12"><hr><footer><p>&copy; Rafael Aznar (2013)</p></footer></div>   
+                </div>
             </div>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>        

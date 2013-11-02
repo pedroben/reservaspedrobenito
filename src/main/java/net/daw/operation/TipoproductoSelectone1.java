@@ -18,7 +18,7 @@ import net.daw.helper.Contexto;
  *
  * @author rafa
  */
-public class TipoproductoSelectone1  extends Operation {
+public class TipoproductoSelectone1  implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

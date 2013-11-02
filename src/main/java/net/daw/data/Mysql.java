@@ -195,7 +195,7 @@ public class Mysql implements GenericData {
             String strSQL = "SELECT count(*) FROM " + strTabla + " WHERE 1=1";
             if (hmFilter != null) {
                 for (Map.Entry oPar : hmFilter.entrySet()) {
-                    strSQL += " AND " + oPar.getKey() + " = " + oPar.getValue();
+                    strSQL += " AND " + oPar.getKey() + " LIKE '%" + oPar.getValue() + "%'";
                 }
             }
             if (hmOrder != null) {

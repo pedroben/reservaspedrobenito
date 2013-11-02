@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.UsuarioBean;
 import net.daw.dao.UsuarioDao;
 import net.daw.helper.Contexto;
+import net.daw.parameter.ContextParam;
 import net.daw.parameter.UsuarioParam;
 
-public class UsuarioLogin2 extends Operation {
+public class UsuarioLogin2 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -33,6 +34,8 @@ public class UsuarioLogin2 extends Operation {
         } else {
             result = "Login o password incorrectos. No has entrado en la aplicación.";
         }
+        ContextParam oContextParam=new ContextParam(request);
+        oContexto=oContextParam.loadSession(oContexto);
         return result;
     }
 

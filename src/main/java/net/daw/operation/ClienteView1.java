@@ -12,7 +12,7 @@ import net.daw.parameter.ClienteParam;
  *
  * @author rafael aznar
  */
-public class ClienteView1 extends Operation {
+public class ClienteView1 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

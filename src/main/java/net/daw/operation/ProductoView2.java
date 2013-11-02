@@ -13,7 +13,7 @@ import net.daw.helper.Contexto;
  *
  * @author rafa
  */
-public class ProductoView2 extends Operation {
+public class ProductoView2 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

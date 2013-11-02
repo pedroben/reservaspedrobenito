@@ -6,7 +6,7 @@ import net.daw.bean.ClienteBean;
 import net.daw.helper.Contexto;
 import net.daw.parameter.ClienteParam;
 
-public class ClienteRemove1 extends Operation {
+public class ClienteRemove1 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

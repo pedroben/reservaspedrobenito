@@ -8,7 +8,7 @@ import net.daw.bean.ProductoBean;
 import net.daw.dao.ProductoDao;
 import net.daw.helper.Contexto;
 
-public class ProductoList1 extends Operation {
+public class ProductoList1 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

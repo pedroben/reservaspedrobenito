@@ -14,7 +14,7 @@ import net.daw.bean.ClienteBean;
 import net.daw.dao.ClienteDao;
 import net.daw.helper.Contexto;
 
-public class ClienteRellena1 extends Operation {
+public class ClienteRellena1 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

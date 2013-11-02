@@ -8,7 +8,7 @@ import net.daw.dao.TipoproductoDao;
 import net.daw.helper.Contexto;
 import net.daw.parameter.TipoproductoParam;
 
-public class TipoproductoSelectone2 extends Operation {
+public class TipoproductoSelectone2 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

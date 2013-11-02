@@ -6,7 +6,7 @@ import net.daw.bean.ProductoBean;
 import net.daw.helper.Contexto;
 import net.daw.parameter.ProductoParam;
 
-public class ProductoRemove1 extends Operation {
+public class ProductoRemove1 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

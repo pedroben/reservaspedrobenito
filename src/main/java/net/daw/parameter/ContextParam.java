@@ -7,9 +7,8 @@ package net.daw.parameter;
 
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import net.daw.bean.UsuarioBean;
 import net.daw.helper.Contexto;
 
 /**
@@ -18,10 +17,22 @@ import net.daw.helper.Contexto;
  */
 public class ContextParam {
 
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     public ContextParam(HttpServletRequest request) throws Exception {
         this.request = request;
+    }
+
+
+
+    public  Contexto loadSession(Contexto oContexto) {
+        oContexto.setHaySesion(request.getSession().getAttribute("usuarioBean") != null);
+        if (oContexto.getHaySesion()){
+            oContexto.setUserBeanSession((UsuarioBean) request.getSession().getAttribute("usuarioBean"));
+        } else        {
+            oContexto.setUserBeanSession(null);
+        }
+        return oContexto;
     }
 
     public Contexto load(Contexto oContexto) throws NumberFormatException {
@@ -34,41 +45,27 @@ public class ContextParam {
             }
             oContexto.setParameters(parameterNames);
 
-            if (request.getParameter("id") == null) {
-                oContexto.setId(0);
-            } else {
-                oContexto.setId(Integer.parseInt(request.getParameter("id")));
-            }
+
 
             if ((request.getParameter("class") == null) || !oContexto.getHaySesion()) {
                 oContexto.setClase("usuario");
-            } else {
-                oContexto.setClase(request.getParameter("class"));
-            }
+            } 
 
             if (request.getParameter("method") == null || (!oContexto.getHaySesion() && !"login".equals(request.getParameter("method")))) {
                 oContexto.setMetodo("ocioso");
-            } else {
-                oContexto.setMetodo(request.getParameter("method"));
             }
 
             if (request.getParameter("phase") == null) {
                 oContexto.setFase("1");
-            } else {
-                oContexto.setFase(request.getParameter("phase"));
-            }
+            } 
 
             if (request.getParameter("page") == null) {
                 oContexto.setPage(1);
-            } else {
-                oContexto.setPage(Integer.parseInt(request.getParameter("page")));
-            }
+            } 
 
             if (request.getParameter("nrpp") == null) {
                 oContexto.setNrpp(10);
-            } else {
-                oContexto.setNrpp(Integer.parseInt(request.getParameter("nrrp")));
-            }
+            } 
 
             if (request.getParameter("filter") == null) {
                 oContexto.setHmFilter(null);
@@ -82,10 +79,10 @@ public class ContextParam {
                 }
             }
 
-            if (request.getParameter("order") == null) {  
+            if (request.getParameter("order") == null) {
                 oContexto.setHmOrder(null);
             } else {
-                if (request.getParameter("ordervalue") == null) { 
+                if (request.getParameter("ordervalue") == null) {
                     oContexto.setHmOrder(null);
                 } else {
                     HashMap<String, String> hmOrder = new HashMap<>();
@@ -108,7 +105,7 @@ public class ContextParam {
 
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Controller: Error: load: Formato de datos en parámetros incorrecto " + e.getMessage());
-        }
+        } 
         return oContexto;
     }
 }

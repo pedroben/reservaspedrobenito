@@ -12,7 +12,7 @@ import net.daw.parameter.ProductoParam;
  *
  * @author rafael aznar
  */
-public class ProductoView1 extends Operation {
+public class ProductoView1 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

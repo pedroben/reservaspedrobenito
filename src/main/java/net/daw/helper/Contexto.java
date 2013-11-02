@@ -1,80 +1,112 @@
 package net.daw.helper;
 
 import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
+import net.daw.bean.UsuarioBean;
 
 public class Contexto {
 
     private HashMap<String, String> parameters;
-
-    private Integer id;
-
-    private String clase;
-    private String metodo;
-    private String fase;
-
-    private String selectOneTable;
-    private String selectOneField;
-
-    private Integer page;
-    private Integer nrpp;
 
     private HashMap<String, String> hmFilter;
     private HashMap<String, String> hmOrder;
 
     private String vista;
 
-    private String titulo;
-    private String mensaje;
     private Object parametro;
 
     private Boolean haySesion;
-
-    private ArrayList<String> paginacion;
-    private ArrayList<Object> listado;
+    private UsuarioBean userBeanSession;
 
     private Enum.Connection enumTipoConexion;
 
-    public String getClase() {
-        return clase;
+    private void set(String strParam, String strValue) {
+        Boolean entrado = false;
+        for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
+            if (entry.getKey().equals(strParam)) {
+                entry.setValue(strValue);
+                entrado = true;
+            }
+        }
+        if (!entrado) {
+            this.parameters.put(strParam, strValue);
+        }
     }
 
-    public void setClase(String clase) {
-        this.clase = clase;
+    private String get(String defaultValue, String strParam) {
+        String resultado = defaultValue;
+        for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
+            if (entry.getKey().equals(strParam)) {
+                resultado = entry.getValue();
+            }
+        }
+        return resultado;
+    }
+
+    private String getExcept(String strParam1, String strParam2) {
+        String resultado = "";
+        for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (key.equals(strParam1) || key.equals(strParam2)) {
+            } else {
+                resultado += key + "=" + value + "&";
+            }
+        }
+        return resultado.substring(0, resultado.length() - 1);
+    }
+
+    private String getExceptForm(String strParam1, String strParam2) {
+        String resultado = "";
+        for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (key.equals(strParam1) || key.equals(strParam2)) {
+            } else {
+                resultado += "<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\"/>";
+            }
+        }
+        return resultado;
+    }
+
+    public String getClase() {
+        return get(null, "class");
+    }
+
+    public void setClase(String strClase) {
+        this.set("class", strClase);
     }
 
     public String getMetodo() {
-        return metodo;
+        return get(null, "method");
     }
 
-    public void setMetodo(String metodo) {
-        this.metodo = metodo;
+    public void setMetodo(String strMetodo) {
+        this.set("method", strMetodo);
     }
 
     public String getFase() {
-        return fase;
+        return get("1", "phase");
     }
 
-    public void setFase(String fase) {
-        this.fase = fase;
+    public void setFase(String strFase) {
+        this.set("phase", strFase);
     }
 
     public Integer getPage() {
-        return page;
+        return Integer.parseInt(get(null, "page"));
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setPage(Integer intPage) {
+        this.set("page", intPage.toString());
     }
 
     public Integer getNrpp() {
-        return nrpp;
+        return Integer.parseInt(get(null, "nrpp"));
     }
 
-    public void setNrpp(Integer nrpp) {
-        this.nrpp = nrpp;
+    public void setNrpp(Integer intNrpp) {
+        this.set("nrpp", intNrpp.toString());
     }
 
     public String getVista() {
@@ -83,22 +115,6 @@ public class Contexto {
 
     public void setVista(String vista) {
         this.vista = vista;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
     }
 
     public Object getParametro() {
@@ -117,22 +133,6 @@ public class Contexto {
         this.haySesion = haySesion;
     }
 
-    public ArrayList<String> getPaginacion() {
-        return paginacion;
-    }
-
-    public void setPaginacion(ArrayList<String> paginacion) {
-        this.paginacion = paginacion;
-    }
-
-    public ArrayList<Object> getListado() {
-        return listado;
-    }
-
-    public void setListado(ArrayList<Object> listado) {
-        this.listado = listado;
-    }
-
     public Enum.Connection getEnumTipoConexion() {
         return enumTipoConexion;
     }
@@ -143,18 +143,14 @@ public class Contexto {
 
     public String getOperacion() {
         String strOperation = "";
-        strOperation += Character.toUpperCase(clase.charAt(0)) + clase.substring(1);
-        strOperation += Character.toUpperCase(metodo.charAt(0)) + metodo.substring(1);
-        strOperation += fase;
+        strOperation += Character.toUpperCase(this.getClase().charAt(0)) + this.getClase().substring(1);
+        strOperation += Character.toUpperCase(this.getMetodo().charAt(0)) + this.getMetodo().substring(1);
+        strOperation += this.getFase();
         return strOperation;
     }
 
     public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+        return Integer.parseInt(get("0", "id"));
     }
 
     public HashMap<String, String> getParameters() {
@@ -167,42 +163,51 @@ public class Contexto {
 
     public String getSerializedParams() {
         String resultado = "";
-        Iterator oIterator = this.parameters.entrySet().iterator();
-        while (oIterator.hasNext()) {
-            Map.Entry oEntrada = (Map.Entry) oIterator.next();
-            resultado += oEntrada.getKey() + "=" + oEntrada.getValue() + "&";
-            oIterator.remove();
+        for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            resultado += key + "=" + value + "&";
         }
         return resultado.substring(0, resultado.length() - 1);
+    }
+
+    public String getSerializedParamsExceptId() {
+        return getExcept("id", "id");
     }
 
     public String getSerializedParamsExceptPage() {
-        String resultado = "";
-        Iterator oIterator = this.parameters.entrySet().iterator();
-        while (oIterator.hasNext()) {
-            Map.Entry oEntrada = (Map.Entry) oIterator.next();
-            if (!oEntrada.getKey().equals("page")) {
-                resultado += oEntrada.getKey() + "=" + oEntrada.getValue() + "&";                
-            }
-            oIterator.remove();
-        }
-        return resultado.substring(0, resultado.length() - 1);
+        return getExcept("page", "page");
+    }
+
+    public String getSerializedParamsExceptOrder() {
+        return getExcept("order", "ordervalue");
+
+    }
+
+    public String getSerializedParamsExceptFilter() {
+        return getExcept("filter", "filtervalue");
+    }
+
+    public String getSerializedParamsExceptFilterFormFormat() {
+        return getExceptForm("filter", "filtervalue");
     }
 
     public String getSelectOneTable() {
-        return selectOneTable;
+        return get(null, "selectonetable");
+
     }
 
-    public void setSelectOneTable(String selectOneTable) {
-        this.selectOneTable = selectOneTable;
+    public void setSelectOneTable(String strOneTable) {
+        this.set("selectonetable", strOneTable);
     }
 
     public String getSelectOneField() {
-        return selectOneField;
+        return get(null, "selectonefield");
+
     }
 
-    public void setSelectOneField(String selectOneField) {
-        this.selectOneField = selectOneField;
+    public void setSelectOneField(String strOneField) {
+        this.set("selectonefield", strOneField);
     }
 
     public HashMap<String, String> getHmFilter() {
@@ -219,6 +224,14 @@ public class Contexto {
 
     public void setHmOrder(HashMap<String, String> hmOrder) {
         this.hmOrder = hmOrder;
+    }
+
+    public UsuarioBean getUserBeanSession() {
+        return userBeanSession;
+    }
+
+    public void setUserBeanSession(UsuarioBean userBeanSession) {
+        this.userBeanSession = userBeanSession;
     }
 
 }

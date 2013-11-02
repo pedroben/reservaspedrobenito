@@ -1,6 +1,6 @@
 <div class="hero-unit">
     <h1>Bienvenidos a ComprAusiàs March</h1>
-    <h3>Versión (v.04) de 4/11/2013</h3>
+    <h3>Versión (v.05) de 4/11/2013</h3>
     <h5>Desarrollo de aplicaciones web en entorno servidor. CPIFP Ausiàs March. Curso 2013-2014.</h5>    
 </div>
 <div class="row-fluid">
@@ -44,6 +44,7 @@
             <li>Usa Bootstrap responsivo</li>
             <li>Acceso a datos (base de datos MySQL)</li>
             <li>Mantenimientos paginados</li>
+            <li>Filtros y ordenación simultáneos en listados</li>
             <li>Relaciones 1:M</li>
         </ul>
     </div>

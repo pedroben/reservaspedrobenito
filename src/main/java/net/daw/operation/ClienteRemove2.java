@@ -9,7 +9,7 @@ import net.daw.dao.ClienteDao;
 import net.daw.helper.Contexto;
 import net.daw.parameter.ClienteParam;
 
-public class ClienteRemove2 extends Operation {
+public class ClienteRemove2 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

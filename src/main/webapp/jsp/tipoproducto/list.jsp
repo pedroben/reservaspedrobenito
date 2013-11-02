@@ -10,43 +10,72 @@
     Iterator<TipoproductoBean> oIterador = alPagina.listIterator();
 %>
 <div class="row-fluid">
-    <div class="span8">
+    <div class="span9">
         <% if (!oContexto.getMetodo().equalsIgnoreCase("selectone")) {
                 out.print("<h1>Listado de tipos de productos</h1>");
             } else {
                 out.print("<h1>Selección de tipos de productos</h1>");
             }
+        %>
+        <%
             if (!oIterador.hasNext()) {
                 out.print("<h4>Listado vacío</h4>");
             } else {
-                ArrayList<String> paginacion = (ArrayList<String>) alObjetoParametro.get(1);
-                Iterator<String> iterador2 = paginacion.listIterator();
-                while (iterador2.hasNext()) {
-                    String o = iterador2.next();
-                    out.print(o);
-                }
         %>
+        <%
+            if (oContexto.getHmOrder() != null) {
+                out.print("<p>Listado ordenado por " + oContexto.getHmOrder().keySet().toArray()[0].toString() + "    ");
+                out.print("<a href=\"Controller?" + oContexto.getSerializedParamsExceptOrder() + "\">(Quitar orden)</a></p>");
+            } else {
+                out.print("<p>Sin ordenar</p>");
+            }
+        %>
+        <%
+            if (oContexto.getHmFilter() != null) {
+                out.print("<p>Listado filtrado por " + oContexto.getHmFilter().keySet().toArray()[0].toString() + "    ");
+                out.print("<a href=\"Controller?" + oContexto.getSerializedParamsExceptFilter() + "\">(Quitar filtro)</a></p>");
+            } else {
+                out.print("<p>Sin filtrar</p>");
+            }
+        %>
+        <%
+            ArrayList<String> paginacion = (ArrayList<String>) alObjetoParametro.get(1);
+            Iterator<String> iterador2 = paginacion.listIterator();
+            while (iterador2.hasNext()) {
+                String o = iterador2.next();
+                out.print(o);
+            }
+        %>        
     </div>
-    <div class="span4">
+    <div class="span3">
         <div class="text-right">
-            <%
-                if (oContexto.getHmOrder() != null) {
-                    out.print("<h4>Listado ordenado por " + oContexto.getHmOrder().keySet().toArray()[0].toString() + "</h4>");
-                    out.print("<a href=\"Controller?class=tipoproducto&method=list\">Quitar orden</a>");
-                }
-            %>
+            <legend>Filtro de cliente</legend> 
+            <form class="navbar-form pull-right" action="Controller" method="post" id="clienteForm">
+                <fieldset>                                               
+                    <%=oContexto.getSerializedParamsExceptFilterFormFormat()%>       
+                    <span>
+                        <select id="filter" name="filter" width="80" style="width: 80px">
+                            <option>id</option>
+                            <option>descripcion</option>
+                        </select>                        
+                        <input id="filtervalue" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 100px"/>
+                    </span>
+                    <span>
+                        <input type="submit" name="enviar" value="Filtrar" />
+                    </span>
+                </fieldset>
         </div>
     </div>
 </div>
 <table class="table table-hover table-condensed">
     <tr>
         <th>id
-            <a href="Controller?class=tipoproducto&method=list&order=id&ordervalue=asc"><i class="icon-arrow-up"></i></a>
-            <a href="Controller?class=tipoproducto&method=list&order=id&ordervalue=desc"><i class="icon-arrow-down"></i></a>        
+            <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=id&ordervalue=asc"><i class="icon-arrow-up"></i></a>
+            <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=id&ordervalue=desc"><i class="icon-arrow-down"></i></a>        
         </th>
         <th>descripción
-            <a href="Controller?class=tipoproducto&method=list&order=descripcion&ordervalue=asc"><i class="icon-arrow-up"></i></a>
-            <a href="Controller?class=tipoproducto&method=list&order=descripcion&ordervalue=desc"><i class="icon-arrow-down"></i></a>        
+            <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=descripcion&ordervalue=asc"><i class="icon-arrow-up"></i></a>
+            <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=descripcion&ordervalue=desc"><i class="icon-arrow-down"></i></a>        
         </th>
         <th colspan="2">Operaciones</th>
     </tr>
