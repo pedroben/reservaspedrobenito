@@ -48,9 +48,11 @@ public class Contexto {
         for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if (key.equals(strParam1) || key.equals(strParam2)) {
-            } else {
-                resultado += key + "=" + value + "&";
+            if (!value.equalsIgnoreCase("")) {
+                if (key.equals(strParam1) || key.equals(strParam2)) {
+                } else {
+                    resultado += key + "=" + value + "&";
+                }
             }
         }
         return resultado.substring(0, resultado.length() - 1);
@@ -61,9 +63,11 @@ public class Contexto {
         for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if (key.equals(strParam1) || key.equals(strParam2)) {
-            } else {
-                resultado += "<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\"/>";
+            if (!value.equalsIgnoreCase("")) {
+                if (key.equals(strParam1) || key.equals(strParam2)) {
+                } else {
+                    resultado += "<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\"/>";
+                }
             }
         }
         return resultado;
@@ -162,21 +166,15 @@ public class Contexto {
     }
 
     public String getSerializedParams() {
-        String resultado = "";
-        for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            resultado += key + "=" + value + "&";
-        }
-        return resultado.substring(0, resultado.length() - 1);
+        return getExcept("enviar","enviar");
     }
 
     public String getSerializedParamsExceptId() {
-        return getExcept("id", "id");
+        return getExcept("id", "enviar");
     }
 
     public String getSerializedParamsExceptPage() {
-        return getExcept("page", "page");
+        return getExcept("page", "enviar");
     }
 
     public String getSerializedParamsExceptOrder() {
