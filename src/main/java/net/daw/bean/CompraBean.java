@@ -1,23 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package net.daw.bean;
 
 import java.util.Date;
 
-/**
- *
- * @author rafa
- */
 public class CompraBean {
     private int id = 0;
-    private ClienteBean oCliente;
-    private ProductoBean oProducto;
-    private int Cantidad;
-    private Date a;
+    private ClienteBean cliente;
+    private ProductoBean producto;
+    private Integer cantidad;
+    private Date fecha;
+
+       public CompraBean() {
+     
+    }
+    
+    public CompraBean(Integer intId) {
+        this.id=intId;
+    }
 
     public int getId() {
         return id;
@@ -27,37 +26,39 @@ public class CompraBean {
         this.id = id;
     }
 
-    public ClienteBean getoCliente() {
-        return oCliente;
+    public ClienteBean getCliente() {
+        return cliente;
     }
 
-    public void setoCliente(ClienteBean oCliente) {
-        this.oCliente = oCliente;
+    public void setCliente(ClienteBean cliente) {
+        this.cliente = cliente;
     }
 
-    public ProductoBean getoProducto() {
-        return oProducto;
+    public ProductoBean getProducto() {
+        return producto;
     }
 
-    public void setoProducto(ProductoBean oProducto) {
-        this.oProducto = oProducto;
+    public void setProducto(ProductoBean producto) {
+        this.producto = producto;
     }
 
-    public int getCantidad() {
-        return Cantidad;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public void setCantidad(int Cantidad) {
-        this.Cantidad = Cantidad;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public Date getA() {
-        return a;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setA(Date a) {
-        this.a = a;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
+
+
     
             
 }

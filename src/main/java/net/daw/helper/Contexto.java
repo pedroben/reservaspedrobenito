@@ -166,7 +166,7 @@ public class Contexto {
     }
 
     public String getSerializedParams() {
-        return getExcept("enviar","enviar");
+        return getExcept("enviar", "enviar");
     }
 
     public String getSerializedParamsExceptId() {
@@ -192,7 +192,6 @@ public class Contexto {
 
     public String getSelectOneTable() {
         return get(null, "selectonetable");
-
     }
 
     public void setSelectOneTable(String strOneTable) {
@@ -208,6 +207,18 @@ public class Contexto {
         this.set("selectonefield", strOneField);
     }
 
+    public String getForeignTable() {
+        return get(null, "foreigntable");
+    }
+
+    public String getForeignField() {
+        return get(null, "foreignfield");
+    }
+   
+    public String getForeignFieldValue() {
+        return get(null, "foreignfieldvalue");
+    }    
+    
     public HashMap<String, String> getHmFilter() {
         return hmFilter;
     }

@@ -2,7 +2,7 @@ package net.daw.bean;
 
 public class ProductoBean {
 
-    private int id = 0;
+    private Integer id = 0;
     private String codigo = "";
     private String descripcion = "";
     private Double precio = 0.0;
@@ -12,16 +12,16 @@ public class ProductoBean {
         this.tipoProducto = new TipoproductoBean();
     }
 
-    public ProductoBean(int id) {
+    public ProductoBean(Integer id) {
         this.id = id;
         this.tipoProducto = new TipoproductoBean();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

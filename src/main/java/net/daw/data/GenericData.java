@@ -40,7 +40,11 @@ public interface GenericData {
 
     public int getPages(String strTabla, int intRegsPerPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception;
 
+    public int getPagesForeign(String strForeignTable, int intIdForeign, String strForeignField, String strTabla, int intRegsPerPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception;
+
     public ArrayList<Integer> getPage(String strTabla, int intRegsPerPage, int intPagina, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception;
+
+    public ArrayList<Integer> getPageForeign(String strForeignTable, int intIdForeign, String strForeignField, String strTabla, int intRegsPerPage, int intPagina, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception;
 
     public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception;
 

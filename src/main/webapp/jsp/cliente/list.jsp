@@ -87,6 +87,7 @@
             <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=email&ordervalue=asc"><i class="icon-arrow-up"></i></a>
             <a href="Controller?<%=oContexto.getSerializedParamsExceptOrder()%>&order=email&ordervalue=desc"><i class="icon-arrow-down"></i></a>         
         </th>
+        <th>Relaciones</th>
         <th>Operaciones</th>
     </tr>
     <%        while (oIterador.hasNext()) {
@@ -98,6 +99,13 @@
         <td><%=oClienteBEAN.getApe1()%></td>
         <td><%=oClienteBEAN.getApe2()%></td>
         <td><%=oClienteBEAN.getEmail()%></td>
+        <td>
+            <div class="btn-toolbar">
+                <div class="btn-group">                    
+                    <a class="btn btn-mini" href="Controller?class=compra&method=list&foreignfield=id_cliente&foreignfieldvalue=<%=oClienteBEAN.getId()%>">Compras</a>                    
+                </div>
+            </div>
+        </td>        
         <td>
             <div class="btn-toolbar">
                 <div class="btn-group">                    
