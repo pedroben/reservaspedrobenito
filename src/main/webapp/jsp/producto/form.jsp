@@ -62,14 +62,12 @@
         </div>           
         <div class="control-group">
             <label class="control-label" for="id_tipoproducto">Tipo de producto: </label> 
+            <div class="controls">                
+                <input readonly="true" id="id_tipoproducto" class="input-mini"
+                       name="id_tipoproducto" type="text" size="5" maxlength="5"
+                       value="<%=id_tipoproducto%>" />  
+                <input type="submit" name="searchingfor" value="tipoproducto" />
 
-            <div class="controls">
-                
-                    <input id="id_tipoproducto" class="input-mini"
-                           name="id_tipoproducto" type="text" size="5" maxlength="5"
-                           value="<%=id_tipoproducto%>" />  
-                    <input type="submit" name="searchingfor" value="tipoproducto" />
-                
                 <span class="label"><%=descTipoproducto%></span>
             </div>
         </div>             
