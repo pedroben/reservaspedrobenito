@@ -47,6 +47,9 @@ public class ProductoParam {
             if ((request.getParameter("precio") != null)) {
                 oProducto.setPrecio(Double.parseDouble(request.getParameter("precio")));
             }
+            if ((request.getParameter("id_tipoproducto") != null)) {
+                oProducto.getTipoProducto().setId(Integer.parseInt(request.getParameter("id_tipoproducto")));
+            }
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Controller: Error: load: Formato de datos en parámetros incorrecto " + e.getMessage());
         }

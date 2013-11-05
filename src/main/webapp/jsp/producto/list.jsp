@@ -101,7 +101,7 @@
         <td>
             <%=oProductoBEAN.getTipoProducto().getDescripcion()%>
             <div class="btn-group">
-                <a class="btn btn-mini" href="Controller?class=tipoproducto&method=selectone&id=<%=oProductoBEAN.getId()%>&selectonetable=producto&selectonefield=id_tipoproducto"><i class="icon-search"></i></a>                                        
+                <a class="btn btn-mini" href="Controller?class=tipoproducto&method=selectone&id=<%=oProductoBEAN.getId()%>"><i class="icon-search"></i></a>                                        
             </div>
         </td>
         <td>

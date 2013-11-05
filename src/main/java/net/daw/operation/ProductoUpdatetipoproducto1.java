@@ -4,7 +4,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.ProductoBean;
-import net.daw.bean.TipoproductoBean;
 import net.daw.dao.ProductoDao;
 import net.daw.helper.Contexto;
 import net.daw.parameter.ProductoParam;
@@ -18,11 +17,8 @@ public class ProductoUpdatetipoproducto1 implements Operation {
         ProductoBean oProductoBean = new ProductoBean();
         ProductoDao oProductoDao = new ProductoDao(oContexto.getEnumTipoConexion());
         ProductoParam oProductoParam = new ProductoParam(request);
-        oProductoBean = oProductoParam.loadId(oProductoBean);
-        
-        oProductoBean=oProductoDao.get(oProductoBean);
-        oProductoBean.setTipoProducto(oProductoParam.loadTipoProducto(oProductoBean).getTipoProducto());
-                           
+        oProductoBean = oProductoParam.loadId(oProductoBean);        
+        oProductoBean=oProductoDao.get(oProductoBean);                          
         oProductoBean = oProductoParam.loadTipoProducto(oProductoBean);
         try {
             oProductoDao.set(oProductoBean);

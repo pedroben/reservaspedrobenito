@@ -73,8 +73,12 @@ public class Contexto {
         return resultado;
     }
 
+    public void removeParam(String strParam) {
+        this.parameters.remove(strParam);
+    }
+
     public String getClase() {
-        return get(null, "class");
+        return get("usuario", "class");
     }
 
     public void setClase(String strClase) {
@@ -82,7 +86,7 @@ public class Contexto {
     }
 
     public String getMetodo() {
-        return get(null, "method");
+        return get("ocioso", "method");
     }
 
     public void setMetodo(String strMetodo) {
@@ -98,7 +102,7 @@ public class Contexto {
     }
 
     public Integer getPage() {
-        return Integer.parseInt(get(null, "page"));
+        return Integer.parseInt(get("1", "page"));
     }
 
     public void setPage(Integer intPage) {
@@ -106,7 +110,7 @@ public class Contexto {
     }
 
     public Integer getNrpp() {
-        return Integer.parseInt(get(null, "nrpp"));
+        return Integer.parseInt(get("10", "nrpp"));
     }
 
     public void setNrpp(Integer intNrpp) {
@@ -119,6 +123,22 @@ public class Contexto {
 
     public void setVista(String vista) {
         this.vista = vista;
+    }
+
+    public String getClaseRetorno() {
+        return get("", "returnclass");
+    }
+
+    public void setClaseRetorno(String strClase) {
+        this.set("returnclass", strClase);
+    }
+
+    public String getMetodoRetorno() {
+        return get("", "returnmethod");
+    }
+
+    public void setMetodoRetorno(String strClase) {
+        this.set("returnmethod", strClase);
     }
 
     public Object getParametro() {
@@ -166,19 +186,28 @@ public class Contexto {
     }
 
     public String getSerializedParams() {
-        return getExcept("enviar","enviar");
+        return getExcept("enviar", "enviar");
     }
 
     public String getSerializedParamsExceptId() {
-        return getExcept("id", "enviar");
+        return getExcept("id", "id");
+    }
+
+    public String getSerializedParamsExceptMethod() {
+        return getExcept("method", "method");
     }
 
     public String getSerializedParamsExceptPage() {
-        return getExcept("page", "enviar");
+        return getExcept("page", "page");
     }
 
     public String getSerializedParamsExceptOrder() {
         return getExcept("order", "ordervalue");
+
+    }
+
+    public String getSerializedParamsExceptClassMethod() {
+        return getExcept("class", "method");
 
     }
 
@@ -190,22 +219,8 @@ public class Contexto {
         return getExceptForm("filter", "filtervalue");
     }
 
-    public String getSelectOneTable() {
-        return get(null, "selectonetable");
-
-    }
-
-    public void setSelectOneTable(String strOneTable) {
-        this.set("selectonetable", strOneTable);
-    }
-
-    public String getSelectOneField() {
-        return get(null, "selectonefield");
-
-    }
-
-    public void setSelectOneField(String strOneField) {
-        this.set("selectonefield", strOneField);
+    public String getSearchingFor() {
+        return get("", "searchingfor");
     }
 
     public HashMap<String, String> getHmFilter() {
