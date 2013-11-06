@@ -23,13 +23,11 @@ public class ContextParam {
         this.request = request;
     }
 
-
-
-    public  Contexto loadSession(Contexto oContexto) {
+    public Contexto loadSession(Contexto oContexto) {
         oContexto.setHaySesion(request.getSession().getAttribute("usuarioBean") != null);
-        if (oContexto.getHaySesion()){
+        if (oContexto.getHaySesion()) {
             oContexto.setUserBeanSession((UsuarioBean) request.getSession().getAttribute("usuarioBean"));
-        } else        {
+        } else {
             oContexto.setUserBeanSession(null);
         }
         return oContexto;
@@ -45,67 +43,54 @@ public class ContextParam {
             }
             oContexto.setParameters(parameterNames);
 
-
-
-            if ((request.getParameter("class") == null) || !oContexto.getHaySesion()) {
+            if (!oContexto.getHaySesion()) {
                 oContexto.setClase("usuario");
-            } 
+                if (!"login".equals(request.getParameter("method"))) {
+                    oContexto.setMetodo("ocioso");
+                }
 
-            if (request.getParameter("method") == null || (!oContexto.getHaySesion() && !"login".equals(request.getParameter("method")))) {
-                oContexto.setMetodo("ocioso");
             }
 
-            if (request.getParameter("phase") == null) {
-                oContexto.setFase("1");
-            } 
-
-            if (request.getParameter("page") == null) {
-                oContexto.setPage(1);
-            } 
-
-            if (request.getParameter("nrpp") == null) {
-                oContexto.setNrpp(10);
-            } 
-
-            if (request.getParameter("filter") == null) {
-                oContexto.setHmFilter(null);
-            } else {
-                if (request.getParameter("filtervalue") == null) {
+//            if (request.getParameter("phase") == null) {
+//                oContexto.setFase("1");
+//            }
+//            if ("list".equals(oContexto.getMetodo()) || "selectone".equals(oContexto.getMetodo())) {
+//
+//                if (request.getParameter("page") == null) {
+//                    oContexto.setPage(1);
+//                }
+//
+//                if (request.getParameter("nrpp") == null) {
+//                    oContexto.setNrpp(10);
+//                }
+//
+                if (request.getParameter("filter") == null) {
                     oContexto.setHmFilter(null);
                 } else {
-                    HashMap<String, String> hmFilter = new HashMap<>();
-                    hmFilter.put(request.getParameter("filter"), request.getParameter("filtervalue"));
-                    oContexto.setHmFilter(hmFilter);
+                    if (request.getParameter("filtervalue") == null) {
+                        oContexto.setHmFilter(null);
+                    } else {
+                        HashMap<String, String> hmFilter = new HashMap<>();
+                        hmFilter.put(request.getParameter("filter"), request.getParameter("filtervalue"));
+                        oContexto.setHmFilter(hmFilter);
+                    }
                 }
-            }
 
-            if (request.getParameter("order") == null) {
-                oContexto.setHmOrder(null);
-            } else {
-                if (request.getParameter("ordervalue") == null) {
+                if (request.getParameter("order") == null) {
                     oContexto.setHmOrder(null);
                 } else {
-                    HashMap<String, String> hmOrder = new HashMap<>();
-                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
-                    oContexto.setHmOrder(hmOrder);
+                    if (request.getParameter("ordervalue") == null) {
+                        oContexto.setHmOrder(null);
+                    } else {
+                        HashMap<String, String> hmOrder = new HashMap<>();
+                        hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
+                        oContexto.setHmOrder(hmOrder);
+                    }
                 }
-            }
-
-            if (request.getParameter("selectonetable") == null) {
-                oContexto.setSelectOneTable("");
-            } else {
-                oContexto.setSelectOneTable(request.getParameter("selectonetable"));
-            }
-
-            if (request.getParameter("selectonefield") == null) {
-                oContexto.setSelectOneField("");
-            } else {
-                oContexto.setSelectOneField(request.getParameter("selectonefield"));
-            }
-
+            
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Controller: Error: load: Formato de datos en parámetros incorrecto " + e.getMessage());
-        } 
+        }
         return oContexto;
     }
 }

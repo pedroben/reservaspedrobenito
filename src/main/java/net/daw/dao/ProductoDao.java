@@ -95,22 +95,24 @@ public class ProductoDao {
     }
 
     public ProductoBean get(ProductoBean oProductoBean) throws Exception {
-        try {
-            oMysql.conexion(enumTipoConexion);
-            oProductoBean.setCodigo(oMysql.getOne("producto", "codigo", oProductoBean.getId()));
-            oProductoBean.setDescripcion(oMysql.getOne("producto", "descripcion", oProductoBean.getId()));
-            oProductoBean.setPrecio(Double.parseDouble(oMysql.getOne("producto", "precio", oProductoBean.getId())));
-            String intId_producto = oMysql.getOne("producto", "id_tipoproducto", oProductoBean.getId());
-            if (intId_producto != null) {
-                oProductoBean.getTipoProducto().setId(Integer.parseInt(intId_producto));
-                TipoproductoDao oTipoproductoDao = new TipoproductoDao(enumTipoConexion);
-                oProductoBean.setTipoProducto(oTipoproductoDao.get(oProductoBean.getTipoProducto()));
+        if (oProductoBean.getId() > 0) {
+            try {
+                oMysql.conexion(enumTipoConexion);
+                oProductoBean.setCodigo(oMysql.getOne("producto", "codigo", oProductoBean.getId()));
+                oProductoBean.setDescripcion(oMysql.getOne("producto", "descripcion", oProductoBean.getId()));
+                oProductoBean.setPrecio(Double.parseDouble(oMysql.getOne("producto", "precio", oProductoBean.getId())));
+                String intId_producto = oMysql.getOne("producto", "id_tipoproducto", oProductoBean.getId());
+                if (intId_producto != null) {
+                    oProductoBean.getTipoProducto().setId(Integer.parseInt(intId_producto));
+                    TipoproductoDao oTipoproductoDao = new TipoproductoDao(enumTipoConexion);
+                    oProductoBean.setTipoProducto(oTipoproductoDao.get(oProductoBean.getTipoProducto()));
+                }
+                oMysql.desconexion();
+            } catch (Exception e) {
+                throw new Exception("ProductoDao.get: Error: " + e.getMessage());
+            } finally {
+                oMysql.desconexion();
             }
-            oMysql.desconexion();
-        } catch (Exception e) {
-            throw new Exception("ProductoDao.get: Error: " + e.getMessage());
-        } finally {
-            oMysql.desconexion();
         }
         return oProductoBean;
     }
