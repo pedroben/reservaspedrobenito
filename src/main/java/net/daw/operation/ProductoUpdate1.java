@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.daw.bean.ProductoBean;
-import net.daw.bean.TipoproductoBean;
 import net.daw.dao.ProductoDao;
 import net.daw.dao.TipoproductoDao;
 import net.daw.helper.Contexto;

@@ -223,6 +223,10 @@ public class Contexto {
         return get(null, "selectonetable");
     }
 
+    public String getSearchingFor() {
+        return get("", "searchingfor");
+    }
+
     public void setSelectOneTable(String strOneTable) {
         this.set("selectonetable", strOneTable);
     }
@@ -243,11 +247,11 @@ public class Contexto {
     public String getForeignField() {
         return get(null, "foreignfield");
     }
-   
+
     public String getForeignFieldValue() {
         return get(null, "foreignfieldvalue");
-    }    
-    
+    }
+
     public HashMap<String, String> getHmFilter() {
         return hmFilter;
     }
