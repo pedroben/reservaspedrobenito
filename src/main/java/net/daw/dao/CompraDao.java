@@ -19,8 +19,8 @@ import net.daw.data.Mysql;
  */
 public class CompraDao {
 
-    private Mysql oMysql;
-    private net.daw.helper.Enum.Connection enumTipoConexion;
+    private final Mysql oMysql;
+    private final net.daw.helper.Enum.Connection enumTipoConexion;
 
     public CompraDao(net.daw.helper.Enum.Connection tipoConexion) throws Exception {
         oMysql = new Mysql();
@@ -108,8 +108,9 @@ public class CompraDao {
             }
             oMysql.updateOne(oCompraBean.getId(), "compra", "id_cliente", oCompraBean.getCliente().getId().toString());
             oMysql.updateOne(oCompraBean.getId(), "compra", "id_producto", oCompraBean.getProducto().getId().toString());
-            oMysql.updateOne(oCompraBean.getId(), "compra", "cantidad", oCompraBean.getCantidad().toString());
-            //oMysql.updateOne(oCompraBean.getId(), "compra", "fecha", oCompraBean.getFecha().toString());
+            oMysql.updateOne(oCompraBean.getId(), "compra", "cantidad", oCompraBean.getCantidad().toString());            
+//            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");          
+//            oMysql.updateOne(oCompraBean.getId(), "compra", "fecha", sdf.format(oCompraBean.getFecha()));
             oMysql.commitTrans();
         } catch (Exception e) {
             oMysql.rollbackTrans();

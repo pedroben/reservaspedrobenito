@@ -17,15 +17,18 @@ public class CompraList1 implements Operation {
         oContexto.setVista("jsp/compra/list.jsp");
         try {
 
-            
-            //foreignfield
-            //foreignfieldvalue
+//            getForeignTable()
+//            getForeignField()
+//            getForeignFieldValue() 
+                    
             CompraDao oCompraDao = new CompraDao(oContexto.getEnumTipoConexion());
 
-            HashMap<String, String> hmfilter= new HashMap<>();      
-            hmfilter.put(oContexto.getForeignField(), oContexto.getForeignFieldValue());
+            if (oContexto.getForeignField() != null) {
+                //HashMap<String, String> hmfilter= new HashMap<>();      
+                oContexto.getHmFilter().put(oContexto.getForeignField(), oContexto.getForeignFieldValue());
+            }
 
-            Integer intPages = oCompraDao.getPages(oContexto.getNrpp(), hmfilter, oContexto.getHmOrder());
+            Integer intPages = oCompraDao.getPages(oContexto.getNrpp(), oContexto.getHmFilter(), oContexto.getHmOrder());
 
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
@@ -33,7 +36,7 @@ public class CompraList1 implements Operation {
             if (oContexto.getPage() < 1) {
                 oContexto.setPage(1);
             }
-            ArrayList<CompraBean> listado = (ArrayList<CompraBean>) oCompraDao.getPage(oContexto.getNrpp(), oContexto.getPage(), hmfilter, oContexto.getHmOrder());
+            ArrayList<CompraBean> listado = (ArrayList<CompraBean>) oCompraDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getHmFilter(), oContexto.getHmOrder());
             String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";
             ArrayList<String> vecindad = (ArrayList<String>) oCompraDao.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();

@@ -66,8 +66,15 @@
     %>
     <tr>
         <td><%=oCompraBEAN.getId()%></td>
-        <td><%=oCompraBEAN.getCliente().getNombre()%></td>
-        <td><%=oCompraBEAN.getProducto().getDescripcion()%></td>
+        <td>
+            <%=oCompraBEAN.getCliente().getNombre()%>
+        </td>
+        <td>
+            <%=oCompraBEAN.getProducto().getDescripcion()%>
+            <div class="btn-group">
+                <a class="btn btn-mini" href="Controller?class=producto&method=selectone&id=<%=oCompraBEAN.getId()%>"><i class="icon-search"></i></a>                                        
+            </div>
+        </td>
         <td><%=oCompraBEAN.getCantidad()%></td>
         <td><%=oCompraBEAN.getFecha()%></td>
         <td>

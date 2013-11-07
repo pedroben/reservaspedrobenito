@@ -1,21 +1,24 @@
-
 package net.daw.bean;
 
 import java.util.Date;
 
 public class CompraBean {
+
     private int id = 0;
     private ClienteBean cliente;
     private ProductoBean producto;
     private Integer cantidad;
     private Date fecha;
 
-       public CompraBean() {
-     
+    public CompraBean() {
+        this.cliente = new ClienteBean();
+        this.producto = new ProductoBean();
     }
-    
+
     public CompraBean(Integer intId) {
-        this.id=intId;
+        this.id = intId;
+        this.cliente = new ClienteBean();
+        this.producto = new ProductoBean();
     }
 
     public int getId() {
@@ -58,7 +61,4 @@ public class CompraBean {
         this.fecha = fecha;
     }
 
-
-    
-            
 }

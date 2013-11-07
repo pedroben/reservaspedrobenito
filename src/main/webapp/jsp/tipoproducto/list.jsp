@@ -98,7 +98,7 @@
                         %>
                     <a class="btn btn-mini" href="Controller?<%=oContexto.getSerializedParamsExceptClassMethod()%>&class=<%=oContexto.getClaseRetorno()%>&method=<%=oContexto.getMetodoRetorno()%>&id_tipoproducto=<%=oTipoproductoBean.getId()%>"><i class="icon-ok"></i></a>                   
                         <% } else {%>
-                    <a class="btn btn-mini" href="Controller?class=producto&method=updatetipoproducto&id=<%=oContexto.getId()%>&id_tipoproducto=<%=oTipoproductoBean.getId()%>"><i class="icon-ok"></i></a>  -->                    
+                    <a class="btn btn-mini" href="Controller?class=producto&method=update&phase=2&id=<%=oContexto.getId()%>&id_tipoproducto=<%=oTipoproductoBean.getId()%>"><i class="icon-ok"></i></a>  -->                    
 
                     <% }
                         } %>

@@ -18,7 +18,7 @@ public class ClienteDao {
         enumTipoConexion = tipoConexion;
     }
 
-    public int getPages(int intRegsPerPag,HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getPages(int intRegsPerPag, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
@@ -30,11 +30,11 @@ public class ClienteDao {
         }
     }
 
-    public ArrayList<ClienteBean> getPage(int intRegsPerPag, int intPage,HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public ArrayList<ClienteBean> getPage(int intRegsPerPag, int intPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<ClienteBean> arrCliente = new ArrayList<>();
         try {
-            oMysql.conexion(enumTipoConexion);           
+            oMysql.conexion(enumTipoConexion);
             arrId = oMysql.getPage("cliente", intRegsPerPag, intPage, hmFilter, hmOrder);
             Iterator<Integer> iterador = arrId.listIterator();
             while (iterador.hasNext()) {
@@ -56,17 +56,24 @@ public class ClienteDao {
     }
 
     public ClienteBean get(ClienteBean oClienteBean) throws Exception {
-        try {
-            oMysql.conexion(enumTipoConexion);
-            oClienteBean.setNombre(oMysql.getOne("cliente", "nombre", oClienteBean.getId()));
-            oClienteBean.setApe1(oMysql.getOne("cliente", "ape1", oClienteBean.getId()));
-            oClienteBean.setApe2(oMysql.getOne("cliente", "ape2", oClienteBean.getId()));
-            oClienteBean.setEmail(oMysql.getOne("cliente", "email", oClienteBean.getId()));
-            oMysql.desconexion();
-        } catch (Exception e) {
-            throw new Exception("ClienteDao.getCliente: Error: " + e.getMessage());
-        } finally {
-            oMysql.desconexion();
+        if (oClienteBean.getId() > 0) {
+            try {
+                oMysql.conexion(enumTipoConexion);
+                if (!oMysql.existsOne("cliente", oClienteBean.getId())) {
+                    oClienteBean.setId(0);
+                } else {
+                    oClienteBean.setNombre(oMysql.getOne("cliente", "nombre", oClienteBean.getId()));
+                    oClienteBean.setApe1(oMysql.getOne("cliente", "ape1", oClienteBean.getId()));
+                    oClienteBean.setApe2(oMysql.getOne("cliente", "ape2", oClienteBean.getId()));
+                    oClienteBean.setEmail(oMysql.getOne("cliente", "email", oClienteBean.getId()));
+                }
+            } catch (Exception e) {
+                throw new Exception("ClienteDao.getCliente: Error: " + e.getMessage());
+            } finally {
+                oMysql.desconexion();
+            }
+        } else {
+            oClienteBean.setId(0);
         }
         return oClienteBean;
     }
