@@ -8,7 +8,6 @@ package net.daw.parameter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.CompraBean;
-import net.daw.bean.ProductoBean;
 import java.util.*;
 /**
  *

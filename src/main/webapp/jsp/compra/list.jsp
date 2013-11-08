@@ -67,10 +67,13 @@
     <tr>
         <td><%=oCompraBEAN.getId()%></td>
         <td>
-            <%=oCompraBEAN.getCliente().getNombre()%>
+            <%=oCompraBEAN.getCliente().getNombre()%> <%=oCompraBEAN.getCliente().getApe1()%> (<%=oCompraBEAN.getCliente().getId()%>)
+            <div class="btn-group">
+                <a class="btn btn-mini" href="Controller?class=cliente&method=selectone&id=<%=oCompraBEAN.getId()%>"><i class="icon-search"></i></a>                                        
+            </div>            
         </td>
         <td>
-            <%=oCompraBEAN.getProducto().getDescripcion()%>
+            <%=oCompraBEAN.getProducto().getDescripcion()%> (<%=oCompraBEAN.getProducto().getId()%>)
             <div class="btn-group">
                 <a class="btn btn-mini" href="Controller?class=producto&method=selectone&id=<%=oCompraBEAN.getId()%>"><i class="icon-search"></i></a>                                        
             </div>

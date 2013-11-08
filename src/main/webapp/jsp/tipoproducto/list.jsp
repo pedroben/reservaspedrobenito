@@ -97,11 +97,12 @@
                             if (oContexto.getSearchingFor().equals("tipoproducto")) {
                         %>
                     <a class="btn btn-mini" href="Controller?<%=oContexto.getSerializedParamsExceptClassMethod()%>&class=<%=oContexto.getClaseRetorno()%>&method=<%=oContexto.getMetodoRetorno()%>&id_tipoproducto=<%=oTipoproductoBean.getId()%>"><i class="icon-ok"></i></a>                   
-                        <% } else {%>
-                    <a class="btn btn-mini" href="Controller?class=producto&method=update&phase=2&id=<%=oContexto.getId()%>&id_tipoproducto=<%=oTipoproductoBean.getId()%>"><i class="icon-ok"></i></a>  -->                    
-
-                    <% }
-                        } %>
+                        <% } else {
+                            if (!oContexto.getClase().equalsIgnoreCase("producto")) {%>
+                    <a class="btn btn-mini" href="Controller?class=producto&method=update&phase=2&id=<%=oContexto.getId()%>&id_tipoproducto=<%=oTipoproductoBean.getId()%>"><i class="icon-ok"></i></a>  
+                        <%}
+                                }
+                            } %>
                 </div>
             </div>
         </td>

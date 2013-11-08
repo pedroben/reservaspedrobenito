@@ -5,22 +5,26 @@
     String strTitulo = "";
     String strControlEnabled = "";
     String strValueBoton = "Enviar";
-    
+
     Integer id = 0;
-    String cliente="";
-    String producto="";
+    String id_cliente = "";
+    String descCliente = "";
+    String id_producto = "";
+    String descProducto = "";
     String cantidad = "";
     String fecha = "";
-    
+
     if (oContexto.getMetodo().equals("update") || oContexto.getMetodo().equals("view")) {
-        CompraBean oCompraBean = (CompraBean) oContexto.getParametro();        
+        CompraBean oCompraBean = (CompraBean) oContexto.getParametro();
         id = oCompraBean.getId();
-        cliente = oCompraBean.getCliente().getNombre();
-        producto = oCompraBean.getProducto().getDescripcion();
+        id_cliente = Integer.toString(oCompraBean.getCliente().getId());
+        descCliente = oCompraBean.getCliente().getNombre();
+        id_producto = Integer.toString(oCompraBean.getProducto().getId());
+        descProducto = oCompraBean.getProducto().getDescripcion();
         cantidad = oCompraBean.getCantidad().toString();
         fecha = oCompraBean.getFecha().toString();
     }
-    
+
     if (oContexto.getMetodo().equals("view")) {
         strTitulo = "Vista";
         strControlEnabled = "disabled=\"true\"";
@@ -38,29 +42,59 @@
 <h1><%=strTitulo%> de cliente</h1>
 <form class="semantic" action="Controller" method="post" id="clienteForm">
     <fieldset>
-        <legend>Formulario de cliente</legend>
+        <legend>Formulario de compra</legend>
         <input type="hidden" name="id" value="<%=id%>" /> 
         <input type="hidden" name="class" value="compra" /> 
         <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>" /> 
         <input type="hidden" name="phase" value="2" />
-        <div>
-            <label for="nombre">Cliente: </label> 
-            <input <%=strControlEnabled%> id="nombre" name="nombre" type="text" size="30" maxlength="50" autofocus="autofocus" value="<%=cliente%>" /><br />
-        </div>
-        <div>
-            <label for="ape1">Producto: </label>
-            <input <%=strControlEnabled%> id="ape1" name="ape1" type="text" size="30" maxlength="50" value="<%=producto%>" /><br />
-        </div>
-        <div>
-            <label for="ape2">Cantidad: </label> 
-            <input <%=strControlEnabled%> id="ape2" name="ape2" type="text" size="30" maxlength="50" value="<%=cantidad%>" /> <br />
-        </div>
-        <div>
-            <label for="email">Fecha: </label> 
-            <input <%=strControlEnabled%> id="email" name="email" type="text" size="30" maxlength="50" value="<%=fecha%>" /><br />
-        </div>
-        <div>
-            <input type="submit" name="enviar" value="<%=strValueBoton%>" />
-        </div>
+
+
+        <div class="control-group">
+            <label class="control-label" for="id_producto">Producto: </label> 
+            <div class="controls">                
+                <input readonly="true" id="id_producto" class="input-mini"
+                       name="id_producto" type="text" size="5" maxlength="5"
+                       value="<%=id_producto%>" />  
+                <input type="submit" name="searchingfor" value="producto" />
+
+                <span class="label"><%=descProducto%></span>
+            </div>
+        </div>             
+
+        <div class="control-group">
+            <label class="control-label" for="id_cliente">Cliente: </label> 
+            <div class="controls">                
+                <input readonly="true" id="id_cliente" class="input-mini"
+                       name="id_producto" type="text" size="5" maxlength="5"
+                       value="<%=id_cliente%>" />  
+                <input type="submit" name="searchingfor" value="cliente" />
+                <span class="label"><%=descCliente%></span>
+            </div>
+        </div>             
+        <div class="control-group">
+            <label class="control-label" for="precio">Cantidad: </label> 
+            <div class="controls">
+                <input <%=strControlEnabled%>  id="cantidad"
+                                               name="cantidad" type="text" size="30" maxlength="50"
+                                               value="<%=cantidad%>" /> 
+            </div>
+
+            <label class="control-label" for="precio">Fecha: </label> 
+            <div class="controls">
+                <input <%=strControlEnabled%>  id="fecha"
+                                               name="fecha" type="text" size="30" maxlength="50"
+                                               value="<%=fecha%>" /> 
+            </div>
+
+
+            <div class="control-group">
+                <div class="controls">
+                    <input type="submit" name="enviar" value="<%=strValueBoton%>" />
+                </div>
+            </div>
+
+
+
+
     </fieldset>
 </form>

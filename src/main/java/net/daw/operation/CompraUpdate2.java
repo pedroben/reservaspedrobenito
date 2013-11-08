@@ -41,7 +41,7 @@ public class CompraUpdate2 implements Operation {
         } catch (Exception e) {
             throw new ServletException("CompraController: Update Error: Phase 2: " + e.getMessage());
         }
-        return "Se ha modificado la información del producto con id=" + Integer.toString(oCompraBean.getId());
+        return "Se ha modificado la información de la compra con id=" + Integer.toString(oCompraBean.getId());
 
     }
 

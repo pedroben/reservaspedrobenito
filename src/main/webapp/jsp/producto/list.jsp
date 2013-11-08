@@ -112,9 +112,11 @@
                     <a class="btn btn-mini" href="Controller?class=producto&method=view&id=<%=oProductoBEAN.getId()%>"><i class="icon-eye-open"></i></a>                    
                     <a class="btn btn-mini" href="Controller?class=producto&method=update&id=<%=oProductoBEAN.getId()%>"><i class="icon-pencil"></i></a>           
                     <a class="btn btn-mini" href="Controller?class=producto&method=remove&id=<%=oProductoBEAN.getId()%>"><i class="icon-trash"></i></a>            
-                        <% } else {%>
-                    <a class="btn btn-mini" href="Controller?class=compra&method=update&phase=2&id=<%=oContexto.getId()%>&id_producto=<%=oProductoBEAN.getId()%>"><i class="icon-ok"></i></a>  -->                    
-                        <% } %>                    
+                        <% } else {
+                            if (!oContexto.getClase().equalsIgnoreCase("compra")) {%>
+                    <a class="btn btn-mini" href="Controller?class=compra&method=update&phase=2&id=<%=oContexto.getId()%>&id_producto=<%=oProductoBEAN.getId()%>"><i class="icon-ok"></i></a>  
+                        <% }
+                            } %>                    
                 </div>                
             </div>
         </td>

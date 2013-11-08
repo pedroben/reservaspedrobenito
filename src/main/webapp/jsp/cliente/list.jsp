@@ -108,10 +108,16 @@
         </td>        
         <td>
             <div class="btn-toolbar">
-                <div class="btn-group">                    
+                <div class="btn-group"> 
+                    <% if (!oContexto.getMetodo().equalsIgnoreCase("selectone")) {%>
                     <a class="btn btn-mini" href="Controller?class=cliente&method=view&id=<%=oClienteBEAN.getId()%>"><i class="icon-eye-open"></i></a>                    
                     <a class="btn btn-mini" href="Controller?class=cliente&method=update&id=<%=oClienteBEAN.getId()%>"><i class="icon-pencil"></i></a>           
                     <a class="btn btn-mini" href="Controller?class=cliente&method=remove&id=<%=oClienteBEAN.getId()%>"><i class="icon-trash"></i></a>                         
+                        <% } else {
+                        if (!oContexto.getClase().equalsIgnoreCase("compra")) {%>
+                    <a class="btn btn-mini" href="Controller?class=compra&method=update&phase=2&id=<%=oContexto.getId()%>&id_cliente=<%=oClienteBEAN.getId()%>"><i class="icon-ok"></i></a>  -->                    
+                        <%}
+                            }%> 
                 </div>
             </div>
         </td>
