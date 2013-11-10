@@ -12,6 +12,7 @@ import net.daw.bean.ClienteBean;
 import net.daw.bean.CompraBean;
 import net.daw.bean.ProductoBean;
 import net.daw.data.Mysql;
+import net.daw.helper.FilterBean;
 
 /**
  *
@@ -27,11 +28,11 @@ public class CompraDao {
         enumTipoConexion = tipoConexion;
     }
 
-    public int getPages(int intRegsPerPag, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getPages(int intRegsPerPag, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
-            pages = oMysql.getPages("compra", intRegsPerPag, hmFilter, hmOrder);
+            pages = oMysql.getPages("compra", intRegsPerPag, alFilter, hmOrder);
             oMysql.desconexion();
             return pages;
         } catch (Exception e) {
@@ -41,12 +42,12 @@ public class CompraDao {
         }
     }
 
-    public ArrayList<CompraBean> getPage(int intRegsPerPag, int intPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public ArrayList<CompraBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<CompraBean> arrCompra = new ArrayList<>();
         try {
             oMysql.conexion(enumTipoConexion);
-            arrId = oMysql.getPage("compra", intRegsPerPag, intPage, hmFilter, hmOrder);
+            arrId = oMysql.getPage("compra", intRegsPerPag, intPage, alFilter, hmOrder);
             Iterator<Integer> iterador = arrId.listIterator();
             while (iterador.hasNext()) {
                 CompraBean oCompraBean = new CompraBean(iterador.next());

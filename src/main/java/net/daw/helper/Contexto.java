@@ -1,5 +1,6 @@
 package net.daw.helper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import net.daw.bean.UsuarioBean;
@@ -8,7 +9,7 @@ public class Contexto {
 
     private HashMap<String, String> parameters;
 
-    private HashMap<String, String> hmFilter;
+    private ArrayList<FilterBean> alFilter;
     private HashMap<String, String> hmOrder;
 
     private String vista;
@@ -58,13 +59,13 @@ public class Contexto {
         return resultado.substring(0, resultado.length() - 1);
     }
 
-    private String getExceptForm(String strParam1, String strParam2) {
+    private String getExceptForm(String strParam1, String strParam2, String strParam3) {
         String resultado = "";
         for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             if (!value.equalsIgnoreCase("")) {
-                if (key.equals(strParam1) || key.equals(strParam2)) {
+                if (key.equals(strParam1) || key.equals(strParam2) || key.equals(strParam3)) {
                 } else {
                     resultado += "<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\"/>";
                 }
@@ -141,6 +142,14 @@ public class Contexto {
         this.set("returnmethod", strClase);
     }
 
+    public String getFaseRetorno() {
+        return get("1", "returnphase");
+    }
+
+    public void setFaseRetorno(String strClase) {
+        this.set("returnphase", strClase);
+    }
+
     public Object getParametro() {
         return parametro;
     }
@@ -203,12 +212,10 @@ public class Contexto {
 
     public String getSerializedParamsExceptOrder() {
         return getExcept("order", "ordervalue");
-
     }
 
     public String getSerializedParamsExceptClassMethod() {
         return getExcept("class", "method");
-
     }
 
     public String getSerializedParamsExceptFilter() {
@@ -216,28 +223,23 @@ public class Contexto {
     }
 
     public String getSerializedParamsExceptFilterFormFormat() {
-        return getExceptForm("filter", "filtervalue");
-    }
-
-    public String getSelectOneTable() {
-        return get(null, "selectonetable");
+        return getExceptForm("filter", "filteroperator", "filtervalue");
     }
 
     public String getSearchingFor() {
         return get("", "searchingfor");
     }
 
-    public void setSelectOneTable(String strOneTable) {
-        this.set("selectonetable", strOneTable);
+    public void setSearchingFor(String strSearchingFor) {
+        this.set("searchingfor", strSearchingFor);
     }
 
-    public String getSelectOneField() {
-        return get(null, "selectonefield");
-
+    public void setSelectOne(String strOneTable) {
+        this.set("selectone", strOneTable);
     }
 
-    public void setSelectOneField(String strOneField) {
-        this.set("selectonefield", strOneField);
+    public String getSelectOne() {
+        return get("", "selectone");
     }
 
     public String getForeignTable() {
@@ -252,12 +254,12 @@ public class Contexto {
         return get(null, "foreignfieldvalue");
     }
 
-    public HashMap<String, String> getHmFilter() {
-        return hmFilter;
+    public ArrayList<FilterBean> getAlFilter() {
+        return alFilter;
     }
 
-    public void setHmFilter(HashMap<String, String> hmFilter) {
-        this.hmFilter = hmFilter;
+    public void setAlFilter(ArrayList<FilterBean> alFilter) {
+        this.alFilter = alFilter;
     }
 
     public HashMap<String, String> getHmOrder() {

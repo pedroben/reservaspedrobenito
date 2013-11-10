@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.daw.operation;
 
 import java.util.ArrayList;
@@ -13,10 +8,6 @@ import net.daw.bean.ProductoBean;
 import net.daw.dao.ProductoDao;
 import net.daw.helper.Contexto;
 
-/**
- *
- * @author rafa
- */
 public class ProductoSelectone1 implements Operation {
 
     @Override
@@ -25,14 +16,14 @@ public class ProductoSelectone1 implements Operation {
         oContexto.setVista("jsp/producto/list.jsp");
         try {
             ProductoDao oProductoDao = new ProductoDao(oContexto.getEnumTipoConexion());
-            Integer intPages = oProductoDao.getPages(oContexto.getNrpp(), oContexto.getHmFilter(), oContexto.getHmOrder());
+            Integer intPages = oProductoDao.getPages(oContexto.getNrpp(), oContexto.getAlFilter(), oContexto.getHmOrder());
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
             if (oContexto.getPage() < 1) {
                 oContexto.setPage(1);
             }
-            ArrayList<ProductoBean> listado = (ArrayList<ProductoBean>) oProductoDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getHmFilter(), oContexto.getHmOrder());
+            ArrayList<ProductoBean> listado = (ArrayList<ProductoBean>) oProductoDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
             ArrayList<String> vecindad = (ArrayList<String>) oProductoDao.getNeighborhood("<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=", oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);

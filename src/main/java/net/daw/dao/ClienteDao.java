@@ -7,6 +7,7 @@ import java.util.Iterator;
 import net.daw.bean.ClienteBean;
 import net.daw.data.Mysql;
 import net.daw.helper.Enum;
+import net.daw.helper.FilterBean;
 
 public class ClienteDao {
 
@@ -18,7 +19,7 @@ public class ClienteDao {
         enumTipoConexion = tipoConexion;
     }
 
-    public int getPages(int intRegsPerPag, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getPages(int intRegsPerPag, ArrayList<FilterBean> hmFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
@@ -30,7 +31,7 @@ public class ClienteDao {
         }
     }
 
-    public ArrayList<ClienteBean> getPage(int intRegsPerPag, int intPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public ArrayList<ClienteBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean>  hmFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<ClienteBean> arrCliente = new ArrayList<>();
         try {

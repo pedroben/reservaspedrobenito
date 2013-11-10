@@ -5,20 +5,24 @@ import java.util.Date;
 public class CompraBean {
 
     private int id = 0;
-    private ClienteBean cliente;
-    private ProductoBean producto;
-    private Integer cantidad;
-    private Date fecha;
+    private ClienteBean cliente = null;
+    private ProductoBean producto = null;
+    private Integer cantidad = 0;
+    private Date fecha = new Date();
 
     public CompraBean() {
         this.cliente = new ClienteBean();
+        this.cliente.setId(0);
         this.producto = new ProductoBean();
+        this.producto.setId(0);
     }
 
     public CompraBean(Integer intId) {
         this.id = intId;
         this.cliente = new ClienteBean();
+        this.cliente.setId(0);
         this.producto = new ProductoBean();
+        this.producto.setId(0);
     }
 
     public int getId() {

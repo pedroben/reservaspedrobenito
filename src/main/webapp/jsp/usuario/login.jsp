@@ -1,14 +1,9 @@
-<form id="loginForm" class="form-horizontal" method="post">
-    <h1>Formulario de entrada al sistema</h1>    
-    <div>
-        <input type="hidden" name="class" value="usuario" />
-    </div>
-    <div>
-        <input type="hidden" name="method" value="login" />
-    </div>
-    <div>
-        <input type="hidden" name="phase" value="2" />
-    </div>
+<form id="loginForm" class="form-horizontal" method="post" action="Controller">   
+    <h1>Formulario de entrada al sistema</h1> 
+    <br />
+    <input type="hidden" name="class" value="usuario" />
+    <input type="hidden" name="method" value="login" />
+    <input type="hidden" name="phase" value="2" />
     <div class="control-group">
         <label class="control-label" for="inputEmail">Usuario:</label>
         <div class="controls">

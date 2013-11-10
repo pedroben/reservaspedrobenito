@@ -7,6 +7,7 @@ import java.util.Iterator;
 import net.daw.bean.ProductoBean;
 import net.daw.data.Mysql;
 import net.daw.helper.Enum;
+import net.daw.helper.FilterBean;
 
 public class ProductoDao {
 
@@ -50,11 +51,11 @@ public class ProductoDao {
 //            oMysql.desconexion();
 //        }
 //    }
-    public int getPages(int intRegsPerPag, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getPages(int intRegsPerPag, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
-            pages = oMysql.getPages("producto", intRegsPerPag, hmFilter, hmOrder);
+            pages = oMysql.getPages("producto", intRegsPerPag, alFilter, hmOrder);
             oMysql.desconexion();
             return pages;
         } catch (Exception e) {
@@ -64,12 +65,12 @@ public class ProductoDao {
         }
     }
 
-    public ArrayList<ProductoBean> getPage(int intRegsPerPag, int intPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public ArrayList<ProductoBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<ProductoBean> arrProducto = new ArrayList<>();
         try {
             oMysql.conexion(enumTipoConexion);
-            arrId = oMysql.getPage("producto", intRegsPerPag, intPage, hmFilter, hmOrder);
+            arrId = oMysql.getPage("producto", intRegsPerPag, intPage, alFilter, hmOrder);
             Iterator<Integer> iterador = arrId.listIterator();
             while (iterador.hasNext()) {
                 ProductoBean oProductoBean = new ProductoBean(iterador.next());

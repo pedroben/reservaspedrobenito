@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import net.daw.bean.TipoproductoBean;
 import net.daw.data.Mysql;
+import net.daw.helper.FilterBean;
 
 /**
  *
@@ -26,11 +27,11 @@ public class TipoproductoDao {
         enumTipoConexion = tipoConexion;
     }
 
-    public int getPages(int intRegsPerPag, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getPages(int intRegsPerPag, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
-            pages = oMysql.getPages(strTabla, intRegsPerPag, hmFilter, hmOrder);
+            pages = oMysql.getPages(strTabla, intRegsPerPag, alFilter, hmOrder);
             oMysql.desconexion();
             return pages;
         } catch (Exception e) {
@@ -40,12 +41,12 @@ public class TipoproductoDao {
         }
     }
 
-    public ArrayList<TipoproductoBean> getPage(int intRegsPerPag, int intPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public ArrayList<TipoproductoBean> getPage(int intRegsPerPag, int intPage,ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> alId;
         ArrayList<TipoproductoBean> alBeans = new ArrayList<>();
         try {
             oMysql.conexion(enumTipoConexion);
-            alId = oMysql.getPage(strTabla, intRegsPerPag, intPage, hmFilter, hmOrder);
+            alId = oMysql.getPage(strTabla, intRegsPerPag, intPage, alFilter, hmOrder);
             Iterator<Integer> iterador = alId.listIterator();
             while (iterador.hasNext()) {
                 TipoproductoBean oTipoproductoBean = new TipoproductoBean(iterador.next());
@@ -59,7 +60,6 @@ public class TipoproductoDao {
             oMysql.desconexion();
         }
     }
-//buttonpad
 
     public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception {
         oMysql.conexion(enumTipoConexion);

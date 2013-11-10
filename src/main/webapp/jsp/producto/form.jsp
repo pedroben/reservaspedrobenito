@@ -4,15 +4,15 @@
     String strTitulo = "";
     String strControlEnabled = "";
     String strValueBoton = "Enviar";
-    
+
     Integer id = 0;
     String codigo = "";
     String descripcion = "";
     String precio = "";
     String id_tipoproducto = "";
     String descTipoproducto = "";
-    
-    if ("update".equals(oContexto.getMetodo()) || oContexto.getMetodo().equals("view")) {
+
+    if ("update".equals(oContexto.getMetodo()) || oContexto.getMetodo().equals("view") || !oContexto.getSearchingFor().equals("")) {
         ProductoBean oProductoBean = (ProductoBean) oContexto.getParametro();
         id = oProductoBean.getId();
         codigo = oProductoBean.getCodigo();

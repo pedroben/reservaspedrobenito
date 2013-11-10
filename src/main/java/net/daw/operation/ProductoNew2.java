@@ -19,9 +19,9 @@ public class ProductoNew2 implements Operation {
             oContexto.setMetodo("selectone");
             oContexto.setFase("1");
             oContexto.setClaseRetorno("producto");
-            oContexto.setMetodoRetorno("update");
+            oContexto.setMetodoRetorno("new");
+            oContexto.setFaseRetorno("1");
             oContexto.removeParam("id_tipoproducto");
-            oContexto.removeParam("page");
             TipoproductoSelectone1 oOperacion = new TipoproductoSelectone1();
             return oOperacion.execute(request, response);
         } else {

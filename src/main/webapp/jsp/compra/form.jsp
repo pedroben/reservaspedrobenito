@@ -11,18 +11,20 @@
     String descCliente = "";
     String id_producto = "";
     String descProducto = "";
-    String cantidad = "";
+    String cantidad = "0";
     String fecha = "";
-
-    if (oContexto.getMetodo().equals("update") || oContexto.getMetodo().equals("view")) {
+    if (oContexto.getMetodo().equals("update")
+            || oContexto.getMetodo().equals("view")
+            || oContexto.getSearchingFor().equals("producto")
+            || oContexto.getSearchingFor().equals("cliente")) {
         CompraBean oCompraBean = (CompraBean) oContexto.getParametro();
         id = oCompraBean.getId();
         id_cliente = Integer.toString(oCompraBean.getCliente().getId());
-        descCliente = oCompraBean.getCliente().getNombre();
+        descCliente = oCompraBean.getCliente().getNombre() + " " + oCompraBean.getCliente().getApe1();
         id_producto = Integer.toString(oCompraBean.getProducto().getId());
         descProducto = oCompraBean.getProducto().getDescripcion();
         cantidad = oCompraBean.getCantidad().toString();
-        fecha = oCompraBean.getFecha().toString();
+        //fecha = oCompraBean.getFecha().toString();
     }
 
     if (oContexto.getMetodo().equals("view")) {
@@ -39,62 +41,54 @@
         strValueBoton = "Crear";
     }
 %>
-<h1><%=strTitulo%> de cliente</h1>
-<form class="semantic" action="Controller" method="post" id="clienteForm">
-    <fieldset>
-        <legend>Formulario de compra</legend>
-        <input type="hidden" name="id" value="<%=id%>" /> 
-        <input type="hidden" name="class" value="compra" /> 
-        <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>" /> 
-        <input type="hidden" name="phase" value="2" />
+<h1><%=strTitulo%> de compra</h1>
+<form class="form-horizontal" action="Controller" method="post" id="clienteForm">
+    <legend>Formulario de compra</legend>
+    <input type="hidden" name="id" value="<%=id%>" /> 
+    <input type="hidden" name="class" value="compra" /> 
+    <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>" /> 
+    <input type="hidden" name="phase" value="2" />
+    <div class="control-group">
+        <label class="control-label" for="id_producto">Producto: </label> 
+        <div class="controls">                
+            <input readonly="true" id="id_producto" class="input-mini"
+                   name="id_producto" type="text" size="5" maxlength="5"
+                   value="<%=id_producto%>" />  
+            <input type="submit" name="searchingfor" value="producto" />
 
+            <span class="label"><%=descProducto%></span>
+        </div>
+    </div>             
 
-        <div class="control-group">
-            <label class="control-label" for="id_producto">Producto: </label> 
-            <div class="controls">                
-                <input readonly="true" id="id_producto" class="input-mini"
-                       name="id_producto" type="text" size="5" maxlength="5"
-                       value="<%=id_producto%>" />  
-                <input type="submit" name="searchingfor" value="producto" />
-
-                <span class="label"><%=descProducto%></span>
-            </div>
-        </div>             
-
-        <div class="control-group">
-            <label class="control-label" for="id_cliente">Cliente: </label> 
-            <div class="controls">                
-                <input readonly="true" id="id_cliente" class="input-mini"
-                       name="id_producto" type="text" size="5" maxlength="5"
-                       value="<%=id_cliente%>" />  
-                <input type="submit" name="searchingfor" value="cliente" />
-                <span class="label"><%=descCliente%></span>
-            </div>
-        </div>             
-        <div class="control-group">
-            <label class="control-label" for="precio">Cantidad: </label> 
-            <div class="controls">
-                <input <%=strControlEnabled%>  id="cantidad"
-                                               name="cantidad" type="text" size="30" maxlength="50"
-                                               value="<%=cantidad%>" /> 
-            </div>
-
-            <label class="control-label" for="precio">Fecha: </label> 
-            <div class="controls">
-                <input <%=strControlEnabled%>  id="fecha"
-                                               name="fecha" type="text" size="30" maxlength="50"
-                                               value="<%=fecha%>" /> 
-            </div>
-
-
-            <div class="control-group">
-                <div class="controls">
-                    <input type="submit" name="enviar" value="<%=strValueBoton%>" />
-                </div>
-            </div>
-
-
-
-
-    </fieldset>
+    <div class="control-group">
+        <label class="control-label" for="id_cliente">Cliente: </label> 
+        <div class="controls">                
+            <input readonly="true" id="id_cliente" class="input-mini"
+                   name="id_cliente" type="text" size="5" maxlength="5"
+                   value="<%=id_cliente%>" />  
+            <input type="submit" name="searchingfor" value="cliente" />
+            <span class="label"><%=descCliente%></span>
+        </div>
+    </div>             
+    <div class="control-group">
+        <label class="control-label" for="precio">Cantidad: </label> 
+        <div class="controls">
+            <input <%=strControlEnabled%>  id="cantidad"
+                                           name="cantidad" type="text" size="30" maxlength="50"
+                                           value="<%=cantidad%>"  /> 
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="precio">Fecha: </label> 
+        <div class="controls">
+            <input <%=strControlEnabled%>  id="fecha"
+                                           name="fecha" type="text" size="30" maxlength="50"
+                                           value="<%=fecha%>" /> 
+        </div> 
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <input type="submit" name="enviar" value="<%=strValueBoton%>" />
+        </div>
+    </div>
 </form>

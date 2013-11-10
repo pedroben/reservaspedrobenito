@@ -25,14 +25,14 @@ public class TipoproductoSelectone1 implements Operation {
         oContexto.setVista("jsp/tipoproducto/list.jsp");
         try {
             TipoproductoDao oTipoproductoDao = new TipoproductoDao(oContexto.getEnumTipoConexion());
-            Integer intPages = oTipoproductoDao.getPages(oContexto.getNrpp(), oContexto.getHmFilter(), oContexto.getHmOrder());
+            Integer intPages = oTipoproductoDao.getPages(oContexto.getNrpp(), oContexto.getAlFilter(), oContexto.getHmOrder());
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
             if (oContexto.getPage() < 1) {
                 oContexto.setPage(1);
             }
-            ArrayList<TipoproductoBean> listado = (ArrayList<TipoproductoBean>) oTipoproductoDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getHmFilter(), oContexto.getHmOrder());
+            ArrayList<TipoproductoBean> listado = (ArrayList<TipoproductoBean>) oTipoproductoDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
             ArrayList<String> vecindad = (ArrayList<String>) oTipoproductoDao.getNeighborhood("<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=", oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);

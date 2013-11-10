@@ -45,6 +45,8 @@ public class CompraParam {
             }
             if ((request.getParameter("cantidad") != null)) {
                 oCompra.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
+            } else {
+                oCompra.setCantidad(0);
             }
 //            if ((request.getParameter("fecha") != null)) {
 //                Date date = new Date(97, 1, 23);                

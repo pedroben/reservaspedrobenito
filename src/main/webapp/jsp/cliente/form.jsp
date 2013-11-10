@@ -37,8 +37,8 @@
         <legend>Formulario de cliente</legend>
         <input type="hidden" name="id" value="<%=id%>" /> 
         <input type="hidden" name="class" value="cliente" /> 
-        <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>" /> 
-        <input type="hidden" name="phase" value="2" />
+        <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>2" /> 
+
         <div class="control-group">
             <label class="control-label" for="nombre">Nombre: </label> 
             <div class="controls">

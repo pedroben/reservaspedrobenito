@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.CompraBean;
 import net.daw.dao.CompraDao;
 import net.daw.helper.Contexto;
+import net.daw.helper.FilterBean;
 
 public class CompraList1 implements Operation {
 
@@ -17,18 +18,9 @@ public class CompraList1 implements Operation {
         oContexto.setVista("jsp/compra/list.jsp");
         try {
 
-//            getForeignTable()
-//            getForeignField()
-//            getForeignFieldValue() 
-                    
             CompraDao oCompraDao = new CompraDao(oContexto.getEnumTipoConexion());
 
-            if (oContexto.getForeignField() != null) {
-                //HashMap<String, String> hmfilter= new HashMap<>();      
-                oContexto.getHmFilter().put(oContexto.getForeignField(), oContexto.getForeignFieldValue());
-            }
-
-            Integer intPages = oCompraDao.getPages(oContexto.getNrpp(), oContexto.getHmFilter(), oContexto.getHmOrder());
+            Integer intPages = oCompraDao.getPages(oContexto.getNrpp(), oContexto.getAlFilter(), oContexto.getHmOrder());
 
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
@@ -36,7 +28,8 @@ public class CompraList1 implements Operation {
             if (oContexto.getPage() < 1) {
                 oContexto.setPage(1);
             }
-            ArrayList<CompraBean> listado = (ArrayList<CompraBean>) oCompraDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getHmFilter(), oContexto.getHmOrder());
+            
+            ArrayList<CompraBean> listado = (ArrayList<CompraBean>) oCompraDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
             String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";
             ArrayList<String> vecindad = (ArrayList<String>) oCompraDao.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
