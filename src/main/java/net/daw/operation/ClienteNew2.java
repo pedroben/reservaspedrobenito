@@ -27,7 +27,7 @@ public class ClienteNew2 implements Operation {
         try {
             oClienteDao.set(oClienteBean);
         } catch (Exception e) {
-            throw new ServletException("ClienteController: Update Error: Phase 2: " + e.getMessage());
+            throw new ServletException("ClienteController: New Error: Phase 2: " + e.getMessage());
         }
         return "Se ha añadido la información del cliente con id=" + Integer.toString(oClienteBean.getId());
     }

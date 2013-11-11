@@ -4,21 +4,24 @@
     String strTitulo = "";
     String strControlEnabled = "";
     String strValueBoton = "Enviar";
+
     Integer id = 0;
     String codigo = "";
     String descripcion = "";
     String precio = "";
     String id_tipoproducto = "";
     String descTipoproducto = "";
-    if ("update".equals(oContexto.getMetodo()) || oContexto.getMetodo().equals("view")) {
-        ProductoBean oProductoBean = (ProductoBean) oContexto.getParametro();
-        id = oProductoBean.getId();
-        codigo = oProductoBean.getCodigo();
-        descripcion = oProductoBean.getDescripcion();
-        precio = Double.toString(oProductoBean.getPrecio());
-        id_tipoproducto = Integer.toString(oProductoBean.getTipoProducto().getId());
+
+    ProductoBean oProductoBean = (ProductoBean) oContexto.getParametro();
+    id = oProductoBean.getId();
+    codigo = oProductoBean.getCodigo();
+    descripcion = oProductoBean.getDescripcion();
+    precio = Double.toString(oProductoBean.getPrecio());
+    id_tipoproducto = Integer.toString(oProductoBean.getTipoProducto().getId());
+    if (oProductoBean.getTipoProducto().getId() > 0) {
         descTipoproducto = oProductoBean.getTipoProducto().getDescripcion();
     }
+
     if (oContexto.getMetodo().equals("view")) {
         strTitulo = "Vista";
         strControlEnabled = "disabled=\"true\"";
@@ -66,9 +69,9 @@
                 <input readonly="true" id="id_tipoproducto" class="input-mini"
                        name="id_tipoproducto" type="text" size="5" maxlength="5"
                        value="<%=id_tipoproducto%>" />  
-                <input type="submit" name="searchingfor" value="tipoproducto" />
+                <input <%=strControlEnabled%> type="submit" name="searchingfor" value="tipoproducto" />
 
-                <span class="label"><%=descTipoproducto%></span>
+                <span class="alert alert-success"><%=descTipoproducto%></span>
             </div>
         </div>             
         <div class="control-group">

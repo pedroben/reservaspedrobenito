@@ -5,11 +5,13 @@
  */
 package net.daw.parameter;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.UsuarioBean;
 import net.daw.helper.Contexto;
+import net.daw.helper.FilterBean;
 
 /**
  *
@@ -48,46 +50,55 @@ public class ContextParam {
                 if (!"login".equals(request.getParameter("method"))) {
                     oContexto.setMetodo("ocioso");
                 }
-
             }
 
-//            if (request.getParameter("phase") == null) {
-//                oContexto.setFase("1");
-//            }
-//            if ("list".equals(oContexto.getMetodo()) || "selectone".equals(oContexto.getMetodo())) {
-//
-//                if (request.getParameter("page") == null) {
-//                    oContexto.setPage(1);
-//                }
-//
-//                if (request.getParameter("nrpp") == null) {
-//                    oContexto.setNrpp(10);
-//                }
-//
-                if (request.getParameter("filter") == null) {
-                    oContexto.setHmFilter(null);
+            if (request.getParameter("filter") == null) {
+                oContexto.setAlFilter(null);
+            } else {
+                if (request.getParameter("filteroperator") == null) {
+                    oContexto.setAlFilter(null);
                 } else {
                     if (request.getParameter("filtervalue") == null) {
-                        oContexto.setHmFilter(null);
+                        oContexto.setAlFilter(null);
                     } else {
-                        HashMap<String, String> hmFilter = new HashMap<>();
-                        hmFilter.put(request.getParameter("filter"), request.getParameter("filtervalue"));
-                        oContexto.setHmFilter(hmFilter);
+                        ArrayList<FilterBean> alFilter = new ArrayList<>();
+                        FilterBean oFilterBean = new FilterBean();
+                        oFilterBean.setFilter(request.getParameter("filter"));
+                        oFilterBean.setFilterOperator(request.getParameter("filteroperator"));
+                        oFilterBean.setFilterValue(request.getParameter("filtervalue"));
+                        oFilterBean.setFilterOrigin("user");
+                        alFilter.add(oFilterBean);
+                        oContexto.setAlFilter(alFilter);
                     }
                 }
+            }
 
-                if (request.getParameter("order") == null) {
+            if (request.getParameter("systemfilter") != null) {
+                if (request.getParameter("systemfilteroperator") != null) {
+                    if (request.getParameter("systemfiltervalue") != null) {
+                        ArrayList<FilterBean> alFilter = oContexto.getAlFilter();
+                        FilterBean oFilterBean = new FilterBean();
+                        oFilterBean.setFilter(request.getParameter("systemfilter"));
+                        oFilterBean.setFilterOperator(request.getParameter("systemfilteroperator"));
+                        oFilterBean.setFilterValue(request.getParameter("systemfiltervalue"));
+                        oFilterBean.setFilterOrigin("system");
+                        alFilter.add(oFilterBean);
+                    }
+                }
+            }
+
+            if (request.getParameter("order") == null) {
+                oContexto.setHmOrder(null);
+            } else {
+                if (request.getParameter("ordervalue") == null) {
                     oContexto.setHmOrder(null);
                 } else {
-                    if (request.getParameter("ordervalue") == null) {
-                        oContexto.setHmOrder(null);
-                    } else {
-                        HashMap<String, String> hmOrder = new HashMap<>();
-                        hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
-                        oContexto.setHmOrder(hmOrder);
-                    }
+                    HashMap<String, String> hmOrder = new HashMap<>();
+                    hmOrder.put(request.getParameter("order"), request.getParameter("ordervalue"));
+                    oContexto.setHmOrder(hmOrder);
                 }
-            
+            }
+
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Controller: Error: load: Formato de datos en parámetros incorrecto " + e.getMessage());
         }

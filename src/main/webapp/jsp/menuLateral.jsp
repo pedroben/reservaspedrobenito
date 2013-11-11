@@ -10,6 +10,7 @@
     } else {
         menu += "<li>";
     }
+    
     menu += "<a href=\"Controller\">Home</a></li>";
 
     if (!oContexto.getHaySesion()) {
@@ -27,6 +28,7 @@
         }
         menu += "<a href=\"Controller?class=usuario&method=logout\">Logout</a></li>";
     }
+    //-----------------------------------------------
     menu += "<li class=\"nav-header\">Cliente</li>";
 
     if (oContexto.getClase().equals("cliente") && oContexto.getMetodo().equals("new")) {
@@ -42,9 +44,25 @@
         menu += "<li>";
     }
     menu += "<a href=\"Controller?class=cliente&method=list\">Listar</a></li>";
+    //-----------------------------------------------
+    menu += "<li class=\"nav-header\">Compra</li>";
 
+    if (oContexto.getClase().equals("compra") && oContexto.getMetodo().equals("new")) {
+        menu += "<li class=\"active\">";
+    } else {
+        menu += "<li>";
+    }
+    menu += "<a href=\"Controller?class=compra&method=new\">Crear</a></li>";
+
+    if (oContexto.getClase().equals("compra") && oContexto.getMetodo().equals("list")) {
+        menu += "<li class=\"active\">";
+    } else {
+        menu += "<li>";
+    }
+    menu += "<a href=\"Controller?class=compra&method=list\">Listar</a></li>";    
+    //-----------------------------------------------
     menu += "<li class=\"nav-header\">Producto</li>";
-
+    
     if (oContexto.getClase().equals("producto") && oContexto.getMetodo().equals("new")) {
         menu += "<li class=\"active\">";
     } else {

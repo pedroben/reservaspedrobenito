@@ -1,12 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package net.daw.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.daw.helper.Enum;
+import net.daw.helper.FilterBean;
 
 /**
  *
@@ -38,9 +36,9 @@ public interface GenericData {
 
     public Boolean existsOne(String strTabla, int id) throws Exception;
 
-    public int getPages(String strTabla, int intRegsPerPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception;
+    public int getPages(String strTabla, int intRegsPerPage,ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception;
 
-    public ArrayList<Integer> getPage(String strTabla, int intRegsPerPage, int intPagina, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception;
+    public ArrayList<Integer> getPage(String strTabla, int intRegsPerPage, int intPagina, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception;
 
     public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception;
 

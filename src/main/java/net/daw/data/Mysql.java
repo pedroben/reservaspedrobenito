@@ -17,6 +17,7 @@ import net.daw.connection.DataSourceConnection;
 import net.daw.connection.DriverManagerConnection;
 import net.daw.connection.GenericConnection;
 import net.daw.helper.Enum;
+import net.daw.helper.FilterBean;
 
 public class Mysql implements GenericData {
 
@@ -187,17 +188,47 @@ public class Mysql implements GenericData {
     }
 
     @Override
-    public int getPages(String strTabla, int intRegsPerPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getPages(String strTabla, int intRegsPerPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         int intResult = 0;
         Statement oStatement;
         try {
             oStatement = (Statement) oConexionMySQL.createStatement();
             String strSQL = "SELECT count(*) FROM " + strTabla + " WHERE 1=1";
-            if (hmFilter != null) {
-                for (Map.Entry oPar : hmFilter.entrySet()) {
-                    strSQL += " AND " + oPar.getKey() + " LIKE '%" + oPar.getValue() + "%'";
+            if (alFilter != null) {
+                Iterator iterator = alFilter.iterator();
+                while (iterator.hasNext()) {
+                    FilterBean oFilterBean = (FilterBean) iterator.next();
+                    switch (oFilterBean.getFilterOperator()) {
+                        case "like":
+                            strSQL += " AND " + oFilterBean.getFilter() + " LIKE '%" + oFilterBean.getFilterValue() + "%'";
+                            break;
+                        case "notlike":
+                            strSQL += " AND " + oFilterBean.getFilter() + " NOT LIKE '%" + oFilterBean.getFilterValue() + "%'";
+                            break;
+                        case "equals":
+                            strSQL += " AND " + oFilterBean.getFilter() + " = '" + oFilterBean.getFilterValue() + "'";
+                            break;
+                        case "notequalto":
+                            strSQL += " AND " + oFilterBean.getFilter() + " <> '" + oFilterBean.getFilterValue() + "'";
+                            break;
+                        case "less":
+                            strSQL += " AND " + oFilterBean.getFilter() + " < " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "lessorequal":
+                            strSQL += " AND " + oFilterBean.getFilter() + " <= " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "greater":
+                            strSQL += " AND " + oFilterBean.getFilter() + " > " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "greaterorequal":
+                            strSQL += " AND " + oFilterBean.getFilter() + " >= " + oFilterBean.getFilterValue() + "";
+                            break;
+                    }
+
                 }
+
             }
+
             if (hmOrder != null) {
                 strSQL += " ORDER BY";
                 for (Map.Entry oPar : hmOrder.entrySet()) {
@@ -219,7 +250,7 @@ public class Mysql implements GenericData {
     }
 
     @Override
-    public ArrayList<Integer> getPage(String strTabla, int intRegsPerPage, int intPagina, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public ArrayList<Integer> getPage(String strTabla, int intRegsPerPage, int intPagina, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         try {
             ArrayList<Integer> vector = new ArrayList<>();
             int intOffset;
@@ -227,10 +258,39 @@ public class Mysql implements GenericData {
             oStatement = (Statement) oConexionMySQL.createStatement();
             intOffset = Math.max(((intPagina - 1) * intRegsPerPage), 0);
             String strSQL = "SELECT id FROM " + strTabla + " WHERE 1=1 ";
-            if (hmFilter != null) {
-                for (Map.Entry oPar : hmFilter.entrySet()) {
-                    strSQL += " AND " + oPar.getKey() + " LIKE '%" + oPar.getValue() + "%'";
+            if (alFilter != null) {
+                Iterator iterator = alFilter.iterator();
+                while (iterator.hasNext()) {
+                    FilterBean oFilterBean = (FilterBean) iterator.next();
+                    switch (oFilterBean.getFilterOperator()) {
+                        case "like":
+                            strSQL += " AND " + oFilterBean.getFilter() + " LIKE '%" + oFilterBean.getFilterValue() + "%'";
+                            break;
+                        case "notlike":
+                            strSQL += " AND " + oFilterBean.getFilter() + " NOT LIKE '%" + oFilterBean.getFilterValue() + "%'";
+                            break;
+                        case "equals":
+                            strSQL += " AND " + oFilterBean.getFilter() + " = '" + oFilterBean.getFilterValue() + "'";
+                            break;
+                        case "notequalto":
+                            strSQL += " AND " + oFilterBean.getFilter() + " <> '" + oFilterBean.getFilterValue() + "'";
+                            break;
+                        case "less":
+                            strSQL += " AND " + oFilterBean.getFilter() + " < " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "lessorequal":
+                            strSQL += " AND " + oFilterBean.getFilter() + " <= " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "greater":
+                            strSQL += " AND " + oFilterBean.getFilter() + " > " + oFilterBean.getFilterValue() + "";
+                            break;
+                        case "greaterorequal":
+                            strSQL += " AND " + oFilterBean.getFilter() + " >= " + oFilterBean.getFilterValue() + "";
+                            break;
+                    }
+
                 }
+
             }
             if (hmOrder != null) {
                 strSQL += " ORDER BY";

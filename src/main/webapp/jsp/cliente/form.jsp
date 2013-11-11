@@ -9,14 +9,14 @@
     String apellido1 = "";
     String apellido2 = "";
     String email = "";
-    if (oContexto.getMetodo().equals("update") || oContexto.getMetodo().equals("view")) {
-        ClienteBean oClienteBean = (ClienteBean) oContexto.getParametro();
-        id = oClienteBean.getId();
-        nombre = oClienteBean.getNombre();
-        apellido1 = oClienteBean.getApe1();
-        apellido2 = oClienteBean.getApe2();
-        email = oClienteBean.getEmail();
-    }
+
+    ClienteBean oClienteBean = (ClienteBean) oContexto.getParametro();
+    id = oClienteBean.getId();
+    nombre = oClienteBean.getNombre();
+    apellido1 = oClienteBean.getApe1();
+    apellido2 = oClienteBean.getApe2();
+    email = oClienteBean.getEmail();
+
     if (oContexto.getMetodo().equals("view")) {
         strTitulo = "Vista";
         strControlEnabled = "disabled=\"true\"";
@@ -60,7 +60,7 @@
         <div class="control-group">
             <label class="control-label" for="email">Email: </label> 
             <div class="controls">
-                <input <%=strControlEnabled%> id="email" name="email" type="text" size="30" maxlength="50" value="<%=email%>" /><br />
+                <input <%=strControlEnabled%> id="email" name="email" type="email" size="30" maxlength="50" value="<%=email%>" /><br />
             </div>
         </div>
         <div class="control-group">

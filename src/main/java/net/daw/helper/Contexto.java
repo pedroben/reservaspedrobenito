@@ -1,6 +1,8 @@
 package net.daw.helper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import net.daw.bean.UsuarioBean;
 
@@ -8,7 +10,7 @@ public class Contexto {
 
     private HashMap<String, String> parameters;
 
-    private HashMap<String, String> hmFilter;
+    private ArrayList<FilterBean> alFilter;
     private HashMap<String, String> hmOrder;
 
     private String vista;
@@ -43,6 +45,29 @@ public class Contexto {
         return resultado;
     }
 
+    private String getExceptParams(ArrayList<String> alExcept) {
+        String resultado = "";
+        for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (!value.equalsIgnoreCase("")) {
+                String strParam;
+                Iterator<String> iterator = alExcept.iterator();
+                Boolean encontrado = false;
+                while (iterator.hasNext()) {
+                    strParam = iterator.next();
+                    if (key.equals(strParam)) {
+                        encontrado = true;
+                    }
+                }
+                if (!encontrado) {
+                    resultado += key + "=" + value + "&";
+                }
+            }
+        }
+        return resultado;
+    }
+
     private String getExcept(String strParam1, String strParam2) {
         String resultado = "";
         for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
@@ -58,13 +83,13 @@ public class Contexto {
         return resultado.substring(0, resultado.length() - 1);
     }
 
-    private String getExceptForm(String strParam1, String strParam2) {
+    private String getExceptForm(String strParam1, String strParam2, String strParam3) {
         String resultado = "";
         for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             if (!value.equalsIgnoreCase("")) {
-                if (key.equals(strParam1) || key.equals(strParam2)) {
+                if (key.equals(strParam1) || key.equals(strParam2) || key.equals(strParam3)) {
                 } else {
                     resultado += "<input type=\"hidden\" name=\"" + key + "\" value=\"" + value + "\"/>";
                 }
@@ -141,6 +166,14 @@ public class Contexto {
         this.set("returnmethod", strClase);
     }
 
+    public String getFaseRetorno() {
+        return get("1", "returnphase");
+    }
+
+    public void setFaseRetorno(String strClase) {
+        this.set("returnphase", strClase);
+    }
+
     public Object getParametro() {
         return parametro;
     }
@@ -149,12 +182,12 @@ public class Contexto {
         this.parametro = parametro;
     }
 
-    public Boolean getHaySesion() {
-        return haySesion;
+    public String getSearchingFor() {
+        return get("", "searchingfor");
     }
 
-    public void setHaySesion(Boolean haySesion) {
-        this.haySesion = haySesion;
+    public void setSearchingFor(String strSearchingFor) {
+        this.set("searchingfor", strSearchingFor);
     }
 
     public Enum.Connection getEnumTipoConexion() {
@@ -177,58 +210,32 @@ public class Contexto {
         return Integer.parseInt(get("0", "id"));
     }
 
-    public HashMap<String, String> getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(HashMap<String, String> parameters) {
-        this.parameters = parameters;
-    }
-
-    public String getSerializedParams() {
-        return getExcept("enviar", "enviar");
-    }
-
-    public String getSerializedParamsExceptId() {
-        return getExcept("id", "id");
-    }
-
-    public String getSerializedParamsExceptMethod() {
-        return getExcept("method", "method");
-    }
-
     public String getSerializedParamsExceptPage() {
         return getExcept("page", "page");
     }
 
-    public String getSerializedParamsExceptOrder() {
-        return getExcept("order", "ordervalue");
-
+    public String getSerializedParamsExcept(ArrayList<String> alExcept) {
+        return getExceptParams(alExcept);
     }
 
-    public String getSerializedParamsExceptClassMethod() {
-        return getExcept("class", "method");
+    public String getSerializedParamsExceptFilterFormFormat() {
+        return getExceptForm("filter", "filteroperator", "filtervalue");
+    }
 
+    public String getSerializedParamsExceptOrder() {
+        return getExcept("order", "ordervalue");
     }
 
     public String getSerializedParamsExceptFilter() {
         return getExcept("filter", "filtervalue");
     }
 
-    public String getSerializedParamsExceptFilterFormFormat() {
-        return getExceptForm("filter", "filtervalue");
+    public ArrayList<FilterBean> getAlFilter() {
+        return alFilter;
     }
 
-    public String getSearchingFor() {
-        return get("", "searchingfor");
-    }
-
-    public HashMap<String, String> getHmFilter() {
-        return hmFilter;
-    }
-
-    public void setHmFilter(HashMap<String, String> hmFilter) {
-        this.hmFilter = hmFilter;
+    public void setAlFilter(ArrayList<FilterBean> alFilter) {
+        this.alFilter = alFilter;
     }
 
     public HashMap<String, String> getHmOrder() {
@@ -239,6 +246,14 @@ public class Contexto {
         this.hmOrder = hmOrder;
     }
 
+    public Boolean getHaySesion() {
+        return haySesion;
+    }
+
+    public void setHaySesion(Boolean haySesion) {
+        this.haySesion = haySesion;
+    }
+
     public UsuarioBean getUserBeanSession() {
         return userBeanSession;
     }
@@ -247,4 +262,11 @@ public class Contexto {
         this.userBeanSession = userBeanSession;
     }
 
+    public HashMap<String, String> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(HashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
 }

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import net.daw.bean.ProductoBean;
 import net.daw.data.Mysql;
 import net.daw.helper.Enum;
+import net.daw.helper.FilterBean;
 
 public class ProductoDao {
 
@@ -18,11 +19,11 @@ public class ProductoDao {
         enumTipoConexion = tipoConexion;
     }
 
-    public int getPages(int intRegsPerPag, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getPages(int intRegsPerPag, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {
             oMysql.conexion(enumTipoConexion);
-            pages = oMysql.getPages("producto", intRegsPerPag, hmFilter, hmOrder);
+            pages = oMysql.getPages("producto", intRegsPerPag, alFilter, hmOrder);
             oMysql.desconexion();
             return pages;
         } catch (Exception e) {
@@ -32,12 +33,12 @@ public class ProductoDao {
         }
     }
 
-    public ArrayList<ProductoBean> getPage(int intRegsPerPag, int intPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
+    public ArrayList<ProductoBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<ProductoBean> arrProducto = new ArrayList<>();
         try {
             oMysql.conexion(enumTipoConexion);
-            arrId = oMysql.getPage("producto", intRegsPerPag, intPage, hmFilter, hmOrder);
+            arrId = oMysql.getPage("producto", intRegsPerPag, intPage, alFilter, hmOrder);
             Iterator<Integer> iterador = arrId.listIterator();
             while (iterador.hasNext()) {
                 ProductoBean oProductoBean = new ProductoBean(iterador.next());
@@ -63,21 +64,26 @@ public class ProductoDao {
         if (oProductoBean.getId() > 0) {
             try {
                 oMysql.conexion(enumTipoConexion);
-                oProductoBean.setCodigo(oMysql.getOne("producto", "codigo", oProductoBean.getId()));
-                oProductoBean.setDescripcion(oMysql.getOne("producto", "descripcion", oProductoBean.getId()));
-                oProductoBean.setPrecio(Double.parseDouble(oMysql.getOne("producto", "precio", oProductoBean.getId())));
-                String intId_producto = oMysql.getOne("producto", "id_tipoproducto", oProductoBean.getId());
-                if (intId_producto != null) {
-                    oProductoBean.getTipoProducto().setId(Integer.parseInt(intId_producto));
-                    TipoproductoDao oTipoproductoDao = new TipoproductoDao(enumTipoConexion);
-                    oProductoBean.setTipoProducto(oTipoproductoDao.get(oProductoBean.getTipoProducto()));
+                if (!oMysql.existsOne("producto", oProductoBean.getId())) {
+                    oProductoBean.setId(0);
+                } else {
+                    oProductoBean.setCodigo(oMysql.getOne("producto", "codigo", oProductoBean.getId()));
+                    oProductoBean.setDescripcion(oMysql.getOne("producto", "descripcion", oProductoBean.getId()));
+                    oProductoBean.setPrecio(Double.parseDouble(oMysql.getOne("producto", "precio", oProductoBean.getId())));
+                    String intId_producto = oMysql.getOne("producto", "id_tipoproducto", oProductoBean.getId());
+                    if (intId_producto != null) {
+                        oProductoBean.getTipoProducto().setId(Integer.parseInt(intId_producto));
+                        TipoproductoDao oTipoproductoDao = new TipoproductoDao(enumTipoConexion);
+                        oProductoBean.setTipoProducto(oTipoproductoDao.get(oProductoBean.getTipoProducto()));
+                    }
                 }
-                oMysql.desconexion();
             } catch (Exception e) {
                 throw new Exception("ProductoDao.get: Error: " + e.getMessage());
             } finally {
                 oMysql.desconexion();
             }
+        } else {
+            oProductoBean.setId(0);
         }
         return oProductoBean;
     }

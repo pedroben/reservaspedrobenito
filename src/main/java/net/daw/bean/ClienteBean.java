@@ -2,7 +2,7 @@ package net.daw.bean;
 
 public class ClienteBean {
 
-    private int id = 0;
+    private Integer id = 0;
     private String nombre = "";
     private String ape1 = "";
     private String ape2 = "";
@@ -12,15 +12,15 @@ public class ClienteBean {
 
     }
 
-    public ClienteBean(int id) {
+    public ClienteBean(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

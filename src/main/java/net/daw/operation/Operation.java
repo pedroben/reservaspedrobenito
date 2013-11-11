@@ -2,7 +2,6 @@ package net.daw.operation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.daw.helper.Contexto;
 
 
 public abstract interface Operation {

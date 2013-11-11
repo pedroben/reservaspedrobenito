@@ -16,7 +16,7 @@ import net.daw.bean.TipoproductoBean;
  */
 public class ProductoParam {
 
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     public ProductoParam(HttpServletRequest request) throws Exception {
         this.request = request;
@@ -56,15 +56,15 @@ public class ProductoParam {
         return oProducto;
     }
 
-    public ProductoBean loadTipoProducto(ProductoBean oProducto) throws NumberFormatException {
-        try {
-            if ((request.getParameter("id_tipoproducto") != null)) {
-                TipoproductoBean oTipoproducto = new TipoproductoBean(Integer.parseInt(request.getParameter("id_tipoproducto")));
-                oProducto.setTipoProducto(oTipoproducto);
-            }
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Controller: Error: loadTipoProducto: Formato de datos en parámetros incorrecto " + e.getMessage());
-        }
-        return oProducto;
-    }
+//    public ProductoBean loadTipoProducto(ProductoBean oProducto) throws NumberFormatException {
+//        try {
+//            if ((request.getParameter("id_tipoproducto") != null)) {
+//                TipoproductoBean oTipoproducto = new TipoproductoBean(Integer.parseInt(request.getParameter("id_tipoproducto")));
+//                oProducto.setTipoProducto(oTipoproducto);
+//            }
+//        } catch (NumberFormatException e) {
+//            throw new NumberFormatException("Controller: Error: loadTipoProducto: Formato de datos en parámetros incorrecto " + e.getMessage());
+//        }
+//        return oProducto;
+//    }
 }

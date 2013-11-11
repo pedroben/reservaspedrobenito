@@ -20,9 +20,10 @@ public class ProductoUpdate2 implements Operation {
             oContexto.setFase("1");
             oContexto.setClaseRetorno("producto");
             oContexto.setMetodoRetorno("update");
+            oContexto.setFaseRetorno("1");
             oContexto.removeParam("id_tipoproducto");
             oContexto.removeParam("page");
-            TipoproductoSelectone1 oOperacion = new TipoproductoSelectone1();
+            TipoproductoList1 oOperacion = new TipoproductoList1();
             return oOperacion.execute(request, response);
         } else {
             oContexto.setVista("jsp/mensaje.jsp");

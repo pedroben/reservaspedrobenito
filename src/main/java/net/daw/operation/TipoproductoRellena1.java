@@ -2,7 +2,6 @@ package net.daw.operation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +36,6 @@ public class TipoproductoRellena1 implements Operation {
         dos.add("descatalogado");
         dos.add("inexistente");
 
-        Random generator;
         String primero;
         String segundo;
 
@@ -49,9 +47,7 @@ public class TipoproductoRellena1 implements Operation {
             Iterator<String> iterador2 = dos.listIterator();
             while (iterador2.hasNext()) {
                 segundo = iterador2.next();
-                contador++;
-
-                generator = new Random();
+                contador++;               
                 oTipoproductoBean.setId(0);
                 oTipoproductoBean.setDescripcion(primero + " " + segundo);
                 try {
