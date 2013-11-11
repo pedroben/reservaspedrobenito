@@ -44,6 +44,19 @@ public class CompraDao {
         }
     }
 
+    public int getCount( ArrayList<FilterBean> hmFilter) throws Exception {
+        int pages;
+        try {
+            oMysql.conexion(enumTipoConexion);
+            pages = oMysql.getCount("compra",  hmFilter);
+            oMysql.desconexion();
+            return pages;
+        } catch (Exception e) {
+            throw new Exception("CompraDao.getCount: Error: " + e.getMessage());
+        }
+    }
+
+    
     public ArrayList<CompraBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<CompraBean> arrCompra = new ArrayList<>();

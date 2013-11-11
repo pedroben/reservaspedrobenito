@@ -17,6 +17,7 @@ public class ClienteList1 implements Operation {
         try {
             ClienteDao oClienteDAO = new ClienteDao(oContexto.getEnumTipoConexion());
             Integer intPages = oClienteDAO.getPages(oContexto.getNrpp(), oContexto.getAlFilter(), oContexto.getHmOrder());
+            Integer intRegisters = oClienteDAO.getCount(oContexto.getAlFilter());
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
@@ -29,6 +30,7 @@ public class ClienteList1 implements Operation {
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
             a.add(vecindad);
+            a.add(intRegisters);
             return a;
         } catch (Exception e) {
             throw new ServletException("ClienteList1: View Error: " + e.getMessage());

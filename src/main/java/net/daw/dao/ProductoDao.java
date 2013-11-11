@@ -33,6 +33,19 @@ public class ProductoDao {
         }
     }
 
+        public int getCount( ArrayList<FilterBean> hmFilter) throws Exception {
+        int pages;
+        try {
+            oMysql.conexion(enumTipoConexion);
+            pages = oMysql.getCount("producto",  hmFilter);
+            oMysql.desconexion();
+            return pages;
+        } catch (Exception e) {
+            throw new Exception("ProductoDao.getCount: Error: " + e.getMessage());
+        }
+    }
+
+    
     public ArrayList<ProductoBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<ProductoBean> arrProducto = new ArrayList<>();

@@ -27,6 +27,7 @@ public class TipoproductoList1 implements Operation {
         try {
             TipoproductoDao oTipoproductoDao = new TipoproductoDao(oContexto.getEnumTipoConexion());
             Integer intPages = oTipoproductoDao.getPages(oContexto.getNrpp(), oContexto.getAlFilter(), oContexto.getHmOrder());
+            Integer intRegisters = oTipoproductoDao.getCount(oContexto.getAlFilter());                        
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
@@ -39,6 +40,7 @@ public class TipoproductoList1 implements Operation {
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
             a.add(vecindad);
+            a.add(intRegisters);
             return a;
         } catch (Exception e) {
             throw new ServletException("TipoproductoList1: View Error: " + e.getMessage());

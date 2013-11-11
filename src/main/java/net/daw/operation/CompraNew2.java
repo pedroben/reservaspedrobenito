@@ -67,9 +67,8 @@ public class CompraNew2 implements Operation {
                 }
                 String strMensaje = "Se ha añadido la información de compra con id=" + Integer.toString(oCompraBean.getId()) + "<br />";
                 strMensaje += "<a href=\"Controller?class=compra&method=list&filter=id_cliente&filteroperator=equals&filtervalue=" + oCompraBean.getCliente().getId() + "\">Ver compras de este cliente</a><br />";
-                strMensaje += "<a href=\"Controller?class=compra&method=view&id=" + oCompraBean.getId() + "\">Ver compra creada</a><br />";
+                strMensaje += "<a href=\"Controller?class=compra&method=view&id=" + oCompraBean.getId() + "\">Ver compra creada en el formulario</a><br />";
                 return strMensaje;
-
         }
     }
 }

@@ -16,20 +16,22 @@ public class ProductoList1 implements Operation {
         Contexto oContexto = (Contexto) request.getAttribute("contexto");
         oContexto.setVista("jsp/producto/list.jsp");
         try {
-            ProductoDao oProductoDAO = new ProductoDao(oContexto.getEnumTipoConexion());
-            Integer intPages = oProductoDAO.getPages(oContexto.getNrpp(), oContexto.getAlFilter(), oContexto.getHmOrder());
+            ProductoDao oProductoDao = new ProductoDao(oContexto.getEnumTipoConexion());
+            Integer intPages = oProductoDao.getPages(oContexto.getNrpp(), oContexto.getAlFilter(), oContexto.getHmOrder());
+            Integer intRegisters = oProductoDao.getCount(oContexto.getAlFilter());            
             if (oContexto.getPage() >= intPages) {
                 oContexto.setPage(intPages);
             }
             if (oContexto.getPage() < 1) {
                 oContexto.setPage(1);   
             }
-            ArrayList<ProductoBean> listado = (ArrayList<ProductoBean>) oProductoDAO.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
+            ArrayList<ProductoBean> listado = (ArrayList<ProductoBean>) oProductoDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
             String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";            
-            ArrayList<String> vecindad = (ArrayList<String>) oProductoDAO.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
+            ArrayList<String> vecindad = (ArrayList<String>) oProductoDao.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
             a.add(vecindad);
+            a.add(intRegisters);
             return a;
         } catch (Exception e) {
             throw new ServletException("ProductoList1: View Error: " + e.getMessage());

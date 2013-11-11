@@ -1,4 +1,3 @@
-
 package net.daw.dao;
 
 import java.util.ArrayList;
@@ -37,7 +36,19 @@ public class TipoproductoDao {
         }
     }
 
-    public ArrayList<TipoproductoBean> getPage(int intRegsPerPag, int intPage,ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
+    public int getCount(ArrayList<FilterBean> hmFilter) throws Exception {
+        int pages;
+        try {
+            oMysql.conexion(enumTipoConexion);
+            pages = oMysql.getCount("tipoproducto", hmFilter);
+            oMysql.desconexion();
+            return pages;
+        } catch (Exception e) {
+            throw new Exception("TipoproductoDao.getCount: Error: " + e.getMessage());
+        }
+    }
+
+    public ArrayList<TipoproductoBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> alId;
         ArrayList<TipoproductoBean> alBeans = new ArrayList<>();
         try {

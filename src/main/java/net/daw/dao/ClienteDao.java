@@ -31,6 +31,18 @@ public class ClienteDao {
         }
     }
 
+    public int getCount( ArrayList<FilterBean> hmFilter) throws Exception {
+        int pages;
+        try {
+            oMysql.conexion(enumTipoConexion);
+            pages = oMysql.getCount("cliente",  hmFilter);
+            oMysql.desconexion();
+            return pages;
+        } catch (Exception e) {
+            throw new Exception("ClienteDao.getCount: Error: " + e.getMessage());
+        }
+    }
+  
     public ArrayList<ClienteBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBean>  hmFilter, HashMap<String, String> hmOrder) throws Exception {
         ArrayList<Integer> arrId;
         ArrayList<ClienteBean> arrCliente = new ArrayList<>();
