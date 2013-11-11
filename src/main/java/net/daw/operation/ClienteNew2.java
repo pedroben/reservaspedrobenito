@@ -30,7 +30,7 @@ public class ClienteNew2 implements Operation {
             throw new ServletException("ClienteController: New Error: Phase 2: " + e.getMessage());
         }
         String strMensaje = "Se ha añadido la información del cliente con id=" + Integer.toString(oClienteBean.getId()) + "<br />";
-        strMensaje += "<a href=\"Controller?class=compra&method=view&id=" + oClienteBean.getId() + "\">Ver cliente creado en el formulario</a><br />";
+        strMensaje += "<a href=\"Controller?class=cliente&method=view&id=" + oClienteBean.getId() + "\">Ver cliente creado en el formulario</a><br />";
         return strMensaje;
     }
 }
