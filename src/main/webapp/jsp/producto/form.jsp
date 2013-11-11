@@ -21,20 +21,24 @@
     if (oProductoBean.getTipoProducto().getId() > 0) {
         descTipoproducto = oProductoBean.getTipoProducto().getDescripcion();
     }
-
     if (oContexto.getMetodo().equals("view")) {
         strTitulo = "Vista";
         strControlEnabled = "disabled=\"true\"";
         strValueBoton = "Cerrar";
-    } else {
-        strValueBoton = "Guardar";
+    }
+    if (oContexto.getMetodo().equals("update")) {
+        strTitulo = "Edición";
+        strValueBoton = "Modificar";
+    }
+    if (oContexto.getMetodo().equals("new")) {
+        strTitulo = "Alta";
+        strValueBoton = "Crear";
     }
 %>
-<h1>Formulario de producto</h1>
-<hr/>
-<form class="form-horizontal" action="Controller" method="post" id="clienteForm">
+<h1><%=strTitulo%> de producto</h1>
+<form class="form-horizontal" action="Controller" method="post" id="productoForm">
+    <legend>Formulario de producto</legend>
     <fieldset>
-        <!-- <legend>Formulario de producto</legend> -->
         <input type="hidden" name="id" value="<%=id%>" /> 
         <input type="hidden" name="class" value="producto" /> 
         <input type="hidden" name="method" value="<%=oContexto.getMetodo()%>" /> 

@@ -58,7 +58,7 @@
     </div>
     <div class="span4">
         <div class="text-right">
-            <legend>Filtro de producto</legend> 
+            <legend>Filtro de compra</legend> 
             <form class="navbar-form pull-right" action="Controller" method="post" id="filterForm">
                 <fieldset>                                               
                     <%=oContexto.getSerializedParamsExceptFilterFormFormat()%>       
