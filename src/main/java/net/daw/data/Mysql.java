@@ -186,74 +186,7 @@ public class Mysql implements GenericData {
             throw new Exception("mysql.existsOne: Error en la consulta: " + e.getMessage());
         }
     }
-//
-//    @Override
-//    public int getPagesForeign(String strForeignTable, int intIdForeign, String strForeignField, String strTabla, int intRegsPerPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
-//        int intResult = 0;
-//        Statement oStatement;
-//        try {
-//            oStatement = (Statement) oConexionMySQL.createStatement();
-//            String strSQL = "SELECT count(*) FROM " + strTabla + " p," + strForeignTable + " f WHERE 1=1";
-//            strSQL += " AND f.id=" + intIdForeign;
-//            strSQL += " AND f." + strForeignField + "=p.id";
-//            if (hmFilter != null) {
-//                for (Map.Entry oPar : hmFilter.entrySet()) {
-//                    strSQL += " AND " + oPar.getKey() + " LIKE '%" + oPar.getValue() + "%'";
-//                }
-//            }
-//            if (hmOrder != null) {
-//                strSQL += " ORDER BY";
-//                for (Map.Entry oPar : hmOrder.entrySet()) {
-//                    strSQL += " " + oPar.getKey() + " " + oPar.getValue() + ",";
-//                }
-//                strSQL = strSQL.substring(0, strSQL.length() - 1);
-//            }
-//            ResultSet oResultSet = oStatement.executeQuery(strSQL);
-//            while (oResultSet.next()) {
-//                intResult = oResultSet.getInt("COUNT(*)") / intRegsPerPage;
-//                if ((oResultSet.getInt("COUNT(*)") % intRegsPerPage) > 0) {
-//                    intResult++;
-//                }
-//            }
-//            return intResult;
-//        } catch (SQLException e) {
-//            throw new Exception("mysql.getPagesForeign: Error en la consulta: " + e.getMessage());
-//        }
-//    }
 
-//    @Override
-//    public ArrayList<Integer> getPageForeign(String strForeignTable, int intIdForeign, String strForeignField, String strTabla, int intRegsPerPage, int intPagina, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
-//        try {
-//            ArrayList<Integer> vector = new ArrayList<>();
-//            int intOffset;
-//            Statement oStatement;
-//            oStatement = (Statement) oConexionMySQL.createStatement();
-//            intOffset = Math.max(((intPagina - 1) * intRegsPerPage), 0);
-//            String strSQL = "SELECT count(*) FROM " + strTabla + " p," + strForeignTable + " f WHERE 1=1";
-//            strSQL += " AND f.id=" + intIdForeign;
-//            strSQL += " AND f." + strForeignField + "=p.id";
-//            if (hmFilter != null) {
-//                for (Map.Entry oPar : hmFilter.entrySet()) {
-//                    strSQL += " AND " + oPar.getKey() + " LIKE '%" + oPar.getValue() + "%'";
-//                }
-//            }
-//            if (hmOrder != null) {
-//                strSQL += " ORDER BY";
-//                for (Map.Entry oPar : hmOrder.entrySet()) {
-//                    strSQL += " " + oPar.getKey() + " " + oPar.getValue() + ",";
-//                }
-//                strSQL = strSQL.substring(0, strSQL.length() - 1);
-//            }
-//            strSQL += " LIMIT " + intOffset + " , " + intRegsPerPage;
-//            ResultSet oResultSet = oStatement.executeQuery(strSQL);
-//            while (oResultSet.next()) {
-//                vector.add(oResultSet.getInt("id"));
-//            }
-//            return vector;
-//        } catch (SQLException e) {
-//            throw new Exception("mysql.getPage: Error en la consulta: " + e.getMessage());
-//        }
-//    }
     @Override
     public int getPages(String strTabla, int intRegsPerPage, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         int intResult = 0;
@@ -261,13 +194,13 @@ public class Mysql implements GenericData {
         try {
             oStatement = (Statement) oConexionMySQL.createStatement();
             String strSQL = "SELECT count(*) FROM " + strTabla + " WHERE 1=1";
-           if (alFilter != null) {
+            if (alFilter != null) {
                 Iterator iterator = alFilter.iterator();
                 while (iterator.hasNext()) {
                     FilterBean oFilterBean = (FilterBean) iterator.next();
                     switch (oFilterBean.getFilterOperator()) {
                         case "like":
-                            strSQL += " AND " + oFilterBean.getFilter() + " LIKE '%" + oFilterBean.getFilterValue()+ "%'";
+                            strSQL += " AND " + oFilterBean.getFilter() + " LIKE '%" + oFilterBean.getFilterValue() + "%'";
                             break;
                         case "notlike":
                             strSQL += " AND " + oFilterBean.getFilter() + " NOT LIKE '%" + oFilterBean.getFilterValue() + "%'";
@@ -295,7 +228,7 @@ public class Mysql implements GenericData {
                 }
 
             }
- 
+
             if (hmOrder != null) {
                 strSQL += " ORDER BY";
                 for (Map.Entry oPar : hmOrder.entrySet()) {
@@ -331,7 +264,7 @@ public class Mysql implements GenericData {
                     FilterBean oFilterBean = (FilterBean) iterator.next();
                     switch (oFilterBean.getFilterOperator()) {
                         case "like":
-                            strSQL += " AND " + oFilterBean.getFilter() + " LIKE '%" + oFilterBean.getFilterValue()+ "%'";
+                            strSQL += " AND " + oFilterBean.getFilter() + " LIKE '%" + oFilterBean.getFilterValue() + "%'";
                             break;
                         case "notlike":
                             strSQL += " AND " + oFilterBean.getFilter() + " NOT LIKE '%" + oFilterBean.getFilterValue() + "%'";

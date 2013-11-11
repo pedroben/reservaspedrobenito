@@ -23,9 +23,9 @@ public class ClienteList1 implements Operation {
             if (oContexto.getPage() < 1) {
                 oContexto.setPage(1);
             }
-            ArrayList<ClienteBean> listado = (ArrayList<ClienteBean>) oClienteDAO.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
+            ArrayList<ClienteBean> listado = oClienteDAO.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
             String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";            
-            ArrayList<String> vecindad = (ArrayList<String>) oClienteDAO.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
+            ArrayList<String> vecindad = oClienteDAO.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
             a.add(vecindad);

@@ -52,19 +52,6 @@ public class ContextParam {
                 }
             }
 
-//            if (request.getParameter("phase") == null) {
-//                oContexto.setFase("1");
-//            }
-//            if ("list".equals(oContexto.getMetodo()) || "selectone".equals(oContexto.getMetodo())) {
-//
-//                if (request.getParameter("page") == null) {
-//                    oContexto.setPage(1);
-//                }
-//
-//                if (request.getParameter("nrpp") == null) {
-//                    oContexto.setNrpp(10);
-//                }
-//
             if (request.getParameter("filter") == null) {
                 oContexto.setAlFilter(null);
             } else {
@@ -86,24 +73,16 @@ public class ContextParam {
                 }
             }
 
-            if (oContexto.getForeignField() != null) {
-                if (request.getParameter("systemfilter") == null) {
-                    oContexto.setAlFilter(null);
-                } else {
-                    if (request.getParameter("systemfilteroperator") == null) {
-                        oContexto.setAlFilter(null);
-                    } else {
-                        if (request.getParameter("systemfiltervalue") == null) {
-                            oContexto.setAlFilter(null);
-                        } else {
-                            ArrayList<FilterBean> alFilter = oContexto.getAlFilter();
-                            FilterBean oFilterBean = new FilterBean();
-                            oFilterBean.setFilter(request.getParameter("systemfilter"));
-                            oFilterBean.setFilterOperator(request.getParameter("systemfilteroperator"));
-                            oFilterBean.setFilterValue(request.getParameter("systemfiltervalue"));
-                            oFilterBean.setFilterOrigin("system");
-                            alFilter.add(oFilterBean);
-                        }
+            if (request.getParameter("systemfilter") != null) {
+                if (request.getParameter("systemfilteroperator") != null) {
+                    if (request.getParameter("systemfiltervalue") != null) {
+                        ArrayList<FilterBean> alFilter = oContexto.getAlFilter();
+                        FilterBean oFilterBean = new FilterBean();
+                        oFilterBean.setFilter(request.getParameter("systemfilter"));
+                        oFilterBean.setFilterOperator(request.getParameter("systemfilteroperator"));
+                        oFilterBean.setFilterValue(request.getParameter("systemfiltervalue"));
+                        oFilterBean.setFilterOrigin("system");
+                        alFilter.add(oFilterBean);
                     }
                 }
             }

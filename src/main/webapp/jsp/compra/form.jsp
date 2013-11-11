@@ -1,4 +1,4 @@
-
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="net.daw.helper.Contexto"%>
 <%@page import="net.daw.bean.CompraBean"%>
 <% Contexto oContexto = (Contexto) request.getAttribute("contexto");
@@ -13,19 +13,19 @@
     String descProducto = "";
     String cantidad = "0";
     String fecha = "";
-    if (oContexto.getMetodo().equals("update")
-            || oContexto.getMetodo().equals("view")
-            || oContexto.getSearchingFor().equals("producto")
-            || oContexto.getSearchingFor().equals("cliente")) {
-        CompraBean oCompraBean = (CompraBean) oContexto.getParametro();
-        id = oCompraBean.getId();
-        id_cliente = Integer.toString(oCompraBean.getCliente().getId());
+
+    CompraBean oCompraBean = (CompraBean) oContexto.getParametro();
+    id = oCompraBean.getId();
+    id_cliente = Integer.toString(oCompraBean.getCliente().getId());
+    if (!(oCompraBean.getCliente().getNombre().equals("") && oCompraBean.getCliente().getApe1().equals(""))) {
         descCliente = oCompraBean.getCliente().getNombre() + " " + oCompraBean.getCliente().getApe1();
-        id_producto = Integer.toString(oCompraBean.getProducto().getId());
-        descProducto = oCompraBean.getProducto().getDescripcion();
-        cantidad = oCompraBean.getCantidad().toString();
-        //fecha = oCompraBean.getFecha().toString();
     }
+    id_producto = Integer.toString(oCompraBean.getProducto().getId());
+    if (oCompraBean.getProducto().getId() > 0) {
+        descProducto = oCompraBean.getProducto().getDescripcion();
+    }
+    cantidad = oCompraBean.getCantidad().toString();
+    fecha = new SimpleDateFormat("yyyy-MM-dd").format(oCompraBean.getFecha());
 
     if (oContexto.getMetodo().equals("view")) {
         strTitulo = "Vista";
@@ -54,9 +54,8 @@
             <input readonly="true" id="id_producto" class="input-mini"
                    name="id_producto" type="text" size="5" maxlength="5"
                    value="<%=id_producto%>" />  
-            <input type="submit" name="searchingfor" value="producto" />
-
-            <span class="label"><%=descProducto%></span>
+            <input <%=strControlEnabled%> type="submit" name="searchingfor" value="producto" />
+            <span class="alert alert-success"><%=descProducto%></span>
         </div>
     </div>             
 
@@ -66,8 +65,8 @@
             <input readonly="true" id="id_cliente" class="input-mini"
                    name="id_cliente" type="text" size="5" maxlength="5"
                    value="<%=id_cliente%>" />  
-            <input type="submit" name="searchingfor" value="cliente" />
-            <span class="label"><%=descCliente%></span>
+            <input <%=strControlEnabled%> type="submit" name="searchingfor" value="cliente" />
+            <span class="alert alert-success"><%=descCliente%></span>
         </div>
     </div>             
     <div class="control-group">
@@ -79,10 +78,10 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="precio">Fecha: </label> 
+        <label class="control-label" for="fecha">Fecha: </label> 
         <div class="controls">
             <input <%=strControlEnabled%>  id="fecha"
-                                           name="fecha" type="text" size="30" maxlength="50"
+                                           name="fecha" type="date" size="30" maxlength="50"
                                            value="<%=fecha%>" /> 
         </div> 
     </div>

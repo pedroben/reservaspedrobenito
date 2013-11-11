@@ -1,4 +1,5 @@
 
+<%@page import="java.util.Arrays"%>
 <%@page import="net.daw.helper.FilterBean"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Iterator"%>
@@ -109,20 +110,14 @@
             <div class="btn-toolbar">
                 <div class="btn-group">
                     <%
-                        if (!oContexto.getMetodo().equalsIgnoreCase("selectone")) {
-                            out.print("<a class=\"btn btn-mini\" href=\"Controller?class=tipoproducto&method=view&id=" + oTipoproductoBean.getId() + "\"><i class=\"icon-eye-open\"></i></a>");
-                            out.print("<a class=\"btn btn-mini\" href=\"Controller?class=tipoproducto&method=update&id=" + oTipoproductoBean.getId() + "\"><i class=\"icon-pencil\"></i></a>");
-                            out.print("<a class=\"btn btn-mini\" href=\"Controller?class=tipoproducto&method=remove&id=" + oTipoproductoBean.getId() + "\"><i class=\"icon-trash\"></i></a>");
+                        if (oContexto.getSearchingFor().equals("tipoproducto")) {
+                            out.print("<a class=\"btn btn-mini\" href=\"Controller?" + oContexto.getSerializedParamsExcept(new ArrayList<String>(Arrays.asList("class","method","phase","id_tipoproducto","id","returnclass","returnmethod","returnphase","searchingfor"))) + "class=" + oContexto.getClaseRetorno() + "&method=" + oContexto.getMetodoRetorno() + "&phase=" + oContexto.getFaseRetorno() + "&id_tipoproducto=" + oTipoproductoBean.getId() + "&id=" + oContexto.getId() + "\"><i class=\"icon-ok\"></i></a>");                            
                         } else {
-                            if (oContexto.getSearchingFor().equals("tipoproducto")) {
-                                out.print("<a class=\"btn btn-mini\" href=\"Controller?" + oContexto.getSerializedParamsExceptClassMethod() + "&class=" + oContexto.getClaseRetorno() + "&method=" + oContexto.getMetodoRetorno() + "&id_tipoproducto=" + oTipoproductoBean.getId() + "\"><i class=\"icon-ok\"></i></a>");
-                            } else {
-                                if (!oContexto.getClase().equalsIgnoreCase("producto")) {
-                                    out.print("<a class=\"btn btn-mini\" href=\"Controller?class=producto&method=update&phase=2&id=" + oContexto.getId() + "&id_tipoproducto=" + oTipoproductoBean.getId() + "\"><i class=\"icon-ok\"></i></a>");
-                                }
-                            }
+                            out.print("<a class=\"btn btn-mini\" href=\"Controller?class=Tipoproducto&method=view&id=" + oTipoproductoBean.getId() + "\"><i class=\"icon-eye-open\"></i></a>");
+                            out.print("<a class=\"btn btn-mini\" href=\"Controller?class=Tipoproducto&method=update&id=" + oTipoproductoBean.getId() + "\"><i class=\"icon-pencil\"></i></a>");
+                            out.print("<a class=\"btn btn-mini\" href=\"Controller?class=Tipoproducto&method=remove&id=" + oTipoproductoBean.getId() + "\"><i class=\"icon-trash\"></i></a>");
                         }
-                    %>
+                    %>   
                 </div>
             </div>
         </td>

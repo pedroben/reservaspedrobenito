@@ -15,7 +15,7 @@ import net.daw.bean.TipoproductoBean;
  */
 public class TipoproductoParam {
 
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     public TipoproductoParam(HttpServletRequest request) throws Exception {
         this.request = request;

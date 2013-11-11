@@ -5,7 +5,6 @@
  */
 package net.daw.parameter;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.UsuarioBean;
 
@@ -15,7 +14,7 @@ import net.daw.bean.UsuarioBean;
  */
 public class UsuarioParam {
 
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     public UsuarioParam(HttpServletRequest request) throws Exception {
         this.request = request;

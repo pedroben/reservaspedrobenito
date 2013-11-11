@@ -5,10 +5,12 @@
  */
 package net.daw.parameter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.CompraBean;
-import java.util.*;
+
 /**
  *
  * @author rafa
@@ -35,7 +37,7 @@ public class CompraParam {
 
     }
 
-    public CompraBean load(CompraBean oCompra) throws NumberFormatException {
+    public CompraBean load(CompraBean oCompra) throws NumberFormatException, ParseException {
         try {
             if ((request.getParameter("id_cliente") != null)) {
                 oCompra.getCliente().setId(Integer.parseInt(request.getParameter("id_cliente")));
@@ -45,15 +47,12 @@ public class CompraParam {
             }
             if ((request.getParameter("cantidad") != null)) {
                 oCompra.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
-            } else {
-                oCompra.setCantidad(0);
             }
-//            if ((request.getParameter("fecha") != null)) {
-//                Date date = new Date(97, 1, 23);                
-//                oCompra.setFecha(date);
-//            }            
+            if ((request.getParameter("fecha") != null)) {
+                oCompra.setFecha(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha")));
+            }
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Controller: Error: load: Formato de datos en parámetros incorrecto " + e.getMessage());
+            throw new NumberFormatException("CompraParam: Error: load: Formato de datos en parámetros incorrecto " + e.getMessage());
         }
         return oCompra;
     }

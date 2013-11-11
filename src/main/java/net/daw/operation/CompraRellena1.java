@@ -1,7 +1,6 @@
 package net.daw.operation;
 
 import java.util.Date;
-import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

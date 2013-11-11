@@ -23,8 +23,7 @@ public class CompraNew2 implements Operation {
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Contexto oContexto = (Contexto) request.getAttribute("contexto");
         switch (oContexto.getSearchingFor()) {
-            case "producto":
-            {
+            case "producto": {
                 oContexto.setVista("jsp/producto/list.jsp");
                 oContexto.setClase("producto");
                 oContexto.setMetodo("list");
@@ -37,8 +36,7 @@ public class CompraNew2 implements Operation {
                 ProductoList1 oOperacion = new ProductoList1();
                 return oOperacion.execute(request, response);
             }
-            case "cliente":
-            {
+            case "cliente": {
                 oContexto.setVista("jsp/cliente/list.jsp");
                 oContexto.setClase("cliente");
                 oContexto.setMetodo("list");
@@ -67,7 +65,11 @@ public class CompraNew2 implements Operation {
                 } catch (Exception e) {
                     throw new ServletException("CompraController: Update Error: Phase 2: " + e.getMessage());
                 }
-                return "Se ha añadido la información de compra con id=" + Integer.toString(oCompraBean.getId());
+                String strMensaje = "Se ha añadido la información de compra con id=" + Integer.toString(oCompraBean.getId()) + "<br />";
+                strMensaje += "<a href=\"Controller?class=compra&method=list&filter=id_cliente&filteroperator=equals&filtervalue=" + oCompraBean.getCliente().getId() + "\">Ver compras de este cliente</a><br />";
+                strMensaje += "<a href=\"Controller?class=compra&method=view&id=" + oCompraBean.getId() + "\">Ver compra creada</a><br />";
+                return strMensaje;
+
         }
     }
 }

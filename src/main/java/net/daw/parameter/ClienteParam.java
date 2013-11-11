@@ -1,6 +1,5 @@
 package net.daw.parameter;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.ClienteBean;
 
@@ -10,7 +9,7 @@ import net.daw.bean.ClienteBean;
  */
 public class ClienteParam {
 
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     public ClienteParam(HttpServletRequest request) throws Exception {
         this.request = request;

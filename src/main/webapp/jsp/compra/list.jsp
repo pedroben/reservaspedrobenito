@@ -1,5 +1,3 @@
-
-
 <%@page import="net.daw.helper.FilterBean"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.ArrayList"%>
@@ -84,7 +82,7 @@
                             <option>greater</option>
                             <option>greaterorequal</option>                            
                         </select>            
-                        <input id="filtervalue" name="filtervalue" type="text" size="20" maxlength="50" value=""  width="100" style="width: 100px"/>
+                        <input id="filtervalue" name="filtervalue" type="search" size="20" maxlength="50" value=""  width="100" style="width: 100px"/>
                     </span>
                     <span>
                         <input type="submit" name="enviar" value="Filtrar" />
@@ -127,13 +125,13 @@
         <td>
             <%=oCompraBEAN.getCliente().getNombre()%> <%=oCompraBEAN.getCliente().getApe1()%> (<%=oCompraBEAN.getCliente().getId()%>)
             <div class="btn-group">
-                <a class="btn btn-mini" href="Controller?class=cliente&method=list&id=<%=oCompraBEAN.getId()%>&searchingfor=producto&returnclass=compra&returnmethod=update&phase=2"><i class="icon-search"></i></a>                                        
+                <a class="btn btn-mini" href="Controller?class=cliente&method=list&id=<%=oCompraBEAN.getId()%>&searchingfor=cliente&returnclass=compra&returnmethod=update&returnphase=2"><i class="icon-search"></i></a>                                        
             </div>            
         </td>
         <td>
             <%=oCompraBEAN.getProducto().getDescripcion()%> (<%=oCompraBEAN.getProducto().getId()%>)
             <div class="btn-group">
-                <a class="btn btn-mini" href="Controller?class=producto&method=list&id=<%=oCompraBEAN.getId()%>&searchingfor=producto&returnclass=compra&returnmethod=update&phase=2"><i class="icon-search"></i></a>                                        
+                <a class="btn btn-mini" href="Controller?class=producto&method=list&id=<%=oCompraBEAN.getId()%>&searchingfor=producto&returnclass=compra&returnmethod=update&returnphase=2"><i class="icon-search"></i></a>                                        
             </div>
         </td>
         <td><%=oCompraBEAN.getCantidad()%></td>
@@ -144,9 +142,9 @@
         <td>
             <div class="btn-toolbar">
                 <div class="btn-group">                    
-                    <a class="btn btn-mini" href="Controller?class=cliente&method=view&id=<%=oCompraBEAN.getId()%>"><i class="icon-eye-open"></i></a>
-                    <a class="btn btn-mini" href="Controller?class=cliente&method=update&id=<%=oCompraBEAN.getId()%>"><i class="icon-pencil"></i></a>           
-                    <a class="btn btn-mini" href="Controller?class=cliente&method=remove&id=<%=oCompraBEAN.getId()%>"><i class="icon-trash"></i></a>                         
+                    <a class="btn btn-mini" href="Controller?class=compra&method=view&id=<%=oCompraBEAN.getId()%>"><i class="icon-eye-open"></i></a>
+                    <a class="btn btn-mini" href="Controller?class=compra&method=update&id=<%=oCompraBEAN.getId()%>"><i class="icon-pencil"></i></a>           
+                    <a class="btn btn-mini" href="Controller?class=compra&method=remove&id=<%=oCompraBEAN.getId()%>"><i class="icon-trash"></i></a>                         
                 </div>
             </div>
         </td>

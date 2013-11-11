@@ -11,8 +11,8 @@ import net.daw.helper.FilterBean;
 
 public class ClienteDao {
 
-    private Mysql oMysql;
-    private Enum.Connection enumTipoConexion;
+    private final Mysql oMysql;
+    private final Enum.Connection enumTipoConexion;
 
     public ClienteDao(Enum.Connection tipoConexion) throws Exception {
         oMysql = new Mysql();

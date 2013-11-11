@@ -2,6 +2,7 @@ package net.daw.helper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import net.daw.bean.UsuarioBean;
 
@@ -39,6 +40,29 @@ public class Contexto {
         for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
             if (entry.getKey().equals(strParam)) {
                 resultado = entry.getValue();
+            }
+        }
+        return resultado;
+    }
+
+    private String getExceptParams(ArrayList<String> alExcept) {
+        String resultado = "";
+        for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (!value.equalsIgnoreCase("")) {
+                String strParam;
+                Iterator<String> iterator = alExcept.iterator();
+                Boolean encontrado = false;
+                while (iterator.hasNext()) {
+                    strParam = iterator.next();
+                    if (key.equals(strParam)) {
+                        encontrado = true;
+                    }
+                }
+                if (!encontrado) {
+                    resultado += key + "=" + value + "&";
+                }
             }
         }
         return resultado;
@@ -158,12 +182,12 @@ public class Contexto {
         this.parametro = parametro;
     }
 
-    public Boolean getHaySesion() {
-        return haySesion;
+    public String getSearchingFor() {
+        return get("", "searchingfor");
     }
 
-    public void setHaySesion(Boolean haySesion) {
-        this.haySesion = haySesion;
+    public void setSearchingFor(String strSearchingFor) {
+        this.set("searchingfor", strSearchingFor);
     }
 
     public Enum.Connection getEnumTipoConexion() {
@@ -186,72 +210,24 @@ public class Contexto {
         return Integer.parseInt(get("0", "id"));
     }
 
-    public HashMap<String, String> getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(HashMap<String, String> parameters) {
-        this.parameters = parameters;
-    }
-
-    public String getSerializedParams() {
-        return getExcept("enviar", "enviar");
-    }
-
-    public String getSerializedParamsExceptId() {
-        return getExcept("id", "id");
-    }
-
-    public String getSerializedParamsExceptMethod() {
-        return getExcept("method", "method");
-    }
-
     public String getSerializedParamsExceptPage() {
         return getExcept("page", "page");
     }
 
-    public String getSerializedParamsExceptOrder() {
-        return getExcept("order", "ordervalue");
-    }
-
-    public String getSerializedParamsExceptClassMethod() {
-        return getExcept("class", "method");
-    }
-
-    public String getSerializedParamsExceptFilter() {
-        return getExcept("filter", "filtervalue");
+    public String getSerializedParamsExcept(ArrayList<String> alExcept) {
+        return getExceptParams(alExcept);
     }
 
     public String getSerializedParamsExceptFilterFormFormat() {
         return getExceptForm("filter", "filteroperator", "filtervalue");
     }
 
-    public String getSearchingFor() {
-        return get("", "searchingfor");
+    public String getSerializedParamsExceptOrder() {
+        return getExcept("order", "ordervalue");
     }
 
-    public void setSearchingFor(String strSearchingFor) {
-        this.set("searchingfor", strSearchingFor);
-    }
-
-    public void setSelectOne(String strOneTable) {
-        this.set("selectone", strOneTable);
-    }
-
-    public String getSelectOne() {
-        return get("", "selectone");
-    }
-
-    public String getForeignTable() {
-        return get(null, "foreigntable");
-    }
-
-    public String getForeignField() {
-        return get(null, "foreignfield");
-    }
-
-    public String getForeignFieldValue() {
-        return get(null, "foreignfieldvalue");
+    public String getSerializedParamsExceptFilter() {
+        return getExcept("filter", "filtervalue");
     }
 
     public ArrayList<FilterBean> getAlFilter() {
@@ -270,6 +246,14 @@ public class Contexto {
         this.hmOrder = hmOrder;
     }
 
+    public Boolean getHaySesion() {
+        return haySesion;
+    }
+
+    public void setHaySesion(Boolean haySesion) {
+        this.haySesion = haySesion;
+    }
+
     public UsuarioBean getUserBeanSession() {
         return userBeanSession;
     }
@@ -278,4 +262,11 @@ public class Contexto {
         this.userBeanSession = userBeanSession;
     }
 
+    public HashMap<String, String> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(HashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
 }

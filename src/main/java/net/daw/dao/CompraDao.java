@@ -5,7 +5,9 @@
  */
 package net.daw.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import net.daw.bean.ClienteBean;
@@ -80,7 +82,14 @@ public class CompraDao {
             oClienteBean.setId(Integer.parseInt(oMysql.getOne("compra", "id_cliente", oCompraBean.getId())));
 
             oCompraBean.setCantidad(Integer.parseInt(oMysql.getOne("compra", "cantidad", oCompraBean.getId())));
-            //oCompraBean.setFecha(oMysql.getOne("compra", "fecha", oCompraBean.getId()));
+
+            String strFecha = oMysql.getOne("compra", "fecha", oCompraBean.getId());
+            if (strFecha!=null) {
+                Date dFecha = new SimpleDateFormat("yyyy-MM-dd").parse(strFecha);
+                oCompraBean.setFecha(dFecha);
+            } else {
+                oCompraBean.setFecha(new Date(0));
+            }
 
             ProductoDao oProductoDao = new ProductoDao(enumTipoConexion);
             ClienteDao oClienteDao = new ClienteDao(enumTipoConexion);
@@ -109,9 +118,9 @@ public class CompraDao {
             }
             oMysql.updateOne(oCompraBean.getId(), "compra", "id_cliente", oCompraBean.getCliente().getId().toString());
             oMysql.updateOne(oCompraBean.getId(), "compra", "id_producto", oCompraBean.getProducto().getId().toString());
-            oMysql.updateOne(oCompraBean.getId(), "compra", "cantidad", oCompraBean.getCantidad().toString());            
-//            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");          
-//            oMysql.updateOne(oCompraBean.getId(), "compra", "fecha", sdf.format(oCompraBean.getFecha()));
+            oMysql.updateOne(oCompraBean.getId(), "compra", "cantidad", oCompraBean.getCantidad().toString());
+            java.text.SimpleDateFormat oSimpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            oMysql.updateOne(oCompraBean.getId(), "compra", "fecha", oSimpleDateFormat.format(oCompraBean.getFecha()));
             oMysql.commitTrans();
         } catch (Exception e) {
             oMysql.rollbackTrans();

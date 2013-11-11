@@ -12,17 +12,17 @@ public class ProductoNew2 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Contexto oContexto = (Contexto) request.getAttribute("contexto");        
+        Contexto oContexto = (Contexto) request.getAttribute("contexto");
         if ("tipoproducto".equals(oContexto.getSearchingFor())) {
             oContexto.setVista("jsp/producto/list.jsp");
             oContexto.setClase("tipoproducto");
-            oContexto.setMetodo("selectone");
+            oContexto.setMetodo("list");
             oContexto.setFase("1");
             oContexto.setClaseRetorno("producto");
             oContexto.setMetodoRetorno("new");
             oContexto.setFaseRetorno("1");
             oContexto.removeParam("id_tipoproducto");
-            TipoproductoSelectone1 oOperacion = new TipoproductoSelectone1();
+            TipoproductoList1 oOperacion = new TipoproductoList1();
             return oOperacion.execute(request, response);
         } else {
             oContexto.setVista("jsp/mensaje.jsp");
@@ -40,7 +40,9 @@ public class ProductoNew2 implements Operation {
             } catch (Exception e) {
                 throw new ServletException("ProductoController: Update Error: Phase 2: " + e.getMessage());
             }
-            return "Se ha añadido la información del producto con id=" + Integer.toString(oProductoBean.getId());
+            String strMensaje = "Se ha añadido la información del producto con id=" + Integer.toString(oProductoBean.getId()) + "<br />";            
+            strMensaje += "<a href=\"Controller?class=producto&method=view&id=" + oProductoBean.getId() + "\">Ver producto creado</a><br />";
+            return strMensaje;
         }
     }
 }

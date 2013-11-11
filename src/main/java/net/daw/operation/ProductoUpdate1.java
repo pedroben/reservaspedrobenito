@@ -27,17 +27,14 @@ public class ProductoUpdate1 implements Operation {
         } catch (Exception e) {
             throw new ServletException("ProductoController: Update Error: Phase 1: " + e.getMessage());
         }
-        if (!"".equals(oContexto.getSearchingFor())) {
+
             try {
                 oProductoBean = oProductoParam.load(oProductoBean);
             } catch (NumberFormatException e) {
                 oContexto.setVista("jsp/mensaje.jsp");
                 return "Tipo de dato incorrecto en uno de los campos del formulario";
             }
-            oContexto.removeParam("returnclass");
-            oContexto.removeParam("returnmethod");
-            oContexto.removeParam("searchingfor");
-        }
+
         TipoproductoDao oTipoproductoDao = new TipoproductoDao(oContexto.getEnumTipoConexion());
         oProductoBean.setTipoProducto(oTipoproductoDao.get(oProductoBean.getTipoProducto()));
         return oProductoBean;

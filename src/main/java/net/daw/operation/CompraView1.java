@@ -5,10 +5,12 @@
  */
 package net.daw.operation;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.CompraBean;
 import net.daw.dao.ClienteDao;
+import net.daw.dao.CompraDao;
 import net.daw.dao.ProductoDao;
 import net.daw.helper.Contexto;
 import net.daw.parameter.CompraParam;
@@ -17,26 +19,28 @@ import net.daw.parameter.CompraParam;
  *
  * @author rafa
  */
-public class CompraNew1 implements Operation {
+public class CompraView1 implements Operation {
 
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Contexto oContexto = (Contexto) request.getAttribute("contexto");
-        CompraParam oCompraParam = new CompraParam(request);
-        CompraBean oCompraBean = new CompraBean();
-        ProductoDao oProductoDao = new ProductoDao(oContexto.getEnumTipoConexion());
-        ClienteDao oClienteDao = new ClienteDao(oContexto.getEnumTipoConexion());
-        try {
-            oCompraBean = oCompraParam.load(oCompraBean);
-            oCompraBean.setProducto(oProductoDao.get(oCompraBean.getProducto()));
-            oCompraBean = oCompraParam.load(oCompraBean);
-            oCompraBean.setCliente(oClienteDao.get(oCompraBean.getCliente()));
-        } catch (NumberFormatException e) {
-            oContexto.setVista("jsp/mensaje.jsp");
-            return "Tipo de dato incorrecto en uno de los campos del formulario";
-        }
         oContexto.setVista("jsp/compra/form.jsp");
+        CompraBean oCompraBean;
+        CompraDao oCompraDao;
+        oCompraBean = new CompraBean();
+        CompraParam oCompraParam = new CompraParam(request);
+        oCompraBean = oCompraParam.loadId(oCompraBean);
+        oCompraDao = new CompraDao(oContexto.getEnumTipoConexion());
+        ClienteDao oClienteDao = new ClienteDao(oContexto.getEnumTipoConexion());
+        ProductoDao oProductoDao = new ProductoDao(oContexto.getEnumTipoConexion());
+        try {
+            oCompraBean = oCompraDao.get(oCompraBean);
+            oCompraBean.setProducto(oProductoDao.get(oCompraBean.getProducto()));
+            oCompraBean.setCliente(oClienteDao.get(oCompraBean.getCliente()));
+        } catch (Exception e) {
+            throw new ServletException("ClienteController: View Error: Phase 1: " + e.getMessage());
+        }
+        
         return oCompraBean;
     }
-
 }

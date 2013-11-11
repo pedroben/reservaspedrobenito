@@ -19,38 +19,6 @@ public class ProductoDao {
         enumTipoConexion = tipoConexion;
     }
 
-//    public int getPagesForeignCompras(ClienteBean oCliente, int intRegsPerPag, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
-//        int pages;
-//        try {
-//            oMysql.conexion(enumTipoConexion);
-//            pages = oMysql.getPagesForeign("compras", oCliente.getId(),"id_producto", "producto", intRegsPerPag, hmFilter, hmOrder);
-//            oMysql.desconexion();
-//            return pages;
-//        } catch (Exception e) {
-//            throw new Exception("ProductoDao.getPagesForeign: Error: " + e.getMessage());
-//        } finally {
-//            oMysql.desconexion();
-//        }
-//    }
-//        public ArrayList<ProductoBean>  getPageForeignCompras(ClienteBean oCliente,int intRegsPerPag, int intPage, HashMap<String, String> hmFilter, HashMap<String, String> hmOrder) throws Exception {
-//        ArrayList<Integer> arrId;
-//        ArrayList<ProductoBean> arrProducto = new ArrayList<>();
-//        try {
-//            oMysql.conexion(enumTipoConexion);
-//            arrId = oMysql.getPageForeign("compras", oCliente.getId(),"id_producto","producto", intRegsPerPag, intPage, hmFilter, hmOrder);
-//            Iterator<Integer> iterador = arrId.listIterator();
-//            while (iterador.hasNext()) {
-//                ProductoBean oProductoBean = new ProductoBean(iterador.next());
-//                arrProducto.add(this.get(oProductoBean));
-//            }
-//            oMysql.desconexion();
-//            return arrProducto;
-//        } catch (Exception e) {
-//            throw new Exception("ProductoDao.getPage: Error: " + e.getMessage());
-//        } finally {
-//            oMysql.desconexion();
-//        }
-//    }
     public int getPages(int intRegsPerPag, ArrayList<FilterBean> alFilter, HashMap<String, String> hmOrder) throws Exception {
         int pages;
         try {

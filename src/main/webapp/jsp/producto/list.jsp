@@ -1,4 +1,4 @@
-
+<%@page import="java.util.Arrays"%>
 <%@page import="net.daw.helper.FilterBean"%>
 <%@ page import="net.daw.helper.Contexto"%>
 <%@ page import="java.util.ArrayList"%>
@@ -120,15 +120,15 @@
         <td>
             <%=oProductoBEAN.getTipoProducto().getDescripcion()%>
             <div class="btn-group">
-                <a class="btn btn-mini" href="Controller?class=tipoproducto&method=selectone&id=<%=oProductoBEAN.getId()%>"><i class="icon-search"></i></a>                                        
+                <a class="btn btn-mini" href="Controller?class=tipoproducto&method=list&id=<%=oProductoBEAN.getId()%>&searchingfor=tipoproducto&returnclass=producto&returnmethod=update&returnphase=2"><i class="icon-search"></i></a>                                        
             </div>
         </td>
         <td>
             <div class="btn-toolbar">
                 <div class="btn-group">
                     <%
-                        if (oContexto.getSearchingFor().equals("producto")) {
-                            out.print("<a class=\"btn btn-mini\" href=\"Controller?" + oContexto.getSerializedParamsExceptClassMethod() + "&class=" + oContexto.getClaseRetorno() + "&method=" + oContexto.getMetodoRetorno() + "&id_producto=" + oProductoBEAN.getId() + "\"><i class=\"icon-ok\"></i></a>");
+                        if (oContexto.getSearchingFor().equals("producto")) {                            
+                            out.print("<a class=\"btn btn-mini\" href=\"Controller?" + oContexto.getSerializedParamsExcept(new ArrayList<String>(Arrays.asList("class","method","phase","id_producto","id","returnclass","returnmethod","returnphase","searchingfor"))) + "class=" + oContexto.getClaseRetorno() + "&method=" + oContexto.getMetodoRetorno() + "&phase=" + oContexto.getFaseRetorno() + "&id_producto=" + oProductoBEAN.getId() + "&id=" + oContexto.getId() + "\"><i class=\"icon-ok\"></i></a>");
                         } else {
                             out.print("<a class=\"btn btn-mini\" href=\"Controller?class=producto&method=view&id=" + oProductoBEAN.getId() + "\"><i class=\"icon-eye-open\"></i></a>");
                             out.print("<a class=\"btn btn-mini\" href=\"Controller?class=producto&method=update&id=" + oProductoBEAN.getId() + "\"><i class=\"icon-pencil\"></i></a>");
