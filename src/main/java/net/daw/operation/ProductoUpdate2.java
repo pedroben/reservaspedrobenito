@@ -42,7 +42,9 @@ public class ProductoUpdate2 implements Operation {
             } catch (Exception e) {
                 throw new ServletException("ProductoController: Update Error: Phase 2: " + e.getMessage());
             }
-            return "Se ha modificado la información del producto con id=" + Integer.toString(oProductoBean.getId());
+            String strMensaje = "Se ha añadido la información del producto con id=" + Integer.toString(oProductoBean.getId()) + "<br />";            
+            strMensaje += "<a href=\"Controller?class=producto&method=view&id=" + oProductoBean.getId() + "\">Ver producto creado</a><br />";
+            return strMensaje;
         }
     }
 }

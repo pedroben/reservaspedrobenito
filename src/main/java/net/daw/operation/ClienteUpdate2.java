@@ -28,6 +28,8 @@ public class ClienteUpdate2 implements Operation {
         } catch (Exception e) {
             throw new ServletException("ClienteController: Update Error: Phase 2: " + e.getMessage());
         }
-        return "Se ha modificado la información del cliente con id=" + Integer.toString(oClienteBean.getId());
+        String strMensaje = "Se ha añadido la información del cliente con id=" + Integer.toString(oClienteBean.getId()) + "<br />";
+        strMensaje += "<a href=\"Controller?class=compra&method=view&id=" + oClienteBean.getId() + "\">Ver cliente creado en el formulario</a><br />";
+        return strMensaje;
     }
 }

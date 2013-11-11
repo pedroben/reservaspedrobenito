@@ -66,8 +66,9 @@ public class CompraUpdate2 implements Operation {
                 } catch (Exception e) {
                     throw new ServletException("CompraController: Update Error: Phase 2: " + e.getMessage());
                 }
-                String strMensaje = "Se ha modificado la información de la compra con id=" + Integer.toString(oCompraBean.getId()) + "<br />";
-                strMensaje += "<a href=\"Controller?class=compra&method=view&id=" + oCompraBean.getId() + "\">Ver compra modificada</a><br />";
+                String strMensaje = "Se ha cambiado la información de compra con id=" + Integer.toString(oCompraBean.getId()) + "<br />";
+                strMensaje += "<a href=\"Controller?class=compra&method=list&filter=id_cliente&filteroperator=equals&filtervalue=" + oCompraBean.getCliente().getId() + "\">Ver compras de este cliente</a><br />";
+                strMensaje += "<a href=\"Controller?class=compra&method=view&id=" + oCompraBean.getId() + "\">Ver compra creada en el formulario</a><br />";
                 return strMensaje;
         }
     }
