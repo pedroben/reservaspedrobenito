@@ -3,18 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Oct 29, 2013 at 12:59 PM
+-- Generation Time: Nov 11, 2013 at 08:39 AM
 -- Server version: 5.5.30
 -- PHP Version: 5.4.14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `facturacion`
@@ -33,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `ape2` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=243 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=246 ;
 
 --
 -- Dumping data for table `cliente`
@@ -41,11 +35,11 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 INSERT INTO `cliente` (`id`, `nombre`, `ape1`, `ape2`, `email`) VALUES
 (1, 'Rafael', 'Gutierrez', 'Galindo', 'rafa@rafa.es'),
-(2, 'Pepe', 'Chover', 'Flavio', 'pepe@pep.es'),
-(10, 'Jaime', 'Lincoln', 'Garcia', 'j@jjd.es'),
+(2, 'Jose Joaquín', 'Chover', 'Flavio', 'pepe@pep.es'),
+(10, 'Jaime', 'Lincoln', 'Garcia', 'jaimel@jjd.es'),
 (14, 'Pepitiño', 'González', 'Perujo', 'pegope@gamilito.com'),
 (15, 'Javier', 'Lomo', 'Toro', 'jaloto@de.es'),
-(19, 'Berni', 'Rodriguez', 'Lopex', 'b@dde.es'),
+(19, 'Berni', 'Rodriguez', 'Lopex', 'bern4@dde.es'),
 (21, 'Ronaldo', 'Lopez', 'GonzÃ¡lez', 'rologo@ron.es'),
 (22, 'Rogelio', 'Caramillo', 'Gonzalo', 'rogo@gmailito.es'),
 (23, 'José', 'Rogelio', 'Miranda', 'jose@rog.es'),
@@ -54,7 +48,7 @@ INSERT INTO `cliente` (`id`, `nombre`, `ape1`, `ape2`, `email`) VALUES
 (33, 'Milagros', 'Viñuelas', 'Cousido', 'mivico@gorseg.com'),
 (35, 'Maria', 'Vicente', 'Maldonado', 'mavido@humirty.com'),
 (38, 'Lola', 'Viñuelas', 'Escorihuela', 'lovies@ausiasmarch.net'),
-(39, 'Alejandra', 'Polop', 'Jovellanos', 'al@jo.es'),
+(39, 'Alejandra', 'Polop', 'Jovellanos', 'al@joss.es'),
 (40, 'Josefa', 'Gutierrez', 'Giménez', 'GutierrezGiménez@emailito.com'),
 (41, 'Josefa', 'Montoya', 'Sanchís', 'MontoyaSanchís@emailito.com'),
 (42, 'Santiago', 'Fernández', 'Domínguez', 'FernándezDomínguez@emailito.com'),
@@ -272,15 +266,183 @@ CREATE TABLE IF NOT EXISTS `compra` (
   `fecha` date DEFAULT NULL,
   `id_factura` int(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=177 ;
 
 --
 -- Dumping data for table `compra`
 --
 
 INSERT INTO `compra` (`id`, `id_cliente`, `id_producto`, `cantidad`, `fecha`, `id_factura`) VALUES
-(1, 1, 1, 4, '2012-12-11', 1),
-(2, 1, 2, 7, '2012-12-11', 1);
+(2, 10, 2, 11, '2012-05-10', NULL),
+(3, 188, 60, 248, '2013-08-04', NULL),
+(5, 59, 44, 122, '1970-01-01', NULL),
+(6, 131, 23, 154, NULL, NULL),
+(7, 23, 16, 39, NULL, NULL),
+(8, 77, 32, 109, NULL, NULL),
+(9, 179, 27, 206, NULL, NULL),
+(10, 61, 61, 122, NULL, NULL),
+(11, 39, 8, 47, NULL, NULL),
+(12, 49, 13, 157, '1970-01-01', NULL),
+(13, 57, 92, 149, NULL, NULL),
+(14, 98, 35, 133, NULL, NULL),
+(15, 27, 79, 106, NULL, NULL),
+(16, 9, 10, 19, NULL, NULL),
+(17, 131, 63, 194, NULL, NULL),
+(18, 121, 71, 192, NULL, NULL),
+(19, 185, 96, 281, NULL, NULL),
+(20, 173, 65, 238, NULL, NULL),
+(21, 115, 34, 149, NULL, NULL),
+(22, 32, 42, 74, NULL, NULL),
+(23, 57, 37, 94, NULL, NULL),
+(24, 144, 28, 172, NULL, NULL),
+(25, 128, 91, 219, NULL, NULL),
+(26, 40, 17, 57, NULL, NULL),
+(27, 78, 82, 160, NULL, NULL),
+(28, 59, 32, 91, NULL, NULL),
+(29, 158, 51, 209, NULL, NULL),
+(30, 45, 59, 104, NULL, NULL),
+(31, 97, 88, 185, NULL, NULL),
+(32, 187, 22, 209, '1970-01-01', NULL),
+(33, 200, 74, 274, NULL, NULL),
+(34, 36, 4, 40, NULL, NULL),
+(35, 178, 68, 246, NULL, NULL),
+(36, 104, 8, 112, NULL, NULL),
+(37, 32, 17, 49, NULL, NULL),
+(38, 168, 53, 221, NULL, NULL),
+(39, 138, 58, 196, NULL, NULL),
+(40, 165, 53, 218, NULL, NULL),
+(41, 176, 85, 261, NULL, NULL),
+(42, 80, 93, 173, NULL, NULL),
+(43, 24, 3, 27, NULL, NULL),
+(44, 59, 94, 153, NULL, NULL),
+(45, 23, 69, 92, NULL, NULL),
+(46, 37, 100, 137, NULL, NULL),
+(47, 102, 99, 201, NULL, NULL),
+(48, 65, 78, 143, NULL, NULL),
+(49, 169, 85, 254, NULL, NULL),
+(50, 173, 69, 242, NULL, NULL),
+(51, 54, 80, 134, NULL, NULL),
+(52, 98, 76, 174, NULL, NULL),
+(53, 40, 31, 71, NULL, NULL),
+(54, 112, 83, 195, NULL, NULL),
+(55, 76, 19, 95, NULL, NULL),
+(56, 45, 76, 121, NULL, NULL),
+(57, 160, 41, 201, NULL, NULL),
+(58, 131, 23, 154, NULL, NULL),
+(59, 49, 3, 52, NULL, NULL),
+(60, 1, 98, 99, NULL, NULL),
+(61, 28, 16, 44, NULL, NULL),
+(62, 59, 70, 129, NULL, NULL),
+(63, 195, 95, 290, NULL, NULL),
+(64, 3, 72, 75, NULL, NULL),
+(65, 67, 32, 99, NULL, NULL),
+(66, 172, 53, 225, NULL, NULL),
+(67, 82, 75, 157, NULL, NULL),
+(68, 149, 58, 207, NULL, NULL),
+(69, 113, 70, 183, NULL, NULL),
+(70, 168, 45, 213, NULL, NULL),
+(71, 88, 48, 136, NULL, NULL),
+(72, 31, 20, 51, NULL, NULL),
+(73, 193, 26, 219, NULL, NULL),
+(74, 195, 20, 215, NULL, NULL),
+(75, 87, 52, 139, NULL, NULL),
+(76, 44, 77, 121, NULL, NULL),
+(77, 179, 83, 262, NULL, NULL),
+(78, 113, 11, 124, NULL, NULL),
+(79, 179, 96, 275, NULL, NULL),
+(80, 22, 78, 100, NULL, NULL),
+(81, 154, 56, 210, NULL, NULL),
+(82, 51, 28, 79, NULL, NULL),
+(83, 116, 22, 138, NULL, NULL),
+(84, 44, 98, 142, NULL, NULL),
+(85, 179, 46, 225, NULL, NULL),
+(86, 161, 45, 206, NULL, NULL),
+(87, 144, 61, 205, NULL, NULL),
+(88, 162, 35, 197, NULL, NULL),
+(89, 197, 58, 255, NULL, NULL),
+(90, 112, 53, 165, NULL, NULL),
+(91, 21, 45, 66, NULL, NULL),
+(92, 20, 58, 78, NULL, NULL),
+(93, 74, 78, 152, NULL, NULL),
+(94, 128, 30, 158, NULL, NULL),
+(95, 27, 65, 92, NULL, NULL),
+(96, 178, 42, 220, NULL, NULL),
+(97, 32, 94, 126, NULL, NULL),
+(98, 29, 18, 47, NULL, NULL),
+(99, 36, 83, 119, NULL, NULL),
+(100, 108, 91, 199, NULL, NULL),
+(101, 172, 28, 200, NULL, NULL),
+(102, 111, 70, 181, NULL, NULL),
+(103, 66, 88, 154, NULL, NULL),
+(104, 6, 18, 24, NULL, NULL),
+(105, 7, 88, 95, NULL, NULL),
+(106, 136, 12, 148, NULL, NULL),
+(107, 142, 65, 207, NULL, NULL),
+(108, 115, 38, 153, NULL, NULL),
+(109, 135, 48, 183, NULL, NULL),
+(110, 50, 19, 69, NULL, NULL),
+(111, 183, 82, 265, NULL, NULL),
+(112, 169, 55, 224, NULL, NULL),
+(113, 22, 33, 55, NULL, NULL),
+(114, 196, 15, 211, NULL, NULL),
+(115, 190, 57, 247, NULL, NULL),
+(116, 153, 87, 240, NULL, NULL),
+(117, 131, 41, 172, NULL, NULL),
+(118, 149, 10, 159, NULL, NULL),
+(119, 7, 85, 92, NULL, NULL),
+(120, 109, 85, 194, NULL, NULL),
+(121, 200, 72, 272, NULL, NULL),
+(122, 29, 62, 91, NULL, NULL),
+(123, 169, 47, 216, NULL, NULL),
+(124, 174, 78, 252, NULL, NULL),
+(125, 75, 90, 165, NULL, NULL),
+(126, 115, 78, 193, NULL, NULL),
+(127, 75, 31, 106, NULL, NULL),
+(128, 80, 52, 132, NULL, NULL),
+(129, 140, 1, 141, NULL, NULL),
+(130, 24, 68, 92, NULL, NULL),
+(131, 159, 60, 219, NULL, NULL),
+(132, 30, 17, 47, NULL, NULL),
+(133, 58, 32, 90, NULL, NULL),
+(134, 152, 4, 156, NULL, NULL),
+(135, 180, 20, 200, NULL, NULL),
+(136, 61, 98, 159, NULL, NULL),
+(137, 155, 25, 180, NULL, NULL),
+(138, 161, 43, 204, NULL, NULL),
+(139, 9, 30, 39, NULL, NULL),
+(140, 101, 48, 149, NULL, NULL),
+(141, 68, 80, 148, NULL, NULL),
+(142, 118, 35, 153, NULL, NULL),
+(143, 144, 89, 233, NULL, NULL),
+(144, 147, 95, 242, NULL, NULL),
+(145, 96, 38, 134, NULL, NULL),
+(146, 132, 14, 146, NULL, NULL),
+(147, 24, 98, 122, NULL, NULL),
+(148, 64, 50, 114, NULL, NULL),
+(149, 153, 64, 217, NULL, NULL),
+(150, 42, 37, 79, NULL, NULL),
+(151, 60, 47, 107, NULL, NULL),
+(152, 121, 37, 158, NULL, NULL),
+(153, 83, 65, 148, NULL, NULL),
+(154, 70, 29, 99, NULL, NULL),
+(155, 183, 94, 277, NULL, NULL),
+(156, 89, 32, 121, NULL, NULL),
+(157, 130, 80, 210, NULL, NULL),
+(158, 95, 47, 142, NULL, NULL),
+(159, 53, 29, 112, NULL, NULL),
+(160, 23, 354, 2, NULL, NULL),
+(161, 2, 4, 1, NULL, NULL),
+(162, 1, 8, 1, NULL, NULL),
+(163, 1, 5, 22, NULL, NULL),
+(167, 10, 5, 22, '2013-01-05', NULL),
+(168, 14, 13, 2, '2013-11-10', NULL),
+(169, 14, 12, 3, '2013-11-10', NULL),
+(170, 22, 2, 4, '2013-11-11', NULL),
+(171, 21, 1, 1, '2013-11-11', NULL),
+(172, 67, 25, 22, '2013-03-11', NULL),
+(173, 1, 12, 2, '2013-11-11', NULL),
+(174, 1, 11, 22, '2013-11-11', NULL),
+(175, 22, 1, 22, '2012-02-11', NULL);
 
 -- --------------------------------------------------------
 
@@ -314,23 +476,23 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `precio` decimal(6,2) DEFAULT NULL,
   `id_tipoproducto` int(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=404 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=441 ;
 
 --
 -- Dumping data for table `producto`
 --
 
 INSERT INTO `producto` (`id`, `codigo`, `descripcion`, `precio`, `id_tipoproducto`) VALUES
-(1, '778uj88', 'Broca gorda de paso fino', '6.22', 2),
-(2, '44RR456', 'Taladro', '100.00', 2),
-(3, '6RRTU3', 'Sierra de calar', '123.00', 1),
+(1, '778uj88', 'Broca gorda de paso fino', '6.22', 10),
+(2, '44RR456', 'Taladro', '100.00', 1),
+(3, '6RRTU3', 'Sierra de calar', '123.00', 2),
 (4, 'SE2PI', 'Pincel', '23.00', 1),
-(5, 'ED45E', 'Caja de cambios', '231.00', 2),
+(5, 'ED45E', 'Caja de cambios', '231.00', 11),
 (8, '455T', 'Llave de mano', '23.50', 2),
 (10, '1413D', 'Llave auxiliar de emergencia', '740.91', 1),
 (11, '1414D', 'Llave auxiliar de repuesto', '864.75', 1),
 (12, '1415D', 'Llave auxiliar de paso', '1269.10', 1),
-(13, '1416D', 'Llave auxiliar de acople', '1451.25', 1),
+(13, '1416Dss', 'Llave auxiliar de acople', '1451.25', 11),
 (14, '1413D', 'Llave auxiliar de emergencia', '1733.93', 1),
 (15, '1414D', 'Llave auxiliar de repuesto', '533.68', 1),
 (16, '1415D', 'Llave auxiliar de paso', '150.58', 1),
@@ -342,9 +504,9 @@ INSERT INTO `producto` (`id`, `codigo`, `descripcion`, `precio`, `id_tipoproduct
 (22, '1417D', 'Llave auxiliar de mano', '1669.62', 1),
 (23, '1413D', 'Llave auxiliar de emergencia', '832.31', 1),
 (24, '1414D', 'Llave auxiliar de repuesto', '1930.30', 1),
-(25, '1415D', 'Llave auxiliar de paso', '505.35', 1),
+(25, '1415D', 'Llave auxiliar de paso', '505.35', 11),
 (26, '1416D', 'Llave auxiliar de acople', '104.86', 1),
-(27, '1417D', 'Llave auxiliar de mano', '891.52', 1),
+(27, '1417D', 'Llave auxiliar de mano', '891.52', 10),
 (28, '1413D', 'Llave auxiliar de emergencia', '521.77', 1),
 (29, '1414D', 'Llave auxiliar de repuesto', '1022.15', 1),
 (30, '1415D', 'Llave auxiliar de paso', '783.54', 1),
@@ -586,7 +748,7 @@ INSERT INTO `producto` (`id`, `codigo`, `descripcion`, `precio`, `id_tipoproduct
 (266, '149297D', 'Rejilla con rodadura de acople', '899.40', 1),
 (267, '149298D', 'Rejilla con rodadura de mano', '865.31', 1),
 (268, '151300D', 'Rejilla extensivo de emergencia', '1998.23', 1),
-(269, '151301D', 'Rejilla extensivo de repuesto', '995.65', 1),
+(269, '151301D', 'Rejilla extensivo de repuesto', '995.65', 2),
 (270, '151302D', 'Rejilla extensivo de paso', '1295.32', 1),
 (271, '151303D', 'Rejilla extensivo de acople', '95.63', 1),
 (272, '151304D', 'Rejilla extensivo de mano', '1518.19', 1),
@@ -730,17 +892,44 @@ INSERT INTO `producto` (`id`, `codigo`, `descripcion`, `precio`, `id_tipoproduct
 CREATE TABLE IF NOT EXISTS `tipoproducto` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(254) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `descripcion` (`descripcion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `tipoproducto`
 --
 
 INSERT INTO `tipoproducto` (`id`, `descripcion`) VALUES
-(1, 'herramienta manual'),
-(2, 'máquina electrica');
+(1, 'herramienta manual engrasada'),
+(2, 'máquina electrica o electrónica'),
+(4, 'Herramienta manual de precisión'),
+(5, 'Herramienta automático'),
+(6, 'Herramienta descatalogado'),
+(7, 'Herramienta inexistente'),
+(8, 'Accesorio manual'),
+(9, 'Accesorio automático'),
+(10, 'Accesorio descatalogado'),
+(11, 'Accesorio inexistente'),
+(12, 'Producto manual'),
+(13, 'Producto automático'),
+(14, 'Producto descatalogado'),
+(15, 'Producto inexistente'),
+(16, 'Artículo manual'),
+(17, 'Artículo automático'),
+(18, 'Artículo descatalogado'),
+(19, 'Artículo inexistente'),
+(20, 'Referencia manual'),
+(21, 'Referencia automático'),
+(22, 'Referencia descatalogado'),
+(23, 'Referencia inexistente'),
+(24, 'Mercancía manual'),
+(25, 'Mercancía automático'),
+(26, 'Mercancía descatalogado'),
+(27, 'Mercancía inexistente'),
+(28, 'Género manual'),
+(29, 'Género automático'),
+(30, 'Género descatalogado'),
+(31, 'Género inexistente');
 
 -- --------------------------------------------------------
 
@@ -755,15 +944,12 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `login` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `email`, `login`, `password`) VALUES
-(1, 'Rafael Aznar', 'raznar@ausiasmarch.net', 'rafa', 'rafa');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+(1, 'Rafael Aznar', 'raznar@ausiasmarch.net', 'rafa', 'rafa'),
+(2, 'Lorenzo González', 'logongas@gmail.com', 'lorenzo', 'lorenzo');
