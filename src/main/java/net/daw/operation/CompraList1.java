@@ -1,13 +1,13 @@
 package net.daw.operation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.daw.bean.CompraBean;
 import net.daw.dao.CompraDao;
 import net.daw.helper.Contexto;
+import net.daw.helper.Pagination;
 
 public class CompraList1 implements Operation {
 
@@ -30,7 +30,7 @@ public class CompraList1 implements Operation {
 
             ArrayList<CompraBean> listado = oCompraDao.getPage(oContexto.getNrpp(), oContexto.getPage(), oContexto.getAlFilter(), oContexto.getHmOrder());
             String strUrl = "<a href=\"Controller?" + oContexto.getSerializedParamsExceptPage() + "&page=";
-            ArrayList<String> vecindad = oCompraDao.getNeighborhood(strUrl, oContexto.getPage(), intPages, 2);
+            ArrayList<String> vecindad = Pagination.getButtonPad(strUrl, oContexto.getPage(), intPages, 2);
             ArrayList<Object> a = new ArrayList<>();
             a.add(listado);
             a.add(vecindad);

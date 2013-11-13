@@ -68,13 +68,6 @@ public class TipoproductoDao {
         }
     }
 
-    public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception {
-        oMysql.conexion(enumTipoConexion);
-        ArrayList<String> n = oMysql.getNeighborhood(strLink, intPageNumber, intTotalPages, intNeighborhood);
-        oMysql.desconexion();
-        return n;
-    }
-
     public TipoproductoBean get(TipoproductoBean oTipoproductoBean) throws Exception {
         try {
             oMysql.conexion(enumTipoConexion);

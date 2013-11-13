@@ -61,13 +61,6 @@ public class ClienteDao {
         }
     }
 
-    public ArrayList<String> getNeighborhood(String strLink, int intPageNumber, int intTotalPages, int intNeighborhood) throws Exception {
-        oMysql.conexion(enumTipoConexion);
-        ArrayList<String> n = oMysql.getNeighborhood(strLink, intPageNumber, intTotalPages, intNeighborhood);
-        oMysql.desconexion();
-        return n;
-    }
-
     public ClienteBean get(ClienteBean oClienteBean) throws Exception {
         if (oClienteBean.getId() > 0) {
             try {
