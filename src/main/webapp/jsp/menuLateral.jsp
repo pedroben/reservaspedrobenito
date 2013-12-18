@@ -29,61 +29,25 @@
         menu += "<a href=\"Controller?class=usuario&method=logout\">Logout</a></li>";
     }
     //-----------------------------------------------
-    menu += "<li class=\"nav-header\">Cliente</li>";
+    menu += "<li class=\"nav-header\">Reservas</li>";
 
-    if (oContexto.getClase().equals("cliente") && oContexto.getMetodo().equals("new")) {
+    if (oContexto.getClase().equals("reserva") && oContexto.getMetodo().equals("new")) {
         menu += "<li class=\"active\">";
     } else {
         menu += "<li>";
     }
-    menu += "<a href=\"Controller?class=cliente&method=new\">Crear</a></li>";
-
-    if (oContexto.getClase().equals("cliente") && oContexto.getMetodo().equals("list")) {
-        menu += "<li class=\"active\">";
-    } else {
-        menu += "<li>";
-    }
-    menu += "<a href=\"Controller?class=cliente&method=list\">Listar</a></li>";
-    //-----------------------------------------------
-    menu += "<li class=\"nav-header\">Compra</li>";
-
-    if (oContexto.getClase().equals("compra") && oContexto.getMetodo().equals("new")) {
-        menu += "<li class=\"active\">";
-    } else {
-        menu += "<li>";
-    }
-    menu += "<a href=\"Controller?class=compra&method=new\">Crear</a></li>";
-
-    if (oContexto.getClase().equals("compra") && oContexto.getMetodo().equals("list")) {
-        menu += "<li class=\"active\">";
-    } else {
-        menu += "<li>";
-    }
-    menu += "<a href=\"Controller?class=compra&method=list\">Listar</a></li>";    
-    //-----------------------------------------------
-    menu += "<li class=\"nav-header\">Producto</li>";
+    menu += "<a href=\"Controller?class=reserva&method=new\">Crear</a></li>";
     
-    if (oContexto.getClase().equals("producto") && oContexto.getMetodo().equals("new")) {
+    if (oContexto.getClase().equals("reserva") && oContexto.getMetodo().equals("list")) {
         menu += "<li class=\"active\">";
     } else {
         menu += "<li>";
     }
-    menu += "<a href=\"Controller?class=producto&method=new\">Crear</a></li>";
-    if (oContexto.getClase().equals("producto") && oContexto.getMetodo().equals("list")) {
-        menu += "<li class=\"active\">";
-    } else {
-        menu += "<li>";
-    }
-    menu += "<a href=\"Controller?class=producto&method=list\">Listar</a></li>";
-
-    menu += "<li class=\"nav-header\">Tipo de Producto</li>";
-    
-    if (oContexto.getClase().equals("tipoproducto") && oContexto.getMetodo().equals("list")) {
-        menu += "<li class=\"active\">";
-    } else {
-        menu += "<li>";
-    }
-    menu += "<a href=\"Controller?class=tipoproducto&method=list\">Listar</a></li>";   
+    menu += "<a href=\"Controller?class=reserva&method=list\">Listar</a></li>";
+    //-----------------------------------------------
+       
+    //-----------------------------------------------
+     
    
     menu += "</ul></div>";
 %>

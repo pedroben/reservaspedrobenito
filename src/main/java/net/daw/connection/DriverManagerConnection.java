@@ -14,7 +14,7 @@ public class DriverManagerConnection implements GenericConnection {
     public Connection crearConexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/facturacion", "root", "bitnami");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/reservas", "root", "bitnami");
             return connection;
         } catch (ClassNotFoundException ex) {
             throw new RuntimeException(ex);

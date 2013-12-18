@@ -1,13 +1,13 @@
 <div class="hero-unit">
-    <h1>Bienvenidos a ComprAusiàs March</h1>
-    <h3>Versión (v.06) de 10/11/2013</h3>
+    <h1>Bienvenidos a Reservas</h1>
+    <h3>Versión (v.01) de 04/12/2013</h3>
     <h5>Desarrollo de aplicaciones web en entorno servidor. CPIFP Ausiàs March. Curso 2013-2014.</h5>    
 </div>
 <div class="row-fluid">
     <div class="span8">
         <div class="row-fluid">
             <div class="span6">
-                <h3>¿Qué es Comprausiàs March?</h3>
+                <h3>¿Qué es Reservas?</h3>
                 <p>Es una aplicación didáctica para aprender a organizar y desarrollar 
                     aplicaciones Java de servidor. La utilizamos como base para construir un 
                     proyecto durante la primera evaluación del módulo DES del ciclo formativo DAW.</p>

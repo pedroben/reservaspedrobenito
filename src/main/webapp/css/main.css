@@ -76,3 +76,9 @@ hr {
 .input_disabled {
     disabled:true;
 } 
+
+.recuadrar {
+    border: 1px solid gainsboro;
+    padding: 1em;
+    margin: 1em;
+}

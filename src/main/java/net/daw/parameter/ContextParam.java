@@ -44,11 +44,17 @@ public class ContextParam {
                 parameterNames.put(parameterName, request.getParameter(parameterName));
             }
             oContexto.setParameters(parameterNames);
-
-            if (!oContexto.getHaySesion()) {
-                oContexto.setClase("usuario");
-                if (!"login".equals(request.getParameter("method"))) {
-                    oContexto.setMetodo("ocioso");
+            
+            String clase = request.getParameter("class");
+            String metodo = request.getParameter("method");
+            
+            if(!"usuario".equals(request.getParameter("class")) || !"new".equals(request.getParameter("method"))) {
+            
+                if (!oContexto.getHaySesion()) {
+                    oContexto.setClase("usuario");
+                    if (!"login".equals(request.getParameter("method"))) {
+                        oContexto.setMetodo("ocioso");
+                    }
                 }
             }
 

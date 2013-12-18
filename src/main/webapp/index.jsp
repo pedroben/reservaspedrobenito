@@ -15,7 +15,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Comprausiàs March</title>
+        <title>Reservas</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -34,7 +34,7 @@
                         <span class="icon-bar"></span> 
                         <span class="icon-bar"></span>
                     </a> 
-                    <a class="brand" href="Controller">ComprAusiàs March</a>
+                    <a class="brand" href="Controller">Reservas</a>
                     <div class="nav-collapse collapse">
                         <%
                             if (oUserBean != null) {
@@ -45,7 +45,7 @@
                         %>
                         <p class="navbar-text pull-right">
                             <%
-                                if (oUserBean != null) {
+                            if (oUserBean != null) {
                             %>
                             Estás logueado como <%=oUserBean.getNombre()%>&nbsp;&nbsp;&nbsp;&nbsp;
                             <a class="navbar-link" href="Controller?class=usuario&method=logout">(Salir del sistema)</a>
@@ -54,8 +54,9 @@
                             %>
                             <a class="navbar-link" href="Controller?class=usuario&method=login">Login</a>
                             <%
-                                }
+                            }
                             %>
+                            <a class="navbar-link" href="Controller?class=usuario&method=new"> / Registrar</a>
                         </p>
                     </div>
                 </div>
@@ -84,7 +85,7 @@
                     out.print("</div>");
                 %>    
                 <div class="row-fluid">
-                <div class="span12"><hr><footer><p>&copy; Rafael Aznar (2013)</p></footer></div>   
+                <div class="span12"><hr><footer><p>&copy; Pedro Benito (2013)</p></footer></div>   
                 </div>
             </div>
         </div>
